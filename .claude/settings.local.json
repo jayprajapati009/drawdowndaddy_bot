@@ -1,0 +1,10 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(python3 -c \"import yfinance as yf; df = yf.Ticker\\('DOCN'\\).history\\(period='5d', interval='1d'\\); print\\(df\\)\")",
+      "Bash(python3 -c \"import yfinance as yf; df = yf.Ticker\\('AAPL'\\).history\\(period='5d', interval='1d'\\); print\\(df[['Close']]\\)\")",
+      "Bash(pip show *)",
+      "Bash(pip install *)"
+    ]
+  }
+}
