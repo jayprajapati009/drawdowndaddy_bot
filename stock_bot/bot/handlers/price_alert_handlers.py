@@ -116,16 +116,37 @@ async def cmd_remove_price_alert(update: Update, ctx: ContextTypes.DEFAULT_TYPE)
 
 async def cmd_view_price_alerts(update: Update, ctx: ContextTypes.DEFAULT_TYPE) -> None:
     """
-    Usage: /palerts TICKER
+    Usage: /palerts TICKER | /palerts all
     """
     args = ctx.args
     if not args:
-        await update.message.reply_text("Usage: /palerts TICKER")
+        await update.message.reply_text("Usage: /palerts TICKER  or  /palerts all")
+        return
+
+    telegram_id = get_account_id(update)
+
+    if args[0].lower() == "all":
+        with get_connection() as conn:
+            all_alerts = q.get_all_active_price_alerts(conn)
+
+        if not all_alerts:
+            await update.message.reply_text("No active price alerts. Use /palert to set one.")
+            return
+
+        lines = ["🎯 All price alerts\n"]
+        current_ticker = None
+        for a in sorted(all_alerts, key=lambda x: x["ticker"]):
+            if a["ticker"] != current_ticker:
+                current_ticker = a["ticker"]
+                lines.append(f"{current_ticker}")
+            currency = CURRENCY_SYMBOL.get(a["exchange"], "")
+            arrow = "📈" if a["direction"] == "ABOVE" else "📉"
+            lines.append(f"  {arrow} {currency}{a['target_price']:,.2f} ({a['direction']})")
+
+        await update.message.reply_text("\n".join(lines))
         return
 
     ticker = args[0].upper()
-    telegram_id = get_account_id(update)
-
     with get_connection() as conn:
         user_id = q.get_user_id(conn, telegram_id)
         if user_id is None:
