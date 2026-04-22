@@ -8,7 +8,7 @@ from typing import Optional
 
 from stock_bot.database.db import get_connection
 from stock_bot.database import queries as q
-from stock_bot.services.price_fetcher import get_current_price, get_price_on_date
+from stock_bot.services.price_fetcher import get_current_price, get_price_on_date, get_prices_batch
 
 logger = logging.getLogger(__name__)
 
@@ -88,36 +88,40 @@ def get_watchlist_with_prices(telegram_id: str) -> list[dict]:
         if user_id is None:
             return []
         items = q.get_watchlist(conn, user_id)
-        result = []
-        for row in items:
-            current = get_current_price(row["ticker"])
-            pct = None
-            if current and row["added_price"]:
-                pct = ((current - row["added_price"]) / row["added_price"]) * 100
+        checkpoints_by_id = {row["id"]: q.get_checkpoints(conn, row["id"]) for row in items}
 
-            checkpoints = q.get_checkpoints(conn, row["id"])
-            cp_data = []
-            for cp in checkpoints:
-                cp_pct = None
-                if current and cp["price_at_checkpoint"]:
-                    cp_pct = ((current - cp["price_at_checkpoint"]) / cp["price_at_checkpoint"]) * 100
-                cp_data.append({
-                    "label": cp["label"],
-                    "price": cp["price_at_checkpoint"],
-                    "pct_return": cp_pct,
-                    "created_at": cp["created_at"],
-                })
+    # Fetch all prices in parallel outside the DB connection
+    prices = get_prices_batch([row["ticker"] for row in items])
 
-            result.append({
-                "ticker": row["ticker"],
-                "exchange": row["exchange"],
-                "added_price": row["added_price"],
-                "added_at": row["added_at"],
-                "current_price": current,
-                "pct_return": pct,
-                "watchlist_id": row["id"],
-                "checkpoints": cp_data,
+    result = []
+    for row in items:
+        current = prices.get(row["ticker"])
+        pct = None
+        if current and row["added_price"]:
+            pct = ((current - row["added_price"]) / row["added_price"]) * 100
+
+        cp_data = []
+        for cp in checkpoints_by_id.get(row["id"], []):
+            cp_pct = None
+            if current and cp["price_at_checkpoint"]:
+                cp_pct = ((current - cp["price_at_checkpoint"]) / cp["price_at_checkpoint"]) * 100
+            cp_data.append({
+                "label": cp["label"],
+                "price": cp["price_at_checkpoint"],
+                "pct_return": cp_pct,
+                "created_at": cp["created_at"],
             })
+
+        result.append({
+            "ticker": row["ticker"],
+            "exchange": row["exchange"],
+            "added_price": row["added_price"],
+            "added_at": row["added_at"],
+            "current_price": current,
+            "pct_return": pct,
+            "watchlist_id": row["id"],
+            "checkpoints": cp_data,
+        })
     return result
 
 

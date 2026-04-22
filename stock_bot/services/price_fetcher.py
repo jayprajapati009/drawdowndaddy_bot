@@ -11,6 +11,7 @@ Design principles (learned from prior yfinance instability):
 
 import logging
 import time
+from concurrent.futures import ThreadPoolExecutor
 from datetime import date, timedelta
 from typing import Optional
 
@@ -21,6 +22,7 @@ from stock_bot.config import EMA_HISTORY_MULTIPLIER, EMA_SPANS
 
 _RETRY_ATTEMPTS = 3
 _RETRY_DELAY    = 3   # seconds between retries
+_BATCH_WORKERS  = 8   # parallel threads for batch price fetches
 
 logger = logging.getLogger(__name__)
 
@@ -78,6 +80,16 @@ def get_ema(ticker: str, indicator: str) -> Optional[float]:
         return None
 
     return float(df["Close"].ewm(span=span, adjust=False).mean().iloc[-1])
+
+
+def get_prices_batch(tickers: list[str]) -> dict[str, Optional[float]]:
+    """Fetch current prices for multiple tickers in parallel."""
+    if not tickers:
+        return {}
+    workers = min(len(tickers), _BATCH_WORKERS)
+    with ThreadPoolExecutor(max_workers=workers) as pool:
+        futures = {ticker: pool.submit(get_current_price, ticker) for ticker in tickers}
+        return {ticker: f.result() for ticker, f in futures.items()}
 
 
 def get_all_emas(ticker: str) -> dict[str, Optional[float]]:

@@ -10,7 +10,7 @@ from typing import Optional
 
 from stock_bot.database.db import get_connection
 from stock_bot.database import queries as q
-from stock_bot.services.price_fetcher import get_current_price
+from stock_bot.services.price_fetcher import get_prices_batch
 
 logger = logging.getLogger(__name__)
 
@@ -116,23 +116,32 @@ def get_positions(telegram_id: str) -> list[dict]:
         if user_id is None:
             return []
         holdings = q.get_holdings(conn, user_id)
-        positions = []
-        for h in holdings:
-            buy_lots = q.get_open_buy_lots(conn, h["id"])
-            total_qty = sum(lot["quantity"] for lot in buy_lots)
-            if total_qty == 0:
-                continue  # fully sold out
-            avg_cost = sum(lot["quantity"] * lot["price"] for lot in buy_lots) / total_qty
-            current = get_current_price(h["ticker"])
-            unrealised = (current - avg_cost) * total_qty if current else None
-            positions.append({
-                "ticker": h["ticker"],
-                "exchange": h["exchange"],
-                "quantity": total_qty,
-                "avg_cost": avg_cost,
-                "current_price": current,
-                "unrealised_pnl": unrealised,
-            })
+        lots_by_holding = {h["id"]: q.get_open_buy_lots(conn, h["id"]) for h in holdings}
+
+    # Build open positions first, then batch-fetch prices in parallel
+    open_positions = []
+    for h in holdings:
+        buy_lots = lots_by_holding[h["id"]]
+        total_qty = sum(lot["quantity"] for lot in buy_lots)
+        if total_qty == 0:
+            continue
+        avg_cost = sum(lot["quantity"] * lot["price"] for lot in buy_lots) / total_qty
+        open_positions.append((h, total_qty, avg_cost))
+
+    prices = get_prices_batch([h["ticker"] for h, _, _ in open_positions])
+
+    positions = []
+    for h, total_qty, avg_cost in open_positions:
+        current = prices.get(h["ticker"])
+        unrealised = (current - avg_cost) * total_qty if current else None
+        positions.append({
+            "ticker": h["ticker"],
+            "exchange": h["exchange"],
+            "quantity": total_qty,
+            "avg_cost": avg_cost,
+            "current_price": current,
+            "unrealised_pnl": unrealised,
+        })
     return positions
 
 

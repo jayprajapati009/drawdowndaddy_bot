@@ -1,0 +1,39 @@
+# Seed commands — paste these into the bot to rebuild the database from scratch.
+# Update this file whenever you add new watchlist entries or transactions.
+# Run /start first, then paste each block.
+
+# ── Watchlist ──────────────────────────────────────────────────────────────────
+/watch MSFT NASDAQ 16/10/2023
+/watch VOO NYSE 23/02/2025
+/watch AMD NASDAQ 12/08/2025
+/watch INTC NASDAQ 27/01/2026
+/watch SNDK NASDAQ 04/02/2026
+/watch DOCN NYSE 09/02/2026
+/watch PSUBNKBEES.NS NSE 10/02/2026
+/watch BE NYSE 02/03/2026
+/watch Q NYSE 15/04/2026
+/watch RKLB NASDAQ
+/watch QPOWER.NS NSE
+
+# ── Transactions (chronological) ──────────────────────────────────────────────
+/buy MSFT NASDAQ 0.01 375.02
+/buy VOO NYSE 0.18 561.74
+/buy VOO NYSE 0.20 514.23
+/buy AMD NASDAQ 3.03 164.79
+/buy VOO NYSE 0.32 628.42
+/buy INTC NASDAQ 1.04 52.90
+/buy SNDK NASDAQ 0.02 593.98
+/sell AMD 3.03 194.84
+/buy DOCN NYSE 2.00 64.61
+/buy PSUBNKBEES.NS NSE 10.00 98.80
+/buy DOCN NYSE 1.00 54.67
+/buy BE NYSE 0.50 156.30
+/buy BE NYSE 1.00 137.28
+/sell BE 1.50 117.67
+/sell DOCN 3.00 75.31
+/buy DOCN NYSE 3.00 81.80
+/buy Q NYSE 2.00 132.20
+
+# ── Price alerts ───────────────────────────────────────────────────────────────
+/palert RKLB 98
+/palert QPOWER.NS 981
