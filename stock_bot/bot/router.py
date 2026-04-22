@@ -7,7 +7,7 @@ Command design: short, no underscores, easy to thumb-type.
 import logging
 
 from telegram import Update
-from telegram.ext import Application, CommandHandler, MessageHandler, filters
+from telegram.ext import Application, ApplicationHandlerStop, CommandHandler, MessageHandler, filters
 from telegram.ext import ContextTypes
 
 logger = logging.getLogger(__name__)
@@ -53,37 +53,63 @@ from stock_bot.bot.handlers.price_alert_handlers import (
     cmd_view_price_alerts,
 )
 
+# Single source of truth: command name → handler function.
+# Used for both CommandHandler registration and multi-command dispatch.
+COMMAND_MAP = {
+    "start":     cmd_start,
+    "help":      cmd_help,
+    "watch":     cmd_add_watchlist,
+    "unwatch":   cmd_remove_watchlist,
+    "watchlist": cmd_view_watchlist,
+    "mark":      cmd_set_checkpoint,
+    "alert":     cmd_set_alert,
+    "unalert":   cmd_remove_alert,
+    "alerts":    cmd_view_alerts,
+    "buy":       cmd_buy,
+    "sell":      cmd_sell,
+    "holdings":  cmd_view_holdings,
+    "history":   cmd_transaction_history,
+    "palert":    cmd_set_price_alert,
+    "unpalert":  cmd_remove_price_alert,
+    "palerts":   cmd_view_price_alerts,
+    "report":    cmd_weekly_report,
+    "stock":     cmd_stock_details,
+}
+
+
+async def _dispatch_multi_command(update: Update, ctx: ContextTypes.DEFAULT_TYPE) -> None:
+    """
+    Fires before CommandHandlers (group -2).
+    If the message contains multiple /command lines, routes each one and
+    raises ApplicationHandlerStop so normal handlers don't double-fire.
+    Single-command messages are left alone.
+    """
+    text = update.message.text or ""
+    cmd_lines = [l.strip() for l in text.splitlines() if l.strip().startswith("/")]
+
+    if len(cmd_lines) <= 1:
+        return  # normal single-command flow takes over
+
+    for line in cmd_lines:
+        parts = line.split()
+        raw_cmd = parts[0].lstrip("/").split("@")[0].lower()
+        ctx.args = parts[1:]
+        handler_fn = COMMAND_MAP.get(raw_cmd)
+        if handler_fn:
+            await handler_fn(update, ctx)
+        else:
+            await update.message.reply_text(f"Unknown command: /{raw_cmd}")
+
+    raise ApplicationHandlerStop
+
 
 def register_handlers(app: Application) -> None:
     """Attach all command handlers to the Application instance."""
-    # Audit logger — fires first for every message that starts with /
+    # Multi-command paste dispatcher — must be registered before everything else
+    app.add_handler(MessageHandler(filters.TEXT & filters.COMMAND, _dispatch_multi_command), group=-2)
+
+    # Audit logger
     app.add_handler(MessageHandler(filters.COMMAND, _log_all_commands), group=-1)
 
-    handlers = [
-        # General
-        CommandHandler("start",     cmd_start),
-        CommandHandler("help",      cmd_help),
-        # Watchlist
-        CommandHandler("watch",     cmd_add_watchlist),
-        CommandHandler("unwatch",   cmd_remove_watchlist),
-        CommandHandler("watchlist", cmd_view_watchlist),
-        CommandHandler("mark",      cmd_set_checkpoint),
-        # Alerts
-        CommandHandler("alert",     cmd_set_alert),
-        CommandHandler("unalert",   cmd_remove_alert),
-        CommandHandler("alerts",    cmd_view_alerts),
-        # Holdings
-        CommandHandler("buy",       cmd_buy),
-        CommandHandler("sell",      cmd_sell),
-        CommandHandler("holdings",  cmd_view_holdings),
-        CommandHandler("history",   cmd_transaction_history),
-        # Price alerts
-        CommandHandler("palert",    cmd_set_price_alert),
-        CommandHandler("unpalert",  cmd_remove_price_alert),
-        CommandHandler("palerts",   cmd_view_price_alerts),
-        # Reports
-        CommandHandler("report",    cmd_weekly_report),
-        CommandHandler("stock",     cmd_stock_details),
-    ]
-    for h in handlers:
-        app.add_handler(h)
+    for cmd, fn in COMMAND_MAP.items():
+        app.add_handler(CommandHandler(cmd, fn))
