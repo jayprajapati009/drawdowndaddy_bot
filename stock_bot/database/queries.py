@@ -270,3 +270,65 @@ def update_lot_quantity(
 
 def delete_lot(conn: sqlite3.Connection, lot_id: int) -> None:
     conn.execute("DELETE FROM lots WHERE id=?", (lot_id,))
+
+
+# ---------------------------------------------------------------------------
+# Price alerts
+# ---------------------------------------------------------------------------
+
+def add_price_alert(
+    conn: sqlite3.Connection,
+    watchlist_id: int,
+    target_price: float,
+    direction: str,
+) -> int:
+    cur = conn.execute(
+        "INSERT INTO price_alerts(watchlist_id, target_price, direction) VALUES(?,?,?)",
+        (watchlist_id, target_price, direction.upper()),
+    )
+    return cur.lastrowid
+
+
+def get_price_alerts(
+    conn: sqlite3.Connection, watchlist_id: int
+) -> list[sqlite3.Row]:
+    return conn.execute(
+        "SELECT * FROM price_alerts WHERE watchlist_id=? AND is_active=TRUE ORDER BY target_price",
+        (watchlist_id,),
+    ).fetchall()
+
+
+def get_all_active_price_alerts(conn: sqlite3.Connection) -> list[sqlite3.Row]:
+    return conn.execute(
+        "SELECT pa.*, w.ticker, w.exchange, w.user_id "
+        "FROM price_alerts pa "
+        "JOIN watchlist w ON w.id = pa.watchlist_id "
+        "WHERE pa.is_active=TRUE"
+    ).fetchall()
+
+
+def deactivate_price_alert(conn: sqlite3.Connection, alert_id: int) -> bool:
+    cur = conn.execute(
+        "UPDATE price_alerts SET is_active=FALSE WHERE id=?", (alert_id,)
+    )
+    return cur.rowcount > 0
+
+
+def log_price_alert(
+    conn: sqlite3.Connection, price_alert_id: int, triggered_price: float
+) -> None:
+    conn.execute(
+        "INSERT INTO price_alert_logs(price_alert_id, triggered_price) VALUES(?,?)",
+        (price_alert_id, triggered_price),
+    )
+
+
+def get_recent_price_alert_log(
+    conn: sqlite3.Connection, price_alert_id: int, since: datetime
+) -> Optional[sqlite3.Row]:
+    return conn.execute(
+        "SELECT * FROM price_alert_logs "
+        "WHERE price_alert_id=? AND triggered_at >= ? "
+        "ORDER BY triggered_at DESC LIMIT 1",
+        (price_alert_id, since),
+    ).fetchone()

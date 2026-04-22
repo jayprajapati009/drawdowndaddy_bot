@@ -41,6 +41,16 @@ HELP_TEXT = """📈 *Stock Alert & Portfolio Bot*
 Indicators: *EMA\\_10W* \\(10\\-week\\) · *EMA\\_40W* \\(40\\-week\\)
 
 ━━━━━━━━━━━━━━━━━━━━
+🎯 *Price Alerts*
+━━━━━━━━━━━━━━━━━━━━
+/palert TICKER PRICE — fire when price crosses target
+  → `/palert AAPL 250`
+  → direction auto\\-detected from current price
+
+/unpalert TICKER PRICE — remove a price alert
+/palerts TICKER — list active price alerts
+
+━━━━━━━━━━━━━━━━━━━━
 💼 *Holdings*
 ━━━━━━━━━━━━━━━━━━━━
 /buy TICKER EXCHANGE QTY PRICE \\[note\\]

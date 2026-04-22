@@ -31,19 +31,58 @@ async def run_alert_check(bot: Bot, chat_id: str) -> None:
     logger.info("Running alert check cycle")
 
     with get_connection() as conn:
-        configs = q.get_all_active_alert_configs(conn)
+        ema_configs   = q.get_all_active_alert_configs(conn)
+        price_configs = q.get_all_active_price_alerts(conn)
 
-    for cfg in configs:
+    for cfg in ema_configs:
         try:
-            await _check_one_alert(bot, chat_id, cfg)
+            await _check_one_ema_alert(bot, chat_id, cfg)
         except Exception as exc:
-            logger.warning(
-                "Alert check failed for %s / %s: %s",
-                cfg["ticker"], cfg["indicator"], exc
-            )
+            logger.warning("EMA alert check failed for %s / %s: %s", cfg["ticker"], cfg["indicator"], exc)
+
+    for cfg in price_configs:
+        try:
+            await _check_one_price_alert(bot, chat_id, cfg)
+        except Exception as exc:
+            logger.warning("Price alert check failed for %s @ %s: %s", cfg["ticker"], cfg["target_price"], exc)
 
 
-async def _check_one_alert(bot: Bot, chat_id: str, cfg) -> None:
+async def _check_one_price_alert(bot: Bot, chat_id: str, cfg) -> None:
+    ticker       = cfg["ticker"]
+    exchange     = cfg["exchange"]
+    target_price = cfg["target_price"]
+    direction    = cfg["direction"]  # ABOVE or BELOW
+
+    current_price = get_current_price(ticker)
+    if current_price is None:
+        return
+
+    triggered = (
+        (direction == "ABOVE" and current_price >= target_price) or
+        (direction == "BELOW" and current_price <= target_price)
+    )
+    if not triggered:
+        return
+
+    cooldown_cutoff = datetime.now(tz=timezone.utc) - timedelta(hours=ALERT_COOLDOWN_HOURS)
+    with get_connection() as conn:
+        recent = q.get_recent_price_alert_log(conn, cfg["id"], cooldown_cutoff)
+        if recent:
+            return
+        q.log_price_alert(conn, cfg["id"], current_price)
+
+    currency  = CURRENCY_SYMBOL.get(exchange, "")
+    arrow     = "📈" if direction == "ABOVE" else "📉"
+    message = (
+        f"{arrow} PRICE ALERT: {ticker}\n"
+        f"Target: {currency}{target_price:,.2f} ({direction})\n"
+        f"Current price: {currency}{current_price:,.2f}"
+    )
+    await bot.send_message(chat_id=chat_id, text=message)
+    logger.info("Price alert sent for %s @ %s (current %.2f)", ticker, target_price, current_price)
+
+
+async def _check_one_ema_alert(bot: Bot, chat_id: str, cfg) -> None:
     ticker = cfg["ticker"]
     indicator = cfg["indicator"]
     threshold_pct = cfg["threshold_pct"]

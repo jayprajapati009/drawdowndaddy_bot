@@ -82,11 +82,26 @@ async def cmd_stock_details(update: Update, ctx: ContextTypes.DEFAULT_TYPE) -> N
     watchlist = ws.get_watchlist_with_prices(telegram_id)
     wl_item = next((i for i in watchlist if i["ticker"] == ticker), None)
     if wl_item:
-        currency = CURRENCY_SYMBOL.get(wl_item["exchange"], "")
-        lines.append(f"Watchlist: added at {currency}{wl_item['added_price']:,.2f} ({fmt_pct(wl_item['pct_return'])})")
+        currency  = CURRENCY_SYMBOL.get(wl_item["exchange"], "")
+        added_date = str(wl_item["added_at"])[:10]
+        lines.append(
+            f"Watchlist: added {added_date} at {currency}{wl_item['added_price']:,.2f} ({fmt_pct(wl_item['pct_return'])})"
+        )
         for cp in wl_item["checkpoints"]:
             lines.append(f"  📍 {cp['label']}: {fmt_pct(cp['pct_return'])}")
         lines.append("")
+
+        # Price alerts for this stock
+        from stock_bot.database.db import get_connection
+        from stock_bot.database import queries as q
+        with get_connection() as conn:
+            price_alerts = q.get_price_alerts(conn, wl_item["watchlist_id"])
+        if price_alerts:
+            lines.append("Price alerts")
+            for a in price_alerts:
+                arrow = "📈" if a["direction"] == "ABOVE" else "📉"
+                lines.append(f"  {arrow} {currency}{a['target_price']:,.2f} ({a['direction']})")
+            lines.append("")
 
     # Holdings info
     positions = hs.get_positions(telegram_id)

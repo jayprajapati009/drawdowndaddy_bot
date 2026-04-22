@@ -47,6 +47,11 @@ from stock_bot.bot.handlers.report_handlers import (
     cmd_weekly_report,
     cmd_stock_details,
 )
+from stock_bot.bot.handlers.price_alert_handlers import (
+    cmd_set_price_alert,
+    cmd_remove_price_alert,
+    cmd_view_price_alerts,
+)
 
 
 def register_handlers(app: Application) -> None:
@@ -72,6 +77,10 @@ def register_handlers(app: Application) -> None:
         CommandHandler("sell",      cmd_sell),
         CommandHandler("holdings",  cmd_view_holdings),
         CommandHandler("history",   cmd_transaction_history),
+        # Price alerts
+        CommandHandler("palert",    cmd_set_price_alert),
+        CommandHandler("unpalert",  cmd_remove_price_alert),
+        CommandHandler("palerts",   cmd_view_price_alerts),
         # Reports
         CommandHandler("report",    cmd_weekly_report),
         CommandHandler("stock",     cmd_stock_details),

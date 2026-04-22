@@ -80,6 +80,22 @@ CREATE TABLE IF NOT EXISTS lots (
     transacted_at DATETIME DEFAULT CURRENT_TIMESTAMP,
     notes         TEXT
 );
+
+CREATE TABLE IF NOT EXISTS price_alerts (
+    id           INTEGER PRIMARY KEY AUTOINCREMENT,
+    watchlist_id INTEGER NOT NULL REFERENCES watchlist(id),
+    target_price REAL    NOT NULL,
+    direction    TEXT    NOT NULL CHECK(direction IN ('ABOVE', 'BELOW')),
+    is_active    BOOLEAN DEFAULT TRUE,
+    created_at   DATETIME DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE IF NOT EXISTS price_alert_logs (
+    id             INTEGER PRIMARY KEY AUTOINCREMENT,
+    price_alert_id INTEGER NOT NULL REFERENCES price_alerts(id),
+    triggered_price REAL   NOT NULL,
+    triggered_at   DATETIME DEFAULT CURRENT_TIMESTAMP
+);
 """
 
 
