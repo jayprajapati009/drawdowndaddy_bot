@@ -100,7 +100,12 @@ async def cmd_stock_details(update: Update, ctx: ContextTypes.DEFAULT_TYPE) -> N
             lines.append("Price alerts")
             for a in price_alerts:
                 arrow = "📈" if a["direction"] == "ABOVE" else "📉"
-                lines.append(f"  {arrow} {currency}{a['target_price']:,.2f} ({a['direction']})")
+                dist_str = ""
+                if current:
+                    dist_pct = ((a["target_price"] - current) / current) * 100
+                    sign = "+" if dist_pct >= 0 else ""
+                    dist_str = f", {sign}{dist_pct:.1f}% away"
+                lines.append(f"  {arrow} {currency}{a['target_price']:,.2f} ({a['direction']}{dist_str})")
             lines.append("")
 
     # Holdings info
