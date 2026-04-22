@@ -122,24 +122,15 @@ async def cmd_view_price_alerts(update: Update, ctx: ContextTypes.DEFAULT_TYPE) 
         return
 
     ticker = args[0].upper()
-    telegram_id = get_account_id(update)
 
     with get_connection() as conn:
-        user_id = q.get_user_id(conn, telegram_id)
-        if user_id is None:
-            await update.message.reply_text("Please run /start first.")
-            return
-        item = q.get_watchlist_item(conn, user_id, ticker)
-        if item is None:
-            await update.message.reply_text(f"❌ {ticker} is not on your watchlist.")
-            return
-        alerts = q.get_price_alerts(conn, item["id"])
+        alerts = q.get_price_alerts_by_ticker(conn, ticker)
 
     if not alerts:
         await update.message.reply_text(f"No price alerts for {ticker}. Use /palert to set one.")
         return
 
-    currency = CURRENCY_SYMBOL.get(item["exchange"], "")
+    currency = CURRENCY_SYMBOL.get(alerts[0]["exchange"], "")
     lines = [f"🎯 Price alerts for {ticker}\n"]
     for a in alerts:
         arrow = "📈" if a["direction"] == "ABOVE" else "📉"

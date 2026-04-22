@@ -298,6 +298,17 @@ def get_price_alerts(
     ).fetchall()
 
 
+def get_price_alerts_by_ticker(
+    conn: sqlite3.Connection, ticker: str
+) -> list[sqlite3.Row]:
+    return conn.execute(
+        "SELECT pa.*, w.exchange FROM price_alerts pa "
+        "JOIN watchlist w ON w.id = pa.watchlist_id "
+        "WHERE w.ticker=? AND pa.is_active=TRUE ORDER BY pa.target_price",
+        (ticker.upper(),),
+    ).fetchall()
+
+
 def get_all_active_price_alerts(conn: sqlite3.Connection) -> list[sqlite3.Row]:
     return conn.execute(
         "SELECT pa.*, w.ticker, w.exchange, w.user_id "
