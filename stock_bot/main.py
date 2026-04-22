@@ -45,9 +45,10 @@ BOT_COMMANDS = [
     BotCommand("sell",      "Log a sell (FIFO) — TICKER QTY PRICE [note]"),
     BotCommand("holdings",  "Open positions with avg cost & P&L"),
     BotCommand("history",   "Full buy/sell log for a stock — TICKER"),
-    BotCommand("palert",    "Set price alert — TICKER PRICE"),
-    BotCommand("unpalert",  "Remove price alert — TICKER PRICE"),
-    BotCommand("palerts",   "List price alerts for a stock — TICKER"),
+    BotCommand("palert",     "Set price alert — TICKER PRICE"),
+    BotCommand("unpalert",   "Remove price alert — TICKER PRICE"),
+    BotCommand("palerts",    "List price alerts for a stock — TICKER"),
+    BotCommand("palertsall", "List all active price alerts"),
     BotCommand("report",    "Weekly watchlist + holdings summary"),
     BotCommand("stock",     "Deep-dive on one stock — TICKER"),
 ]

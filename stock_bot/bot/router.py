@@ -51,6 +51,7 @@ from stock_bot.bot.handlers.price_alert_handlers import (
     cmd_set_price_alert,
     cmd_remove_price_alert,
     cmd_view_price_alerts,
+    cmd_view_all_price_alerts,
 )
 
 # Single source of truth: command name → handler function.
@@ -69,9 +70,10 @@ COMMAND_MAP = {
     "sell":      cmd_sell,
     "holdings":  cmd_view_holdings,
     "history":   cmd_transaction_history,
-    "palert":    cmd_set_price_alert,
-    "unpalert":  cmd_remove_price_alert,
-    "palerts":   cmd_view_price_alerts,
+    "palert":     cmd_set_price_alert,
+    "unpalert":   cmd_remove_price_alert,
+    "palerts":    cmd_view_price_alerts,
+    "palertsall": cmd_view_all_price_alerts,
     "report":    cmd_weekly_report,
     "stock":     cmd_stock_details,
 }
