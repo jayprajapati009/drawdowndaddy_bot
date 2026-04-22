@@ -10,6 +10,7 @@ from stock_bot.config import CURRENCY_SYMBOL
 from stock_bot.database.db import get_connection
 from stock_bot.database import queries as q
 from stock_bot.services.price_fetcher import get_current_price
+from stock_bot.bot.handlers._helpers import get_account_id
 
 logger = logging.getLogger(__name__)
 
@@ -36,7 +37,7 @@ async def cmd_set_price_alert(update: Update, ctx: ContextTypes.DEFAULT_TYPE) ->
         await update.message.reply_text("❌ Price must be a number — e.g. /palert AAPL 250")
         return
 
-    telegram_id = str(update.effective_user.id)
+    telegram_id = get_account_id(update)
     user = update.effective_user
     logger.info("cmd=/palert user=%s(%s) ticker=%s target=%.2f", user.username or "?", user.id, ticker, target_price)
 
@@ -88,7 +89,7 @@ async def cmd_remove_price_alert(update: Update, ctx: ContextTypes.DEFAULT_TYPE)
         await update.message.reply_text("❌ Price must be a number.")
         return
 
-    telegram_id = str(update.effective_user.id)
+    telegram_id = get_account_id(update)
 
     with get_connection() as conn:
         user_id = q.get_user_id(conn, telegram_id)
@@ -123,7 +124,7 @@ async def cmd_view_price_alerts(update: Update, ctx: ContextTypes.DEFAULT_TYPE) 
         return
 
     ticker = args[0].upper()
-    telegram_id = str(update.effective_user.id)
+    telegram_id = get_account_id(update)
 
     with get_connection() as conn:
         user_id = q.get_user_id(conn, telegram_id)

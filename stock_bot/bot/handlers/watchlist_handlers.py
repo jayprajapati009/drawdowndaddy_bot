@@ -11,7 +11,7 @@ from stock_bot.database.db import get_connection
 from stock_bot.database import queries as q
 from stock_bot.services import watchlist_service as ws
 from stock_bot.config import CURRENCY_SYMBOL
-from stock_bot.bot.handlers._helpers import require_registered, fmt_pct
+from stock_bot.bot.handlers._helpers import require_registered, fmt_pct, get_account_id
 
 logger = logging.getLogger(__name__)
 
@@ -75,7 +75,7 @@ async def cmd_add_watchlist(update: Update, ctx: ContextTypes.DEFAULT_TYPE) -> N
     else:
         logger.info("  no date provided — will use current price")
 
-    telegram_id = str(user.id)
+    telegram_id = get_account_id(update)
 
     try:
         result   = ws.add_stock(telegram_id, ticker, exchange, entry_date)
@@ -102,7 +102,7 @@ async def cmd_remove_watchlist(update: Update, ctx: ContextTypes.DEFAULT_TYPE) -
         return
 
     ticker = args[0].upper()
-    telegram_id = str(update.effective_user.id)
+    telegram_id = get_account_id(update)
 
     try:
         ws.remove_stock(telegram_id, ticker)
@@ -113,7 +113,7 @@ async def cmd_remove_watchlist(update: Update, ctx: ContextTypes.DEFAULT_TYPE) -
 
 async def cmd_view_watchlist(update: Update, ctx: ContextTypes.DEFAULT_TYPE) -> None:
     """Usage: /view_watchlist"""
-    telegram_id = str(update.effective_user.id)
+    telegram_id = get_account_id(update)
     items = ws.get_watchlist_with_prices(telegram_id)
 
     if not items:
@@ -145,7 +145,7 @@ async def cmd_set_checkpoint(update: Update, ctx: ContextTypes.DEFAULT_TYPE) -> 
 
     ticker = args[0].upper()
     label = " ".join(args[1:])
-    telegram_id = str(update.effective_user.id)
+    telegram_id = get_account_id(update)
 
     try:
         result = ws.set_checkpoint(telegram_id, ticker, label)

@@ -7,7 +7,7 @@ from telegram.ext import ContextTypes
 
 from stock_bot.config import CURRENCY_SYMBOL
 from stock_bot.services import holdings_service as hs
-from stock_bot.bot.handlers._helpers import fmt_pct
+from stock_bot.bot.handlers._helpers import fmt_pct, get_account_id
 
 
 async def cmd_buy(update: Update, ctx: ContextTypes.DEFAULT_TYPE) -> None:
@@ -28,7 +28,7 @@ async def cmd_buy(update: Update, ctx: ContextTypes.DEFAULT_TYPE) -> None:
         await update.message.reply_text("Quantity and price must be numbers.")
         return
     notes = " ".join(args[4:]) or None
-    telegram_id = str(update.effective_user.id)
+    telegram_id = get_account_id(update)
 
     try:
         result = hs.buy(telegram_id, ticker, exchange, quantity, price, notes)
@@ -62,7 +62,7 @@ async def cmd_sell(update: Update, ctx: ContextTypes.DEFAULT_TYPE) -> None:
         await update.message.reply_text("Quantity and price must be numbers.")
         return
     notes = " ".join(args[3:]) or None
-    telegram_id = str(update.effective_user.id)
+    telegram_id = get_account_id(update)
 
     try:
         result = hs.sell(telegram_id, ticker, quantity, price, notes)
@@ -81,7 +81,7 @@ async def cmd_sell(update: Update, ctx: ContextTypes.DEFAULT_TYPE) -> None:
 
 async def cmd_view_holdings(update: Update, ctx: ContextTypes.DEFAULT_TYPE) -> None:
     """Usage: /view_holdings"""
-    telegram_id = str(update.effective_user.id)
+    telegram_id = get_account_id(update)
     positions = hs.get_positions(telegram_id)
 
     if not positions:
@@ -121,7 +121,7 @@ async def cmd_transaction_history(update: Update, ctx: ContextTypes.DEFAULT_TYPE
         return
 
     ticker = args[0].upper()
-    telegram_id = str(update.effective_user.id)
+    telegram_id = get_account_id(update)
     lots = hs.get_transaction_history(telegram_id, ticker)
 
     if not lots:

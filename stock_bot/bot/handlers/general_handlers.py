@@ -7,6 +7,7 @@ from telegram.ext import ContextTypes
 
 from stock_bot.database.db import get_connection
 from stock_bot.database import queries as q
+from stock_bot.bot.handlers._helpers import get_account_id
 
 HELP_TEXT = """📈 *Stock Alert & Portfolio Bot*
 
@@ -81,11 +82,10 @@ NSE · BSE \\(India\\) · NASDAQ · NYSE \\(US\\)
 async def cmd_start(update: Update, ctx: ContextTypes.DEFAULT_TYPE) -> None:
     """Register the user and show a welcome message."""
     user = update.effective_user
-    telegram_id = str(user.id)
-    username = user.username
+    telegram_id = get_account_id(update)
 
     with get_connection() as conn:
-        q.upsert_user(conn, telegram_id, username)
+        q.upsert_user(conn, telegram_id, user.username)
 
     await update.message.reply_text(
         f"👋 Welcome{', @' + username if username else ''}!\n\n"

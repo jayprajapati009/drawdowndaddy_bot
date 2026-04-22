@@ -8,6 +8,7 @@ from telegram.ext import ContextTypes
 from stock_bot.config import EMA_SPANS, CURRENCY_SYMBOL
 from stock_bot.database.db import get_connection
 from stock_bot.database import queries as q
+from stock_bot.bot.handlers._helpers import get_account_id
 
 
 async def cmd_set_alert(update: Update, ctx: ContextTypes.DEFAULT_TYPE) -> None:
@@ -36,7 +37,7 @@ async def cmd_set_alert(update: Update, ctx: ContextTypes.DEFAULT_TYPE) -> None:
         await update.message.reply_text(f"Unknown indicator '{indicator}'. Use one of: {', '.join(EMA_SPANS)}")
         return
 
-    telegram_id = str(update.effective_user.id)
+    telegram_id = get_account_id(update)
 
     with get_connection() as conn:
         user_id = q.get_user_id(conn, telegram_id)
@@ -66,7 +67,7 @@ async def cmd_remove_alert(update: Update, ctx: ContextTypes.DEFAULT_TYPE) -> No
 
     ticker = args[0].upper()
     indicator = args[1].upper()
-    telegram_id = str(update.effective_user.id)
+    telegram_id = get_account_id(update)
 
     with get_connection() as conn:
         user_id = q.get_user_id(conn, telegram_id)
@@ -93,7 +94,7 @@ async def cmd_view_alerts(update: Update, ctx: ContextTypes.DEFAULT_TYPE) -> Non
         return
 
     ticker = args[0].upper()
-    telegram_id = str(update.effective_user.id)
+    telegram_id = get_account_id(update)
 
     with get_connection() as conn:
         user_id = q.get_user_id(conn, telegram_id)

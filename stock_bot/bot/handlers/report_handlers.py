@@ -8,12 +8,12 @@ from telegram.ext import ContextTypes
 from stock_bot.config import CURRENCY_SYMBOL
 from stock_bot.services import watchlist_service as ws, holdings_service as hs
 from stock_bot.services.price_fetcher import get_all_emas, get_current_price
-from stock_bot.bot.handlers._helpers import fmt_pct
+from stock_bot.bot.handlers._helpers import fmt_pct, get_account_id
 
 
 async def cmd_weekly_report(update: Update, ctx: ContextTypes.DEFAULT_TYPE) -> None:
     """Usage: /report"""
-    telegram_id = str(update.effective_user.id)
+    telegram_id = get_account_id(update)
     lines = ["📊 Weekly Report\n"]
 
     # --- Watchlist section ---
@@ -60,7 +60,7 @@ async def cmd_stock_details(update: Update, ctx: ContextTypes.DEFAULT_TYPE) -> N
         return
 
     ticker = args[0].upper()
-    telegram_id = str(update.effective_user.id)
+    telegram_id = get_account_id(update)
     lines = [f"🔍 {ticker} Details\n"]
 
     current = get_current_price(ticker)
