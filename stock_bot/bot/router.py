@@ -7,10 +7,18 @@ Command design: short, no underscores, easy to thumb-type.
 import logging
 
 from telegram import Update
+from telegram.error import NetworkError, TimedOut
 from telegram.ext import Application, ApplicationHandlerStop, CommandHandler, MessageHandler, filters
 from telegram.ext import ContextTypes
 
 logger = logging.getLogger(__name__)
+
+
+async def _error_handler(update: object, ctx: ContextTypes.DEFAULT_TYPE) -> None:
+    if isinstance(ctx.error, (NetworkError, TimedOut)):
+        logger.warning("Transient Telegram error (will retry): %s", ctx.error)
+    else:
+        logger.error("Unhandled exception", exc_info=ctx.error)
 
 
 async def _log_all_commands(update: Update, ctx: ContextTypes.DEFAULT_TYPE) -> None:
@@ -107,6 +115,8 @@ async def _dispatch_multi_command(update: Update, ctx: ContextTypes.DEFAULT_TYPE
 
 def register_handlers(app: Application) -> None:
     """Attach all command handlers to the Application instance."""
+    app.add_error_handler(_error_handler)
+
     # Multi-command paste dispatcher — must be registered before everything else
     app.add_handler(MessageHandler(filters.TEXT & filters.COMMAND, _dispatch_multi_command), group=-2)
 
