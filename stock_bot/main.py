@@ -82,6 +82,9 @@ async def _scheduled_alert_job(bot, chat_id: str) -> None:
 
 
 def main() -> None:
+    logger.info("=" * 60)
+    logger.info("  BOT STARTING UP")
+    logger.info("=" * 60)
     init_db()
 
     app = Application.builder().token(TELEGRAM_TOKEN).build()
