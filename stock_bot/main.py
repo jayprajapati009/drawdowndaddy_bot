@@ -10,7 +10,10 @@ import logging
 import sys
 from datetime import datetime
 
-# --- Load config first, before anything else ---
+# --- Load .env then config, before anything else ---
+from dotenv import load_dotenv
+load_dotenv()
+
 parser = argparse.ArgumentParser()
 parser.add_argument("--config", required=True, help="Path to bot JSON config file")
 args = parser.parse_args()

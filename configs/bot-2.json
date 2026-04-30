@@ -1,0 +1,19 @@
+{
+  "bot_name": "FriendsBot",
+  "telegram_token": "${BOT2_TOKEN}",
+  "alert_chat_id": "${BOT2_CHAT_ID}",
+  "database": "data/bot-2.db",
+  "logs": "logs/bot-2",
+  "features": {
+    "watchlist":    true,
+    "alerts":       true,
+    "price_alerts": true,
+    "holdings":     false,
+    "reports":      true
+  },
+  "settings": {
+    "alert_cooldown_hours":        2,
+    "check_interval_market_hours": 1800,
+    "check_interval_off_hours":    3600
+  }
+}

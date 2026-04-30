@@ -1,0 +1,19 @@
+{
+  "bot_name": "DrawdownDaddy",
+  "telegram_token": "${BOT1_TOKEN}",
+  "alert_chat_id": "${BOT1_CHAT_ID}",
+  "database": "data/bot-1.db",
+  "logs": "logs/bot-1",
+  "features": {
+    "watchlist":    true,
+    "alerts":       true,
+    "price_alerts": true,
+    "holdings":     true,
+    "reports":      true
+  },
+  "settings": {
+    "alert_cooldown_hours":        2,
+    "check_interval_market_hours": 1800,
+    "check_interval_off_hours":    3600
+  }
+}

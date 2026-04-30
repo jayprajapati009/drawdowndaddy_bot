@@ -1,6 +1,5 @@
 # Secrets
 .env
-configs/bot-*.json
 
 # Database
 *.db
