@@ -140,22 +140,48 @@ async def cmd_view_watchlist(update: Update, ctx: ContextTypes.DEFAULT_TYPE) -> 
 
 
 async def cmd_set_checkpoint(update: Update, ctx: ContextTypes.DEFAULT_TYPE) -> None:
-    """Usage: /set_checkpoint TICKER LABEL"""
+    """
+    Usage:
+      /mark TICKER LABEL
+      /mark TICKER LABEL DD/MM/YYYY
+    """
     args = ctx.args
     if len(args) < 2:
-        await update.message.reply_text("Usage: /set_checkpoint TICKER LABEL\nExample: /set_checkpoint AAPL Q1-earnings")
+        await update.message.reply_text(
+            "Usage:\n"
+            "  /mark TICKER LABEL\n"
+            "  /mark TICKER LABEL DD/MM/YYYY\n\n"
+            "Examples:\n"
+            "  /mark AAPL pre-earnings\n"
+            "  /mark AAPL budget-day 01/02/2025"
+        )
         return
 
     ticker = args[0].upper()
-    label = " ".join(args[1:])
+    entry_date = None
+
+    # If the last arg looks like a date, parse it and exclude from label
+    label_parts = args[1:]
+    if len(label_parts) >= 2 and "/" in label_parts[-1]:
+        try:
+            entry_date  = _parse_date(label_parts[-1])
+            label_parts = label_parts[:-1]
+            if entry_date > date.today():
+                await update.message.reply_text("❌ Date cannot be in the future.")
+                return
+        except (ValueError, IndexError):
+            await update.message.reply_text("❌ Invalid date format. Use DD/MM/YYYY — e.g. 01/02/2025")
+            return
+
+    label       = " ".join(label_parts)
     telegram_id = get_account_id(update)
 
     try:
-        result = ws.set_checkpoint(telegram_id, ticker, label)
+        result = ws.set_checkpoint(telegram_id, ticker, label, entry_date)
         await update.message.reply_text(
             f"📍 Checkpoint set for *{result['ticker']}*\n"
             f"Label: {result['label']}\n"
-            f"Price: {result['price']:,.2f}",
+            f"Price: {result['price']:,.2f} ({result['price_label']})",
             parse_mode="Markdown",
         )
     except ws.WatchlistError as e:

@@ -125,9 +125,21 @@ def get_watchlist_with_prices(telegram_id: str) -> list[dict]:
     return result
 
 
-def set_checkpoint(telegram_id: str, ticker: str, label: str) -> dict:
-    """Mark the current price of *ticker* as a named checkpoint."""
-    price = get_current_price(ticker)
+def set_checkpoint(
+    telegram_id: str,
+    ticker: str,
+    label: str,
+    entry_date: Optional[date] = None,
+) -> dict:
+    """Mark the price of *ticker* as a named checkpoint.
+    Uses historical close if *entry_date* is given, otherwise current price."""
+    if entry_date is not None:
+        price = get_price_on_date(ticker, entry_date)
+        price_label = f"close on {entry_date.strftime('%d %b %Y')}"
+    else:
+        price = get_current_price(ticker)
+        price_label = "current price"
+
     if price is None:
         raise WatchlistError(f"Could not fetch price for {ticker}.")
 
@@ -140,4 +152,4 @@ def set_checkpoint(telegram_id: str, ticker: str, label: str) -> dict:
             raise WatchlistError(f"{ticker.upper()} is not on your watchlist.")
         q.add_checkpoint(conn, item["id"], label, price)
 
-    return {"ticker": ticker.upper(), "label": label, "price": price}
+    return {"ticker": ticker.upper(), "label": label, "price": price, "price_label": price_label}
