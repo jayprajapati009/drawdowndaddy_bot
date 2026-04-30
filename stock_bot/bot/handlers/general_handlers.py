@@ -17,6 +17,14 @@ HELP_TEXT = """📈 *Stock Alert & Portfolio Bot*
 /start — register yourself \\(run this first\\)
 
 ━━━━━━━━━━━━━━━━━━━━
+🔎 *Finding stocks*
+━━━━━━━━━━━━━━━━━━━━
+/search COMPANY NAME — find a ticker by name \\(handles typos\\)
+  → `/search Apple`
+  → `/search Reliance Industries`
+  → `/search HDFC Bank`
+
+━━━━━━━━━━━━━━━━━━━━
 📋 *Watchlist*
 ━━━━━━━━━━━━━━━━━━━━
 /watch TICKER EXCHANGE \\[DD/MM/YYYY\\]

@@ -48,6 +48,7 @@ logger = logging.getLogger(__name__)
 _COMMAND_DESCRIPTIONS = {
     "start":      "Register yourself — run this first",
     "help":       "Show all commands with examples",
+    "search":     "Find a stock by company name — e.g. /search Apple",
     "watch":      "Track a stock — TICKER EXCHANGE [DD/MM/YYYY]",
     "unwatch":    "Stop tracking a stock — TICKER",
     "watchlist":  "All tracked stocks with live prices & returns",

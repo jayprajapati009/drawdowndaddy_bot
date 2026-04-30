@@ -91,7 +91,10 @@ async def cmd_add_watchlist(update: Update, ctx: ContextTypes.DEFAULT_TYPE) -> N
         )
     except ws.WatchlistError as e:
         logger.warning("  WatchlistError: %s", e)
-        await update.message.reply_text(f"❌ {e}")
+        msg = f"❌ {e}"
+        if "Could not fetch price" in str(e):
+            msg += f"\n\nDon't know the ticker? Try:\n/search {ticker.lower()}"
+        await update.message.reply_text(msg)
 
 
 async def cmd_remove_watchlist(update: Update, ctx: ContextTypes.DEFAULT_TYPE) -> None:

@@ -36,6 +36,7 @@ async def _log_all_commands(update: Update, ctx: ContextTypes.DEFAULT_TYPE) -> N
 
 
 from stock_bot.bot.handlers.general_handlers import cmd_start, cmd_help
+from stock_bot.bot.handlers.search_handlers import cmd_search, handle_search_reply
 from stock_bot.bot.handlers.watchlist_handlers import (
     cmd_add_watchlist, cmd_remove_watchlist, cmd_view_watchlist, cmd_set_checkpoint,
 )
@@ -56,8 +57,9 @@ from stock_bot.bot.handlers.price_alert_handlers import (
 def _build_command_map(features: Features) -> dict:
     """Build the active command map based on enabled features."""
     cmds = {
-        "start": cmd_start,
-        "help":  cmd_help,
+        "start":  cmd_start,
+        "help":   cmd_help,
+        "search": cmd_search,
     }
     if features.watchlist:
         cmds.update({
@@ -124,5 +126,13 @@ def register_handlers(app: Application, features: Features) -> dict:
 
     for cmd, fn in command_map.items():
         app.add_handler(CommandHandler(cmd, fn))
+
+    # Catch digit / "other" / "cancel" replies for the interactive search flow.
+    # Silently ignored when the user has no pending search.
+    import re as _re
+    _reply_filter = filters.TEXT & ~filters.COMMAND & filters.Regex(
+        _re.compile(r"^\s*([1-9]|other|none|cancel)\s*$", _re.IGNORECASE)
+    )
+    app.add_handler(MessageHandler(_reply_filter, handle_search_reply), group=1)
 
     return command_map
