@@ -1,0 +1,51 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Stock Bot Config",
+  "type": "object",
+  "required": ["bot_name", "telegram_token", "alert_chat_id", "database", "logs"],
+  "additionalProperties": false,
+  "properties": {
+    "bot_name": {
+      "type": "string",
+      "description": "Display name for this bot instance"
+    },
+    "telegram_token": {
+      "type": "string",
+      "description": "Telegram bot token from BotFather"
+    },
+    "alert_chat_id": {
+      "type": "string",
+      "description": "Telegram chat ID where alert notifications are sent"
+    },
+    "database": {
+      "type": "string",
+      "description": "Path to the SQLite database file (relative to project root)"
+    },
+    "logs": {
+      "type": "string",
+      "description": "Directory for log files (relative to project root)"
+    },
+    "features": {
+      "type": "object",
+      "description": "Turn features on or off for this bot",
+      "additionalProperties": false,
+      "properties": {
+        "watchlist":    { "type": "boolean", "default": true,  "description": "/watch /unwatch /watchlist /mark" },
+        "alerts":       { "type": "boolean", "default": true,  "description": "EMA proximity alerts — /alert /unalert /alerts" },
+        "price_alerts": { "type": "boolean", "default": true,  "description": "Price crossover alerts — /palert /unpalert /palerts /palertsall" },
+        "holdings":     { "type": "boolean", "default": true,  "description": "Portfolio tracking — /buy /sell /holdings /history" },
+        "reports":      { "type": "boolean", "default": true,  "description": "Summaries — /report /stock" }
+      }
+    },
+    "settings": {
+      "type": "object",
+      "description": "Optional tunable values — all have sensible defaults",
+      "additionalProperties": false,
+      "properties": {
+        "alert_cooldown_hours":        { "type": "integer", "default": 2,    "description": "Hours before the same alert can fire again" },
+        "check_interval_market_hours": { "type": "integer", "default": 1800, "description": "Alert check frequency in seconds during market hours" },
+        "check_interval_off_hours":    { "type": "integer", "default": 3600, "description": "Alert check frequency in seconds outside market hours" }
+      }
+    }
+  }
+}

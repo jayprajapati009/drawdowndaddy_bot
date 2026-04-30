@@ -1,11 +1,13 @@
 # Secrets
 .env
+configs/bot-*.json
 
 # Database
 *.db
 *.db-shm
 *.db-wal
 db_backups/
+data/
 
 # Logs
 logs/

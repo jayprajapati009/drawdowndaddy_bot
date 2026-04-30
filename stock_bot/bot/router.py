@@ -11,6 +11,8 @@ from telegram.error import NetworkError, TimedOut
 from telegram.ext import Application, ApplicationHandlerStop, CommandHandler, MessageHandler, filters
 from telegram.ext import ContextTypes
 
+from stock_bot.bot_config import Features
+
 logger = logging.getLogger(__name__)
 
 
@@ -22,7 +24,6 @@ async def _error_handler(update: object, ctx: ContextTypes.DEFAULT_TYPE) -> None
 
 
 async def _log_all_commands(update: Update, ctx: ContextTypes.DEFAULT_TYPE) -> None:
-    """MessageHandler that runs before every command and writes a single audit line."""
     user = update.effective_user
     chat = update.effective_chat
     text = update.message.text if update.message else ""
@@ -33,95 +34,95 @@ async def _log_all_commands(update: Update, ctx: ContextTypes.DEFAULT_TYPE) -> N
         text,
     )
 
+
 from stock_bot.bot.handlers.general_handlers import cmd_start, cmd_help
 from stock_bot.bot.handlers.watchlist_handlers import (
-    cmd_add_watchlist,
-    cmd_remove_watchlist,
-    cmd_view_watchlist,
-    cmd_set_checkpoint,
+    cmd_add_watchlist, cmd_remove_watchlist, cmd_view_watchlist, cmd_set_checkpoint,
 )
 from stock_bot.bot.handlers.alert_handlers import (
-    cmd_set_alert,
-    cmd_remove_alert,
-    cmd_view_alerts,
+    cmd_set_alert, cmd_remove_alert, cmd_view_alerts,
 )
 from stock_bot.bot.handlers.holdings_handlers import (
-    cmd_buy,
-    cmd_sell,
-    cmd_view_holdings,
-    cmd_transaction_history,
+    cmd_buy, cmd_sell, cmd_view_holdings, cmd_transaction_history,
 )
 from stock_bot.bot.handlers.report_handlers import (
-    cmd_weekly_report,
-    cmd_stock_details,
+    cmd_weekly_report, cmd_stock_details,
 )
 from stock_bot.bot.handlers.price_alert_handlers import (
-    cmd_set_price_alert,
-    cmd_remove_price_alert,
-    cmd_view_price_alerts,
-    cmd_view_all_price_alerts,
+    cmd_set_price_alert, cmd_remove_price_alert, cmd_view_price_alerts, cmd_view_all_price_alerts,
 )
 
-# Single source of truth: command name → handler function.
-# Used for both CommandHandler registration and multi-command dispatch.
-COMMAND_MAP = {
-    "start":     cmd_start,
-    "help":      cmd_help,
-    "watch":     cmd_add_watchlist,
-    "unwatch":   cmd_remove_watchlist,
-    "watchlist": cmd_view_watchlist,
-    "mark":      cmd_set_checkpoint,
-    "alert":     cmd_set_alert,
-    "unalert":   cmd_remove_alert,
-    "alerts":    cmd_view_alerts,
-    "buy":       cmd_buy,
-    "sell":      cmd_sell,
-    "holdings":  cmd_view_holdings,
-    "history":   cmd_transaction_history,
-    "palert":     cmd_set_price_alert,
-    "unpalert":   cmd_remove_price_alert,
-    "palerts":    cmd_view_price_alerts,
-    "palertsall": cmd_view_all_price_alerts,
-    "report":    cmd_weekly_report,
-    "stock":     cmd_stock_details,
-}
+
+def _build_command_map(features: Features) -> dict:
+    """Build the active command map based on enabled features."""
+    cmds = {
+        "start": cmd_start,
+        "help":  cmd_help,
+    }
+    if features.watchlist:
+        cmds.update({
+            "watch":     cmd_add_watchlist,
+            "unwatch":   cmd_remove_watchlist,
+            "watchlist": cmd_view_watchlist,
+            "mark":      cmd_set_checkpoint,
+        })
+    if features.alerts:
+        cmds.update({
+            "alert":   cmd_set_alert,
+            "unalert": cmd_remove_alert,
+            "alerts":  cmd_view_alerts,
+        })
+    if features.price_alerts:
+        cmds.update({
+            "palert":     cmd_set_price_alert,
+            "unpalert":   cmd_remove_price_alert,
+            "palerts":    cmd_view_price_alerts,
+            "palertsall": cmd_view_all_price_alerts,
+        })
+    if features.holdings:
+        cmds.update({
+            "buy":      cmd_buy,
+            "sell":     cmd_sell,
+            "holdings": cmd_view_holdings,
+            "history":  cmd_transaction_history,
+        })
+    if features.reports:
+        cmds.update({
+            "report": cmd_weekly_report,
+            "stock":  cmd_stock_details,
+        })
+    return cmds
 
 
-async def _dispatch_multi_command(update: Update, ctx: ContextTypes.DEFAULT_TYPE) -> None:
+def register_handlers(app: Application, features: Features) -> dict:
     """
-    Fires before CommandHandlers (group -2).
-    If the message contains multiple /command lines, routes each one and
-    raises ApplicationHandlerStop so normal handlers don't double-fire.
-    Single-command messages are left alone.
+    Attach command handlers to the Application based on enabled features.
+    Returns the active command map (used by main.py to build BOT_COMMANDS).
     """
-    text = update.message.text or ""
-    cmd_lines = [l.strip() for l in text.splitlines() if l.strip().startswith("/")]
+    command_map = _build_command_map(features)
 
-    if len(cmd_lines) <= 1:
-        return  # normal single-command flow takes over
-
-    for line in cmd_lines:
-        parts = line.split()
-        raw_cmd = parts[0].lstrip("/").split("@")[0].lower()
-        ctx.args = parts[1:]
-        handler_fn = COMMAND_MAP.get(raw_cmd)
-        if handler_fn:
-            await handler_fn(update, ctx)
-        else:
-            await update.message.reply_text(f"Unknown command: /{raw_cmd}")
-
-    raise ApplicationHandlerStop
-
-
-def register_handlers(app: Application) -> None:
-    """Attach all command handlers to the Application instance."""
     app.add_error_handler(_error_handler)
 
-    # Multi-command paste dispatcher — must be registered before everything else
-    app.add_handler(MessageHandler(filters.TEXT & filters.COMMAND, _dispatch_multi_command), group=-2)
+    async def _dispatch_multi_command(update: Update, ctx: ContextTypes.DEFAULT_TYPE) -> None:
+        text = update.message.text or ""
+        cmd_lines = [l.strip() for l in text.splitlines() if l.strip().startswith("/")]
+        if len(cmd_lines) <= 1:
+            return
+        for line in cmd_lines:
+            parts   = line.split()
+            raw_cmd = parts[0].lstrip("/").split("@")[0].lower()
+            ctx.args = parts[1:]
+            fn = command_map.get(raw_cmd)
+            if fn:
+                await fn(update, ctx)
+            else:
+                await update.message.reply_text(f"Unknown command: /{raw_cmd}")
+        raise ApplicationHandlerStop
 
-    # Audit logger
+    app.add_handler(MessageHandler(filters.TEXT & filters.COMMAND, _dispatch_multi_command), group=-2)
     app.add_handler(MessageHandler(filters.COMMAND, _log_all_commands), group=-1)
 
-    for cmd, fn in COMMAND_MAP.items():
+    for cmd, fn in command_map.items():
         app.add_handler(CommandHandler(cmd, fn))
+
+    return command_map

@@ -30,6 +30,14 @@ UNCOMPRESSED_KEEP   = 2           # how many recent rotated files stay plain-tex
 SIZE_THRESHOLD_MB   = 200         # trigger oldest-file deletion above this total size
 
 
+def configure(log_dir: str) -> None:
+    """Set the log directory and file before setup_logging() is called."""
+    global LOG_DIR, LOG_FILE
+    LOG_DIR  = Path(log_dir)
+    LOG_FILE = LOG_DIR / "stockbot.log"
+    LOG_DIR.mkdir(parents=True, exist_ok=True)
+
+
 # ---------------------------------------------------------------------------
 # Custom rotating handler
 # ---------------------------------------------------------------------------

@@ -10,12 +10,15 @@ import sqlite3
 from contextlib import contextmanager
 from pathlib import Path
 
-from stock_bot.config import DATABASE_URL
-
 logger = logging.getLogger(__name__)
 
-# Resolve the file path from the sqlite:/// URL (handles both relative and absolute)
-_DB_PATH: str = DATABASE_URL.removeprefix("sqlite:///")
+_DB_PATH: str = "stock_bot.db"  # set by configure() before init_db()
+
+
+def configure(db_path: str) -> None:
+    global _DB_PATH
+    Path(db_path).parent.mkdir(parents=True, exist_ok=True)
+    _DB_PATH = db_path
 
 SCHEMA_SQL = """
 PRAGMA journal_mode=WAL;

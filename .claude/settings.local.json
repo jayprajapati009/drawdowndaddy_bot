@@ -4,7 +4,13 @@
       "Bash(python3 -c \"import yfinance as yf; df = yf.Ticker\\('DOCN'\\).history\\(period='5d', interval='1d'\\); print\\(df\\)\")",
       "Bash(python3 -c \"import yfinance as yf; df = yf.Ticker\\('AAPL'\\).history\\(period='5d', interval='1d'\\); print\\(df[['Close']]\\)\")",
       "Bash(pip show *)",
-      "Bash(pip install *)"
+      "Bash(pip install *)",
+      "Bash(git commit *)",
+      "Bash(git add *)",
+      "Bash(git push *)",
+      "Bash(chmod +x /home/jp/jay/telegram_bot/db.sh)",
+      "Bash(git tag v1.0.0 -m 'v1.0.0 — stable release *)",
+      "Bash(git checkout *)"
     ]
   }
 }
