@@ -64,10 +64,13 @@ _active_bot_ids() {
 }
 
 _config_bot_ids() {
-    # IDs derived from configs/bot-*.json files that exist on disk
+    # IDs derived from configs/bot-N.json files (digits only, excludes *.example.json)
     for f in "$PROJECT_DIR"/configs/bot-*.json; do
         [ -f "$f" ] || continue
-        basename "$f" | sed 's/^bot-//; s/\.json$//'
+        local name; name=$(basename "$f")
+        # Skip example files
+        [[ "$name" == *.example.json ]] && continue
+        echo "$name" | sed 's/^bot-//; s/\.json$//'
     done
 }
 
@@ -81,6 +84,9 @@ cmd_deploy() {
         [ -f "$config_file" ] || { echo "⚠️  No config files found in configs/bot-*.json"; exit 1; }
 
         local filename; filename=$(basename "$config_file")
+        # Skip example files
+        [[ "$filename" == *.example.json ]] && continue
+
         local bot_id="${filename#bot-}"; bot_id="${bot_id%.json}"
         local svc; svc=$(_service_name "$bot_id")
         local bot_name; bot_name=$(_bot_name "$config_file")
