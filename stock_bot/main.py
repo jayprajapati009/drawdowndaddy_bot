@@ -143,13 +143,17 @@ def main() -> None:
         logger.info("Scheduler started")
         changelog = _latest_changelog()
         if changelog:
+            logger.info("Sending restart notification to %s", cfg.alert_chat_id)
             try:
                 await application.bot.send_message(
                     chat_id=cfg.alert_chat_id,
                     text=f"🔄 {cfg.bot_name} restarted\n\n{changelog}",
                 )
+                logger.info("Restart notification sent")
             except Exception as exc:  # noqa: BLE001
-                logger.warning("Could not send restart notification: %s", exc)
+                logger.error("Could not send restart notification: %s", exc)
+        else:
+            logger.warning("CHANGELOG.md not found or empty — no restart notification sent")
         bot_commands = [
             BotCommand(cmd, _COMMAND_DESCRIPTIONS[cmd])
             for cmd in command_map
