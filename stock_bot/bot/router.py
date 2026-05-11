@@ -161,8 +161,8 @@ def register_handlers(app: Application, features: Features) -> dict:
                     ok += 1
                 else:
                     errors.append(f"❓ Unknown: /{raw_cmd}")
-            except (ValueError, RuntimeError, KeyError) as exc:
-                logger.warning("Bulk dispatch error on /%s: %s", raw_cmd, exc)
+            except Exception as exc:  # noqa: BLE001
+                logger.warning("Bulk dispatch error on /%s: %s", raw_cmd, exc, exc_info=True)
                 errors.append(f"❌ /{raw_cmd}: {exc}")
         header = f"📦 Bulk import: {ok}/{len(cmd_lines)} done\n"
         body   = "\n".join(f"• {e}" for e in buffer) + (
