@@ -97,6 +97,28 @@ def get_all_emas(ticker: str) -> dict[str, Optional[float]]:
     return {ind: get_ema(ticker, ind) for ind in EMA_SPANS}
 
 
+def get_rsi(ticker: str, period: int = 14) -> Optional[float]:
+    """
+    Return the most recent weekly RSI for *ticker* using Wilder's smoothing.
+    Returns None if there is insufficient data.
+    """
+    df = _fetch_weekly(ticker)
+    if df is None or len(df) < period + 1:
+        return None
+
+    delta    = df["Close"].diff()
+    gain     = delta.clip(lower=0)
+    loss     = (-delta).clip(lower=0)
+    avg_gain = gain.ewm(alpha=1 / period, adjust=False).mean()
+    avg_loss = loss.ewm(alpha=1 / period, adjust=False).mean()
+
+    last_loss = avg_loss.iloc[-1]
+    if last_loss == 0:
+        return 100.0
+    rs  = avg_gain.iloc[-1] / last_loss
+    return round(100 - (100 / (1 + rs)), 2)
+
+
 def get_price_on_date(ticker: str, target_date: date) -> Optional[float]:
     """
     Return the closing price for *ticker* on *target_date*.

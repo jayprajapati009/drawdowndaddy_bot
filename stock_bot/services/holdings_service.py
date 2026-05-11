@@ -10,13 +10,13 @@ from typing import Optional
 
 from stock_bot.database.db import get_connection
 from stock_bot.database import queries as q
-from stock_bot.services.price_fetcher import get_prices_batch
+from stock_bot.services.price_fetcher import get_current_price, get_prices_batch
 
 logger = logging.getLogger(__name__)
 
 
 class HoldingsError(Exception):
-    pass
+    """Raised for invalid or impossible holdings operations."""
 
 
 def buy(
@@ -36,7 +36,7 @@ def buy(
         if user_id is None:
             raise HoldingsError("User not registered. Send /start first.")
         holding_id = q.get_or_create_holding(conn, user_id, ticker, exchange)
-        lot_id = q.add_lot(conn, holding_id, "BUY", quantity, price, notes)
+        q.add_lot(conn, holding_id, "BUY", quantity, price, notes)
 
     logger.info("BUY %s × %s @ %s for user %s", quantity, ticker, price, telegram_id)
     return {"ticker": ticker.upper(), "action": "BUY", "quantity": quantity, "price": price}
@@ -143,6 +143,59 @@ def get_positions(telegram_id: str) -> list[dict]:
             "unrealised_pnl": unrealised,
         })
     return positions
+
+
+def _fifo_realized_pnl(buy_lots: list, sell_lots: list) -> tuple[float, list]:
+    """FIFO match sells against buys. Returns (realized_pnl, remaining_buy_queue)."""
+    queue    = [[l["qty"], l["price"]] for l in buy_lots]
+    realized = 0.0
+    for sell in sell_lots:
+        remaining = sell["qty"]
+        for buy in queue:
+            if remaining <= 0:
+                break
+            consumed   = min(buy[0], remaining)
+            realized  += consumed * (sell["price"] - buy[1])
+            buy[0]    -= consumed
+            remaining -= consumed
+    return realized, queue
+
+
+def get_stock_returns(telegram_id: str, ticker: str) -> Optional[dict]:
+    """
+    Calculate realized P&L, unrealized P&L, total invested and overall
+    return % for *ticker* using FIFO lot matching (read-only).
+    Returns None if no holding exists.
+    """
+    with get_connection() as conn:
+        user_id = q.get_user_id(conn, telegram_id)
+        if user_id is None:
+            return None
+        holding = q.get_holding(conn, user_id, ticker)
+        if holding is None:
+            return None
+        lots = q.get_lots(conn, holding["id"])
+
+    buys           = [{"qty": l["quantity"], "price": l["price"]} for l in lots if l["action"] == "BUY"]
+    sells          = [{"qty": l["quantity"], "price": l["price"]} for l in lots if l["action"] == "SELL"]
+    total_invested = sum(l["qty"] * l["price"] for l in buys)
+    realized, queue = _fifo_realized_pnl(buys, sells)
+
+    open_qty   = sum(b[0] for b in queue)
+    current    = get_current_price(ticker)
+    open_cost  = sum(b[0] * b[1] for b in queue)
+    unrealized = (current - open_cost / open_qty) * open_qty if (current and open_qty > 0) else None
+
+    total_return_pct = (
+        ((realized + (unrealized or 0)) / total_invested * 100) if total_invested > 0 else None
+    )
+    return {
+        "total_invested":   total_invested,
+        "realized_pnl":     realized,
+        "unrealized_pnl":   unrealized,
+        "open_qty":         open_qty,
+        "total_return_pct": total_return_pct,
+    }
 
 
 def get_transaction_history(telegram_id: str, ticker: str) -> list[dict]:
