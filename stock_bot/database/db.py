@@ -81,6 +81,7 @@ CREATE TABLE IF NOT EXISTS lots (
     quantity      REAL    NOT NULL,
     price         REAL    NOT NULL,
     cost_basis    REAL,
+    consumed      BOOLEAN DEFAULT FALSE,
     transacted_at DATETIME DEFAULT CURRENT_TIMESTAMP,
     notes         TEXT
 );
@@ -116,6 +117,7 @@ def _migrate(conn: sqlite3.Connection) -> None:
     """Apply any schema changes that new code requires on existing DBs."""
     migrations = [
         "ALTER TABLE lots ADD COLUMN cost_basis REAL",
+        "ALTER TABLE lots ADD COLUMN consumed BOOLEAN DEFAULT FALSE",
     ]
     for sql in migrations:
         try:

@@ -239,31 +239,31 @@ def add_lot(
     notes: Optional[str] = None,
     cost_basis: Optional[float] = None,
     transacted_at: Optional[str] = None,
+    consumed: bool = False,
 ) -> int:
-    if transacted_at:
-        cur = conn.execute(
-            "INSERT INTO lots"
-            "(holding_id, action, quantity, price, cost_basis, notes, transacted_at) "
-            "VALUES(?,?,?,?,?,?,?)",
-            (holding_id, action.upper(), quantity, price, cost_basis, notes, transacted_at),
-        )
-    else:
-        cur = conn.execute(
-            "INSERT INTO lots(holding_id, action, quantity, price, cost_basis, notes) "
-            "VALUES(?,?,?,?,?,?)",
-            (holding_id, action.upper(), quantity, price, cost_basis, notes),
-        )
+    cur = conn.execute(
+        "INSERT INTO lots"
+        "(holding_id, action, quantity, price, cost_basis, consumed, notes, transacted_at) "
+        "VALUES(?,?,?,?,?,?,?,?)",
+        (holding_id, action.upper(), quantity, price, cost_basis, consumed,
+         notes, transacted_at),
+    )
     return cur.lastrowid
 
 
 def get_open_buy_lots(
     conn: sqlite3.Connection, holding_id: int
 ) -> list[sqlite3.Row]:
-    """Return all BUY lots ordered oldest-first (for FIFO sell matching)."""
+    """Return open (unconsumed) BUY lots oldest-first for FIFO matching."""
     return conn.execute(
-        "SELECT * FROM lots WHERE holding_id=? AND action='BUY' ORDER BY transacted_at",
+        "SELECT * FROM lots WHERE holding_id=? AND action='BUY' AND consumed=FALSE "
+        "ORDER BY transacted_at",
         (holding_id,),
     ).fetchall()
+
+
+def mark_lot_consumed(conn: sqlite3.Connection, lot_id: int) -> None:
+    conn.execute("UPDATE lots SET consumed=TRUE WHERE id=?", (lot_id,))
 
 
 def get_lots(conn: sqlite3.Connection, holding_id: int) -> list[sqlite3.Row]:

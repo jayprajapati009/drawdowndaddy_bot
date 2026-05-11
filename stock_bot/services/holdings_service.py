@@ -74,11 +74,12 @@ def sell(
                 f"Cannot sell {quantity} — you only hold {total_held} units of {ticker.upper()}."
             )
 
-        # FIFO matching
+        # FIFO matching — mark buy lots consumed instead of deleting
+        # so full history is preserved
         remaining    = quantity
         realised_pnl = 0.0
         total_cost   = 0.0
-        consumed     = []
+        lot_consumed = []
 
         for lot in buy_lots:
             if remaining <= 0:
@@ -87,12 +88,15 @@ def sell(
             consumed_qty = min(lot_qty, remaining)
             realised_pnl += consumed_qty * (price - lot["price"])
             total_cost   += consumed_qty * lot["price"]
-            consumed.append({"lot_id": lot["id"], "qty": consumed_qty, "cost": lot["price"]})
+            lot_consumed.append({"lot_id": lot["id"], "qty": consumed_qty, "cost": lot["price"]})
             remaining -= consumed_qty
 
             if consumed_qty >= lot_qty:
-                q.delete_lot(conn, lot["id"])
+                q.mark_lot_consumed(conn, lot["id"])
             else:
+                # Split: insert consumed portion, reduce original to remainder
+                q.add_lot(conn, lot["holding_id"], "BUY", consumed_qty, lot["price"],
+                          lot["notes"], transacted_at=lot["transacted_at"], consumed=True)
                 q.update_lot_quantity(conn, lot["id"], lot_qty - consumed_qty)
 
         avg_cost = total_cost / quantity if quantity else 0.0
@@ -227,11 +231,13 @@ def get_transaction_history(telegram_id: str, ticker: str) -> list[dict]:
         lots = q.get_lots(conn, holding["id"])
         return [
             {
-                "action": lot["action"],
-                "quantity": lot["quantity"],
-                "price": lot["price"],
+                "action":       lot["action"],
+                "quantity":     lot["quantity"],
+                "price":        lot["price"],
+                "cost_basis":   lot["cost_basis"],
+                "consumed":     bool(lot["consumed"]),
                 "transacted_at": lot["transacted_at"],
-                "notes": lot["notes"],
+                "notes":        lot["notes"],
             }
             for lot in lots
         ]

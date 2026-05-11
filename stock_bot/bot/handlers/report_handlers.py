@@ -97,17 +97,28 @@ def _section_returns(returns: dict, currency: str) -> list[str]:
 def _section_history(history: list[dict], currency: str) -> list[str]:
     lines = ["── Transaction history ──"]
     for lot in history:
-        emoji    = "🟢" if lot["action"] == "BUY" else "🔴"
         date_str = str(lot["transacted_at"])[:10]
-        note     = f" — {lot['notes']}" if lot["notes"] else ""
-        lines.append(
-            f"{emoji} {lot['action']} {lot['quantity']}"
-            f" @ {currency}{lot['price']:,.2f}  {date_str}{note}"
-        )
+        note     = f"  [{lot['notes']}]" if lot.get("notes") else ""
+        qty      = lot["quantity"]
+        pr       = lot["price"]
+
+        if lot["action"] == "BUY":
+            tag = " (sold)" if lot.get("consumed") else ""
+            lines.append(f"🟢 BUY {qty:g} @ {currency}{pr:,.2f} — {date_str}{tag}{note}")
+        else:
+            cb  = lot.get("cost_basis")
+            if cb:
+                pnl  = (pr - cb) * qty
+                pct  = (pr / cb - 1) * 100
+                sign = "+" if pnl >= 0 else ""
+                pnl_str = f"  →  {sign}{currency}{pnl:,.2f} ({sign}{pct:.1f}%)"
+            else:
+                pnl_str = ""
+            lines.append(f"🔴 SELL {qty:g} @ {currency}{pr:,.2f} — {date_str}{pnl_str}{note}")
     return lines
 
 
-# ── Handlers ──────────────────────────────────────────────────────────────────
+# ── Handlers ─────────────────────────────────────────────────────────────────
 
 async def cmd_weekly_report(update: Update, _ctx: ContextTypes.DEFAULT_TYPE) -> None:
     """Usage: /report"""
