@@ -36,6 +36,8 @@ from apscheduler.schedulers.asyncio import AsyncIOScheduler
 from telegram import BotCommand, BotCommandScopeAllGroupChats, BotCommandScopeAllPrivateChats
 from telegram.ext import Application
 
+from pathlib import Path
+
 from stock_bot.config import MARKET_HOURS
 from stock_bot.database.db import init_db
 from stock_bot.bot.router import register_handlers
@@ -68,6 +70,26 @@ _COMMAND_DESCRIPTIONS = {
     "report":     "Weekly watchlist + holdings summary",
     "stock":      "Deep-dive on one stock — TICKER",
 }
+
+
+def _latest_changelog() -> str:
+    """Return the most recent entry from CHANGELOG.md as plain text."""
+    try:
+        text = Path("CHANGELOG.md").read_text(encoding="utf-8")
+    except FileNotFoundError:
+        return ""
+    entry, in_entry = [], False
+    for line in text.splitlines():
+        if line.startswith("## "):
+            if in_entry:
+                break
+            in_entry = True
+            entry.append(line.lstrip("# ").strip())
+        elif in_entry:
+            clean = line.lstrip("-*• ").strip()
+            if clean and not clean.startswith("---"):
+                entry.append(f"• {clean}")
+    return "\n".join(entry)
 
 
 def _any_market_open() -> bool:
@@ -119,6 +141,15 @@ def main() -> None:
     async def on_startup(application: Application) -> None:
         scheduler.start()
         logger.info("Scheduler started")
+        changelog = _latest_changelog()
+        if changelog:
+            try:
+                await application.bot.send_message(
+                    chat_id=cfg.alert_chat_id,
+                    text=f"🔄 {cfg.bot_name} restarted\n\n{changelog}",
+                )
+            except Exception as exc:  # noqa: BLE001
+                logger.warning("Could not send restart notification: %s", exc)
         bot_commands = [
             BotCommand(cmd, _COMMAND_DESCRIPTIONS[cmd])
             for cmd in command_map
