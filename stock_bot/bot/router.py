@@ -8,7 +8,9 @@ import logging
 
 from telegram import Update
 from telegram.error import NetworkError, TimedOut
-from telegram.ext import Application, ApplicationHandlerStop, CommandHandler, MessageHandler, filters
+from telegram.ext import (
+    Application, ApplicationHandlerStop, CommandHandler, MessageHandler, filters,
+)
 from telegram.ext import ContextTypes
 
 from stock_bot.bot_config import Features
@@ -16,14 +18,14 @@ from stock_bot.bot_config import Features
 logger = logging.getLogger(__name__)
 
 
-async def _error_handler(update: object, ctx: ContextTypes.DEFAULT_TYPE) -> None:
+async def _error_handler(_update: object, ctx: ContextTypes.DEFAULT_TYPE) -> None:
     if isinstance(ctx.error, (NetworkError, TimedOut)):
         logger.warning("Transient Telegram error (will retry): %s", ctx.error)
     else:
         logger.error("Unhandled exception", exc_info=ctx.error)
 
 
-async def _log_all_commands(update: Update, ctx: ContextTypes.DEFAULT_TYPE) -> None:
+async def _log_all_commands(update: Update, _ctx: ContextTypes.DEFAULT_TYPE) -> None:
     user = update.effective_user
     chat = update.effective_chat
     text = update.message.text if update.message else ""
@@ -121,7 +123,9 @@ def register_handlers(app: Application, features: Features) -> dict:
                 await update.message.reply_text(f"Unknown command: /{raw_cmd}")
         raise ApplicationHandlerStop
 
-    app.add_handler(MessageHandler(filters.TEXT & filters.COMMAND, _dispatch_multi_command), group=-2)
+    app.add_handler(
+        MessageHandler(filters.TEXT & filters.COMMAND, _dispatch_multi_command), group=-2
+    )
     app.add_handler(MessageHandler(filters.COMMAND, _log_all_commands), group=-1)
 
     for cmd, fn in command_map.items():
@@ -131,7 +135,10 @@ def register_handlers(app: Application, features: Features) -> dict:
     # Silently ignored when the user has no pending search.
     import re as _re
     _reply_filter = filters.TEXT & ~filters.COMMAND & filters.Regex(
-        _re.compile(r"^\s*([1-9]|other|none|cancel)\s*$", _re.IGNORECASE)
+        _re.compile(
+            r"^\s*([1-9]|other|none|yes|no|today|cancel|\d{1,2}/\d{1,2}/\d{4})\s*$",
+            _re.IGNORECASE,
+        )
     )
     app.add_handler(MessageHandler(_reply_filter, handle_search_reply), group=1)
 

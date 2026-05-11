@@ -11,6 +11,12 @@ from stock_bot.services.price_fetcher import get_all_emas, get_current_price
 from stock_bot.bot.handlers._helpers import fmt_pct, get_account_id
 
 
+def _tradingview_url(ticker: str, exchange: str) -> str:
+    clean = ticker.split(".")[0]  # strip .NS, .BO suffixes
+    exch  = exchange or "NASDAQ"
+    return f"https://www.tradingview.com/chart/?symbol={exch}:{clean}"
+
+
 async def cmd_weekly_report(update: Update, ctx: ContextTypes.DEFAULT_TYPE) -> None:
     """Usage: /report"""
     telegram_id = get_account_id(update)
@@ -123,4 +129,5 @@ async def cmd_stock_details(update: Update, ctx: ContextTypes.DEFAULT_TYPE) -> N
             f"Avg cost: {currency}{pos['avg_cost']:,.2f} | Unrealised: {pnl_str} ({fmt_pct(pct)})"
         )
 
+    lines.append(f"\nChart: {_tradingview_url(ticker, wl_item['exchange'] if wl_item else '')}")
     await update.message.reply_text("\n".join(lines))
