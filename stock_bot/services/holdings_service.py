@@ -73,16 +73,18 @@ def sell(
             )
 
         # FIFO matching
-        remaining = quantity
+        remaining    = quantity
         realised_pnl = 0.0
-        consumed = []
+        total_cost   = 0.0
+        consumed     = []
 
         for lot in buy_lots:
             if remaining <= 0:
                 break
-            lot_qty = lot["quantity"]
+            lot_qty      = lot["quantity"]
             consumed_qty = min(lot_qty, remaining)
             realised_pnl += consumed_qty * (price - lot["price"])
+            total_cost   += consumed_qty * lot["price"]
             consumed.append({"lot_id": lot["id"], "qty": consumed_qty, "cost": lot["price"]})
             remaining -= consumed_qty
 
@@ -91,8 +93,9 @@ def sell(
             else:
                 q.update_lot_quantity(conn, lot["id"], lot_qty - consumed_qty)
 
-        # Record the SELL lot for history
-        q.add_lot(conn, holding["id"], "SELL", quantity, price, notes)
+        # Record SELL lot with cost_basis so returns can be reconstructed later
+        avg_cost = total_cost / quantity if quantity else 0.0
+        q.add_lot(conn, holding["id"], "SELL", quantity, price, notes, cost_basis=avg_cost)
 
     logger.info("SELL %s × %s @ %s, realised P&L = %.2f for user %s",
                 quantity, ticker, price, realised_pnl, telegram_id)
@@ -145,27 +148,12 @@ def get_positions(telegram_id: str) -> list[dict]:
     return positions
 
 
-def _fifo_realized_pnl(buy_lots: list, sell_lots: list) -> tuple[float, list]:
-    """FIFO match sells against buys. Returns (realized_pnl, remaining_buy_queue)."""
-    queue    = [[l["qty"], l["price"]] for l in buy_lots]
-    realized = 0.0
-    for sell in sell_lots:
-        remaining = sell["qty"]
-        for buy in queue:
-            if remaining <= 0:
-                break
-            consumed   = min(buy[0], remaining)
-            realized  += consumed * (sell["price"] - buy[1])
-            buy[0]    -= consumed
-            remaining -= consumed
-    return realized, queue
-
-
 def get_stock_returns(telegram_id: str, ticker: str) -> Optional[dict]:
     """
-    Calculate realized P&L, unrealized P&L, total invested and overall
-    return % for *ticker* using FIFO lot matching (read-only).
-    Returns None if no holding exists.
+    Returns simple and time-weighted returns for *ticker*.
+
+    SELL lots store cost_basis (avg buy cost) so we can reconstruct
+    full history even after FIFO matching deletes consumed buy lots.
     """
     with get_connection() as conn:
         user_id = q.get_user_id(conn, telegram_id)
@@ -176,25 +164,52 @@ def get_stock_returns(telegram_id: str, ticker: str) -> Optional[dict]:
             return None
         lots = q.get_lots(conn, holding["id"])
 
-    buys           = [{"qty": l["quantity"], "price": l["price"]} for l in lots if l["action"] == "BUY"]
-    sells          = [{"qty": l["quantity"], "price": l["price"]} for l in lots if l["action"] == "SELL"]
-    total_invested = sum(l["qty"] * l["price"] for l in buys)
-    realized, queue = _fifo_realized_pnl(buys, sells)
+    current   = get_current_price(ticker)
+    buy_lots  = [l for l in lots if l["action"] == "BUY"]
+    sell_lots = [l for l in lots if l["action"] == "SELL"]
 
-    open_qty   = sum(b[0] for b in queue)
-    current    = get_current_price(ticker)
-    open_cost  = sum(b[0] * b[1] for b in queue)
+    # Total invested = remaining open buys + cost basis of all sells
+    open_invested = sum(l["quantity"] * l["price"] for l in buy_lots)
+    sold_invested = sum(l["quantity"] * (l["cost_basis"] or 0) for l in sell_lots)
+    total_invested = open_invested + sold_invested
+
+    # Realized P&L from SELL lots (cost_basis populated since this fix)
+    realized = sum(
+        l["quantity"] * (l["price"] - l["cost_basis"])
+        for l in sell_lots if l["cost_basis"] is not None
+    )
+
+    # Unrealized P&L on open position
+    open_qty  = sum(l["quantity"] for l in buy_lots)
+    open_cost = open_invested
     unrealized = (current - open_cost / open_qty) * open_qty if (current and open_qty > 0) else None
 
-    total_return_pct = (
-        ((realized + (unrealized or 0)) / total_invested * 100) if total_invested > 0 else None
-    )
+    # Simple total return
+    total_pnl        = realized + (unrealized or 0.0)
+    total_return_pct = (total_pnl / total_invested * 100) if total_invested > 0 else None
+
+    # Time-weighted return — chain-link each lot's individual return
+    # Sells: (sell_price / avg_cost) - 1 per lot
+    # Open buys: (current / buy_price) - 1 per lot
+    twr_product = 1.0
+    has_twr     = False
+    for lot in sell_lots:
+        if lot["cost_basis"] and lot["cost_basis"] > 0:
+            twr_product *= lot["price"] / lot["cost_basis"]
+            has_twr = True
+    for lot in buy_lots:
+        if current and lot["price"] > 0:
+            twr_product *= current / lot["price"]
+            has_twr = True
+    twr_pct = (twr_product - 1) * 100 if has_twr else None
+
     return {
         "total_invested":   total_invested,
         "realized_pnl":     realized,
         "unrealized_pnl":   unrealized,
         "open_qty":         open_qty,
         "total_return_pct": total_return_pct,
+        "twr_pct":          twr_pct,
     }
 
 

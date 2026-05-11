@@ -237,10 +237,12 @@ def add_lot(
     quantity: float,
     price: float,
     notes: Optional[str] = None,
+    cost_basis: Optional[float] = None,
 ) -> int:
     cur = conn.execute(
-        "INSERT INTO lots(holding_id, action, quantity, price, notes) VALUES(?,?,?,?,?)",
-        (holding_id, action.upper(), quantity, price, notes),
+        "INSERT INTO lots(holding_id, action, quantity, price, cost_basis, notes) "
+        "VALUES(?,?,?,?,?,?)",
+        (holding_id, action.upper(), quantity, price, cost_basis, notes),
     )
     return cur.lastrowid
 

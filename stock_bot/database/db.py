@@ -80,6 +80,7 @@ CREATE TABLE IF NOT EXISTS lots (
     action        TEXT    NOT NULL CHECK(action IN ('BUY', 'SELL')),
     quantity      REAL    NOT NULL,
     price         REAL    NOT NULL,
+    cost_basis    REAL,
     transacted_at DATETIME DEFAULT CURRENT_TIMESTAMP,
     notes         TEXT
 );
@@ -107,7 +108,21 @@ def init_db() -> None:
     Path(_DB_PATH).parent.mkdir(parents=True, exist_ok=True)
     with _connect() as conn:
         conn.executescript(SCHEMA_SQL)
+        _migrate(conn)
     logger.info("Database initialised at %s", _DB_PATH)
+
+
+def _migrate(conn: sqlite3.Connection) -> None:
+    """Apply any schema changes that new code requires on existing DBs."""
+    migrations = [
+        "ALTER TABLE lots ADD COLUMN cost_basis REAL",
+    ]
+    for sql in migrations:
+        try:
+            conn.execute(sql)
+            logger.info("Migration applied: %s", sql)
+        except sqlite3.OperationalError:
+            pass  # column already exists
 
 
 @contextmanager

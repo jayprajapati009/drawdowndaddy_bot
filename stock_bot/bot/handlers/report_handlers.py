@@ -66,20 +66,31 @@ def _section_watchlist(wl_item: dict, current: float | None, currency: str) -> l
     return lines
 
 
+def _signed(val: float, currency: str) -> str:
+    sign = "+" if val >= 0 else ""
+    return f"{sign}{currency}{val:,.2f}"
+
+
 def _section_returns(returns: dict, currency: str) -> list[str]:
     lines = ["── Returns ──"]
+
     r_pnl = returns["realized_pnl"]
-    sign  = "+" if r_pnl >= 0 else ""
-    lines.append(f"Realized P&L:   {sign}{currency}{r_pnl:,.2f}")
+    lines.append(f"Realized P&L:     {_signed(r_pnl, currency)}")
+
     u_pnl = returns["unrealized_pnl"]
     if u_pnl is not None:
-        sign = "+" if u_pnl >= 0 else ""
-        lines.append(f"Unrealized P&L: {sign}{currency}{u_pnl:,.2f}")
-    invested = returns["total_invested"]
-    lines.append(f"Total invested: {currency}{invested:,.2f}")
-    pct = returns["total_return_pct"]
-    if pct is not None:
-        lines.append(f"Total return:   {fmt_pct(pct)}")
+        lines.append(f"Unrealized P&L:   {_signed(u_pnl, currency)}")
+
+    lines.append(f"Total invested:   {currency}{returns['total_invested']:,.2f}")
+
+    simple = returns["total_return_pct"]
+    if simple is not None:
+        lines.append(f"Simple return:    {fmt_pct(simple)}")
+
+    twr = returns["twr_pct"]
+    if twr is not None:
+        lines.append(f"Time-wt. return:  {fmt_pct(twr)}")
+
     return lines
 
 
@@ -96,7 +107,7 @@ def _section_history(history: list[dict], currency: str) -> list[str]:
     return lines
 
 
-# ── Handlers ───────────────────────────────────────────────────────────────────
+# ── Handlers ──────────────────────────────────────────────────────────────────
 
 async def cmd_weekly_report(update: Update, _ctx: ContextTypes.DEFAULT_TYPE) -> None:
     """Usage: /report"""
