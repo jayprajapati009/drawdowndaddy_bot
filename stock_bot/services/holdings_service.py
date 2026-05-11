@@ -111,7 +111,7 @@ def sell(
         "quantity": quantity,
         "price": price,
         "realised_pnl": realised_pnl,
-        "lots_consumed": consumed,
+        "lots_consumed": lot_consumed,
     }
 
 
