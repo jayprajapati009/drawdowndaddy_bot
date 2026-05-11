@@ -102,6 +102,39 @@ def _build_command_map(features: Features) -> dict:
     return cmds
 
 
+_BULK_THRESHOLD = 5   # above this, suppress per-command replies and send one summary
+
+
+class _SilentMessage:
+    """Proxy for Message that buffers reply_text calls instead of sending them."""
+
+    def __init__(self, real_message, buffer: list):
+        self._msg    = real_message
+        self._buffer = buffer
+
+    async def reply_text(self, text, **kwargs):
+        first_line = str(text).split("\n")[0]
+        self._buffer.append(first_line)
+
+    def __getattr__(self, name):
+        return getattr(self._msg, name)
+
+
+class _SilentUpdate:
+    """Proxy for Update that injects _SilentMessage during bulk dispatch."""
+
+    def __init__(self, real_update, buffer: list):
+        self._update  = real_update
+        self._message = _SilentMessage(real_update.message, buffer)
+
+    @property
+    def message(self):
+        return self._message
+
+    def __getattr__(self, name):
+        return getattr(self._update, name)
+
+
 def register_handlers(app: Application, features: Features) -> dict:
     """
     Attach command handlers to the Application based on enabled features.
@@ -116,15 +149,42 @@ def register_handlers(app: Application, features: Features) -> dict:
         cmd_lines = [l.strip() for l in text.splitlines() if l.strip().startswith("/")]
         if len(cmd_lines) <= 1:
             return
+
+        bulk = len(cmd_lines) > _BULK_THRESHOLD
+        buffer: list[str] = []
+        dispatch_update = _SilentUpdate(update, buffer) if bulk else update
+
+        ok = 0
+        errors: list[str] = []
+
         for line in cmd_lines:
             parts   = line.split()
             raw_cmd = parts[0].lstrip("/").split("@")[0].lower()
             ctx.args = parts[1:]
             fn = command_map.get(raw_cmd)
-            if fn:
-                await fn(update, ctx)
-            else:
-                await update.message.reply_text(f"Unknown command: /{raw_cmd}")
+            try:
+                if fn:
+                    await fn(dispatch_update, ctx)
+                    ok += 1
+                elif not bulk:
+                    await update.message.reply_text(f"Unknown command: /{raw_cmd}")
+                else:
+                    errors.append(f"❓ Unknown: /{raw_cmd}")
+            except Exception as exc:
+                logger.warning("Bulk dispatch error on /%s: %s", raw_cmd, exc)
+                errors.append(f"❌ /{raw_cmd}: {exc}")
+
+        if bulk:
+            lines = [f"📦 Bulk import: {ok}/{len(cmd_lines)} done\n"]
+            for entry in buffer:
+                lines.append(f"• {entry}")
+            for err in errors:
+                lines.append(err)
+            summary = "\n".join(lines)
+            # Telegram message limit is 4096 chars — split if needed
+            for i in range(0, len(summary), 4000):
+                await update.message.reply_text(summary[i:i + 4000])
+
         raise ApplicationHandlerStop
 
     app.add_handler(
