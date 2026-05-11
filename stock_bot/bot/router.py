@@ -40,7 +40,7 @@ async def _log_all_commands(update: Update, _ctx: ContextTypes.DEFAULT_TYPE) -> 
 
 from stock_bot.bot.handlers.general_handlers import cmd_start, cmd_help
 from stock_bot.bot.handlers.search_handlers import (
-    cmd_search, handle_search_callback, handle_date_reply,
+    cmd_search, cmd_set_date, handle_search_callback, handle_date_reply,
 )
 from stock_bot.bot.handlers.watchlist_handlers import (
     cmd_add_watchlist, cmd_remove_watchlist, cmd_view_watchlist, cmd_set_checkpoint,
@@ -65,6 +65,7 @@ def _build_command_map(features: Features) -> dict:
         "start":  cmd_start,
         "help":   cmd_help,
         "search": cmd_search,
+        "date":   cmd_set_date,
     }
     if features.watchlist:
         cmds.update({

@@ -161,10 +161,39 @@ async def handle_search_callback(update: Update, ctx: ContextTypes.DEFAULT_TYPE)
     if data == "search:date:manual":
         state["phase"] = "date_manual"
         await cq.edit_message_text(
-            "Reply to this message with the entry date in DD/MM/YYYY format:\n"
-            "Example: 15/01/2025"
+            "Enter the entry date using the command:\n\n"
+            "/date DD/MM/YYYY\n\n"
+            "Example: /date 15/01/2025"
         )
         return
+
+
+async def cmd_set_date(update: Update, ctx: ContextTypes.DEFAULT_TYPE) -> None:
+    """Usage: /date DD/MM/YYYY — completes a pending /search date entry."""
+    state = ctx.user_data.get("search")
+    if not state or state.get("phase") != "date_manual":
+        await update.message.reply_text(
+            "No pending search. Use /search first, then pick a stock and choose 'Enter a past date'."
+        )
+        return
+
+    if not ctx.args:
+        await update.message.reply_text("Usage: /date DD/MM/YYYY\nExample: /date 15/01/2025")
+        return
+
+    try:
+        entry_date = _parse_date(ctx.args[0])
+        if entry_date > date.today():
+            await update.message.reply_text("❌ Date cannot be in the future.")
+            return
+    except (ValueError, IndexError):
+        await update.message.reply_text("❌ Invalid date. Use DD/MM/YYYY — e.g. /date 15/01/2025")
+        return
+
+    pick        = state["selected"]
+    telegram_id = get_account_id(update)
+    ctx.user_data.pop("search", None)
+    await _do_watch(update.message.reply_text, pick, telegram_id, entry_date)
 
 
 async def handle_date_reply(update: Update, ctx: ContextTypes.DEFAULT_TYPE) -> None:
