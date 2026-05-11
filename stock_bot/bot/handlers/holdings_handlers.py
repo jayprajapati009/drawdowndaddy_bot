@@ -2,6 +2,8 @@
 Telegram command handlers for holdings and transaction management.
 """
 
+import re
+from datetime import date
 from telegram import Update
 from telegram.ext import ContextTypes
 
@@ -9,34 +11,64 @@ from stock_bot.config import CURRENCY_SYMBOL
 from stock_bot.services import holdings_service as hs
 from stock_bot.bot.handlers._helpers import fmt_pct, get_account_id
 
+_DATE_RE = re.compile(r"^\d{1,2}/\d{1,2}/\d{4}$")
+
+
+def _parse_date(value: str) -> date:
+    return date(*reversed([int(p) for p in value.split("/")]))
+
+
+def _extract_date(args: list, date_pos: int) -> tuple[str | None, list]:
+    """
+    If args[date_pos] looks like DD/MM/YYYY, pop it and return (iso_date, rest).
+    Otherwise return (None, args[date_pos:]) so it falls through as notes.
+    """
+    if len(args) > date_pos and _DATE_RE.match(args[date_pos]):
+        try:
+            d = _parse_date(args[date_pos])
+            if d > date.today():
+                return "__future__", args[date_pos:]
+            return d.isoformat(), args[date_pos + 1:]
+        except (ValueError, IndexError):
+            pass
+    return None, args[date_pos:]
+
 
 async def cmd_buy(update: Update, ctx: ContextTypes.DEFAULT_TYPE) -> None:
-    """Usage: /buy TICKER EXCHANGE QUANTITY PRICE [notes]"""
+    """Usage: /buy TICKER EXCHANGE QUANTITY PRICE [DD/MM/YYYY] [notes]"""
     args = ctx.args
     if len(args) < 4:
         await update.message.reply_text(
-            "Usage: /buy TICKER EXCHANGE QUANTITY PRICE [notes]\n"
-            "Example: /buy RELIANCE.NS NSE 10 2450"
+            "Usage: /buy TICKER EXCHANGE QUANTITY PRICE [DD/MM/YYYY] [notes]\n"
+            "Examples:\n"
+            "  /buy AAPL NASDAQ 10 185.50\n"
+            "  /buy AAPL NASDAQ 10 185.50 15/01/2025"
         )
         return
 
     ticker, exchange = args[0].upper(), args[1].upper()
     try:
         quantity = float(args[2])
-        price = float(args[3])
+        price    = float(args[3])
     except ValueError:
         await update.message.reply_text("Quantity and price must be numbers.")
         return
-    notes = " ".join(args[4:]) or None
+
+    trade_date, rest = _extract_date(args, date_pos=4)
+    if trade_date == "__future__":
+        await update.message.reply_text("❌ Trade date cannot be in the future.")
+        return
+    notes      = " ".join(rest) or None
     telegram_id = get_account_id(update)
 
     try:
-        result = hs.buy(telegram_id, ticker, exchange, quantity, price, notes)
+        result   = hs.buy(telegram_id, ticker, exchange, quantity, price, notes, trade_date)
         currency = CURRENCY_SYMBOL.get(exchange, "")
+        date_str = f" on {trade_date}" if trade_date else ""
         await update.message.reply_text(
             f"✅ *BUY logged*\n"
             f"{result['ticker']} ({exchange})\n"
-            f"Qty: {result['quantity']} @ {currency}{result['price']:,.2f}\n"
+            f"Qty: {result['quantity']} @ {currency}{result['price']:,.2f}{date_str}\n"
             f"Total: {currency}{result['quantity'] * result['price']:,.2f}",
             parse_mode="Markdown",
         )
@@ -45,33 +77,41 @@ async def cmd_buy(update: Update, ctx: ContextTypes.DEFAULT_TYPE) -> None:
 
 
 async def cmd_sell(update: Update, ctx: ContextTypes.DEFAULT_TYPE) -> None:
-    """Usage: /sell TICKER QUANTITY PRICE [notes]"""
+    """Usage: /sell TICKER QUANTITY PRICE [DD/MM/YYYY] [notes]"""
     args = ctx.args
     if len(args) < 3:
         await update.message.reply_text(
-            "Usage: /sell TICKER QUANTITY PRICE [notes]\n"
-            "Example: /sell RELIANCE.NS 5 2600"
+            "Usage: /sell TICKER QUANTITY PRICE [DD/MM/YYYY] [notes]\n"
+            "Examples:\n"
+            "  /sell AAPL 5 210\n"
+            "  /sell AAPL 5 210 30/03/2026"
         )
         return
 
     ticker = args[0].upper()
     try:
         quantity = float(args[1])
-        price = float(args[2])
+        price    = float(args[2])
     except ValueError:
         await update.message.reply_text("Quantity and price must be numbers.")
         return
-    notes = " ".join(args[3:]) or None
+
+    trade_date, rest = _extract_date(args, date_pos=3)
+    if trade_date == "__future__":
+        await update.message.reply_text("❌ Trade date cannot be in the future.")
+        return
+    notes       = " ".join(rest) or None
     telegram_id = get_account_id(update)
 
     try:
-        result = hs.sell(telegram_id, ticker, quantity, price, notes)
-        pnl = result["realised_pnl"]
+        result    = hs.sell(telegram_id, ticker, quantity, price, notes, trade_date)
+        pnl       = result["realised_pnl"]
         pnl_emoji = "📈" if pnl >= 0 else "📉"
+        date_str  = f" on {trade_date}" if trade_date else ""
         await update.message.reply_text(
             f"✅ *SELL logged*\n"
             f"{result['ticker']}\n"
-            f"Qty: {result['quantity']} @ {price:,.2f}\n"
+            f"Qty: {result['quantity']} @ {price:,.2f}{date_str}\n"
             f"{pnl_emoji} Realised P&L: {'+' if pnl >= 0 else ''}{pnl:,.2f}",
             parse_mode="Markdown",
         )

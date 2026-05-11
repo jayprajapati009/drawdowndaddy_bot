@@ -26,8 +26,9 @@ def buy(
     quantity: float,
     price: float,
     notes: Optional[str] = None,
+    trade_date: Optional[str] = None,
 ) -> dict:
-    """Log a BUY lot. Returns lot details."""
+    """Log a BUY lot. Returns lot details. trade_date is ISO format YYYY-MM-DD."""
     if quantity <= 0 or price <= 0:
         raise HoldingsError("Quantity and price must be positive.")
 
@@ -36,9 +37,9 @@ def buy(
         if user_id is None:
             raise HoldingsError("User not registered. Send /start first.")
         holding_id = q.get_or_create_holding(conn, user_id, ticker, exchange)
-        q.add_lot(conn, holding_id, "BUY", quantity, price, notes)
+        q.add_lot(conn, holding_id, "BUY", quantity, price, notes, transacted_at=trade_date)
 
-    logger.info("BUY %s × %s @ %s for user %s", quantity, ticker, price, telegram_id)
+    logger.info("BUY %s × %s @ %s on %s", quantity, ticker, price, trade_date or "today")
     return {"ticker": ticker.upper(), "action": "BUY", "quantity": quantity, "price": price}
 
 
@@ -48,6 +49,7 @@ def sell(
     quantity: float,
     price: float,
     notes: Optional[str] = None,
+    trade_date: Optional[str] = None,
 ) -> dict:
     """
     Log a SELL using FIFO lot matching.
@@ -93,9 +95,9 @@ def sell(
             else:
                 q.update_lot_quantity(conn, lot["id"], lot_qty - consumed_qty)
 
-        # Record SELL lot with cost_basis so returns can be reconstructed later
         avg_cost = total_cost / quantity if quantity else 0.0
-        q.add_lot(conn, holding["id"], "SELL", quantity, price, notes, cost_basis=avg_cost)
+        q.add_lot(conn, holding["id"], "SELL", quantity, price, notes,
+                  cost_basis=avg_cost, transacted_at=trade_date)
 
     logger.info("SELL %s × %s @ %s, realised P&L = %.2f for user %s",
                 quantity, ticker, price, realised_pnl, telegram_id)
