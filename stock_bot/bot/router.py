@@ -9,7 +9,8 @@ import logging
 from telegram import Update
 from telegram.error import NetworkError, TimedOut
 from telegram.ext import (
-    Application, ApplicationHandlerStop, CommandHandler, MessageHandler, filters,
+    Application, ApplicationHandlerStop, CallbackQueryHandler,
+    CommandHandler, MessageHandler, filters,
 )
 from telegram.ext import ContextTypes
 
@@ -38,7 +39,9 @@ async def _log_all_commands(update: Update, _ctx: ContextTypes.DEFAULT_TYPE) -> 
 
 
 from stock_bot.bot.handlers.general_handlers import cmd_start, cmd_help
-from stock_bot.bot.handlers.search_handlers import cmd_search, handle_search_reply
+from stock_bot.bot.handlers.search_handlers import (
+    cmd_search, handle_search_callback, handle_date_reply,
+)
 from stock_bot.bot.handlers.watchlist_handlers import (
     cmd_add_watchlist, cmd_remove_watchlist, cmd_view_watchlist, cmd_set_checkpoint,
 )
@@ -131,15 +134,15 @@ def register_handlers(app: Application, features: Features) -> dict:
     for cmd, fn in command_map.items():
         app.add_handler(CommandHandler(cmd, fn))
 
-    # Catch digit / "other" / "cancel" replies for the interactive search flow.
-    # Silently ignored when the user has no pending search.
-    import re as _re
-    _reply_filter = filters.TEXT & ~filters.COMMAND & filters.Regex(
-        _re.compile(
-            r"^\s*([1-9]|other|none|yes|no|today|cancel|\d{1,2}/\d{1,2}/\d{4})\s*$",
-            _re.IGNORECASE,
-        )
+    # Inline button handler for the search flow (works with group privacy mode)
+    app.add_handler(CallbackQueryHandler(handle_search_callback, pattern=r"^search:"))
+
+    # Reply handler for typed date / new query after "none of these".
+    # Only fires for replies to the bot's messages, which are received
+    # even when group privacy mode is enabled.
+    app.add_handler(
+        MessageHandler(filters.TEXT & filters.REPLY & ~filters.COMMAND, handle_date_reply),
+        group=1,
     )
-    app.add_handler(MessageHandler(_reply_filter, handle_search_reply), group=1)
 
     return command_map

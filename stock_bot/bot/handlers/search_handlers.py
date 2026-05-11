@@ -1,24 +1,23 @@
 """
 /search handler — lets users find tickers by company name.
 
+Uses inline keyboard buttons so the flow works in groups regardless of
+Telegram's privacy mode (plain text replies aren't received in groups
+unless privacy mode is disabled).
+
 Flow:
-  1. /search Apple              → numbered list of matches
-  2. User replies 1/2/3         → asks "Add to watchlist?"
-  3. User replies yes           → asks "Entry date? (today or DD/MM/YYYY)"
-  4. User replies today / date  → adds to watchlist
-  5. User replies no            → ends without adding
-
-  At any step: 'cancel' aborts. 'other' tries a new search (max 2 attempts).
-  After 2 failed attempts       → shows Yahoo Finance search link.
-
-State is stored in ctx.user_data["search"] per user.
+  1. /search Apple          → numbered list with tap-to-select buttons
+  2. User taps a result     → "Add to watchlist?" [Yes] [No]
+  3. User taps Yes          → "Entry date?" [Today] [Enter date]
+  4a. User taps Today       → added at current price
+  4b. User taps Enter date  → bot asks for reply with DD/MM/YYYY
+  5.  User replies with date → added at historical price
 """
 
 import logging
-import re
 from datetime import date
 
-from telegram import Update
+from telegram import InlineKeyboardButton, InlineKeyboardMarkup, Update
 from telegram.ext import ContextTypes
 
 from stock_bot.config import CURRENCY_SYMBOL
@@ -36,7 +35,37 @@ def _parse_date(value: str) -> date:
     return date(*reversed([int(p) for p in value.split("/")]))
 
 
-# ── Public entry point ─────────────────────────────────────────────────────────
+# ── Keyboards ──────────────────────────────────────────────────────────────────
+
+def _pick_keyboard(results: list[dict]) -> InlineKeyboardMarkup:
+    rows = []
+    for i, r in enumerate(results):
+        label = f"{i + 1}. {r['name']} ({r['ticker']})"
+        if r["exchange"]:
+            label += f" — {r['exchange']}"
+        rows.append([InlineKeyboardButton(label, callback_data=f"search:pick:{i}")])
+    rows.append([
+        InlineKeyboardButton("🔄 None of these", callback_data="search:other"),
+        InlineKeyboardButton("❌ Cancel",         callback_data="search:cancel"),
+    ])
+    return InlineKeyboardMarkup(rows)
+
+
+def _confirm_keyboard(ticker: str) -> InlineKeyboardMarkup:
+    return InlineKeyboardMarkup([[
+        InlineKeyboardButton(f"✅ Yes, add {ticker}", callback_data="search:confirm:yes"),
+        InlineKeyboardButton("❌ No",                 callback_data="search:confirm:no"),
+    ]])
+
+
+def _date_keyboard() -> InlineKeyboardMarkup:
+    return InlineKeyboardMarkup([[
+        InlineKeyboardButton("📅 Today (current price)", callback_data="search:date:today"),
+        InlineKeyboardButton("📆 Enter a past date",     callback_data="search:date:manual"),
+    ]])
+
+
+# ── Entry points ───────────────────────────────────────────────────────────────
 
 async def cmd_search(update: Update, ctx: ContextTypes.DEFAULT_TYPE) -> None:
     """Usage: /search COMPANY NAME"""
@@ -49,145 +78,140 @@ async def cmd_search(update: Update, ctx: ContextTypes.DEFAULT_TYPE) -> None:
             "  /search HDFC Bank"
         )
         return
-
     query = " ".join(ctx.args)
-    await _run_search(update, ctx, query, attempt=1)
+    await _run_search(update.message.reply_text, ctx, query, attempt=1)
 
 
-async def handle_search_reply(update: Update, ctx: ContextTypes.DEFAULT_TYPE) -> None:
+async def handle_search_callback(update: Update, ctx: ContextTypes.DEFAULT_TYPE) -> None:
+    """CallbackQueryHandler — handles all inline button presses for the search flow."""
+    cq    = update.callback_query
+    await cq.answer()
+    data  = cq.data
+    state = ctx.user_data.get("search")
+
+    # ── Cancel ─────────────────────────────────────────────────────────────────
+    if data == "search:cancel":
+        ctx.user_data.pop("search", None)
+        await cq.edit_message_text("Search cancelled.")
+        return
+
+    if state is None:
+        await cq.edit_message_text("This search has expired. Use /search to start a new one.")
+        return
+
+    # ── None of these / try again ──────────────────────────────────────────────
+    if data == "search:other":
+        attempt = state["attempt"] + 1
+        if attempt > MAX_ATTEMPTS:
+            ctx.user_data.pop("search", None)
+            await cq.edit_message_text(
+                "No match found. Search directly on Yahoo Finance:\n"
+                f"{YAHOO_SEARCH}\n\n"
+                "Then use: /watch TICKER EXCHANGE"
+            )
+        else:
+            state["attempt"]       = attempt
+            state["awaiting_query"] = True
+            await cq.edit_message_text(
+                f"Try a different spelling or the full name "
+                f"(attempt {attempt}/{MAX_ATTEMPTS}).\n\n"
+                "Reply to this message with your search:"
+            )
+        return
+
+    # ── Pick a result ──────────────────────────────────────────────────────────
+    if data.startswith("search:pick:"):
+        idx     = int(data.split(":")[-1])
+        results = state.get("results", [])
+        if idx >= len(results):
+            await cq.edit_message_text("Invalid selection. Use /search to try again.")
+            return
+        pick              = results[idx]
+        state["selected"] = pick
+        state["phase"]    = "confirm"
+        exch = f" — {pick['exchange']}" if pick["exchange"] else ""
+        await cq.edit_message_text(
+            f"You picked: {pick['name']} ({pick['ticker']}){exch}\n\n"
+            "Add to watchlist?",
+            reply_markup=_confirm_keyboard(pick["ticker"]),
+        )
+        return
+
+    # ── Confirm yes / no ───────────────────────────────────────────────────────
+    if data == "search:confirm:no":
+        ticker = state.get("selected", {}).get("ticker", "")
+        ctx.user_data.pop("search", None)
+        await cq.edit_message_text(f"Ok, {ticker} not added.")
+        return
+
+    if data == "search:confirm:yes":
+        state["phase"] = "date"
+        await cq.edit_message_text("Entry date?", reply_markup=_date_keyboard())
+        return
+
+    # ── Date selection ─────────────────────────────────────────────────────────
+    if data == "search:date:today":
+        pick        = state["selected"]
+        telegram_id = get_account_id(update)
+        ctx.user_data.pop("search", None)
+        await cq.edit_message_text(f"Adding {pick['ticker']} to watchlist…")
+        await _do_watch(cq.message.reply_text, pick, telegram_id, entry_date=None)
+        return
+
+    if data == "search:date:manual":
+        state["phase"] = "date_manual"
+        await cq.edit_message_text(
+            "Reply to this message with the entry date in DD/MM/YYYY format:\n"
+            "Example: 15/01/2025"
+        )
+        return
+
+
+async def handle_date_reply(update: Update, ctx: ContextTypes.DEFAULT_TYPE) -> None:
     """
-    Catches all non-command text messages and routes them through the
-    search state machine. Silently ignored if no search is active.
+    Catches text replies when the user is in the date_manual or awaiting_query phase.
+    Replies to the bot's messages are received even with group privacy mode enabled.
     """
     state = ctx.user_data.get("search")
     if not state:
         return
 
-    text = (update.message.text or "").strip()
-    phase = state.get("phase", "pick")
+    text  = (update.message.text or "").strip()
+    phase = state.get("phase")
 
-    if phase == "pick":
-        await _handle_pick(update, ctx, state, text)
-    elif phase == "confirm":
-        await _handle_confirm(update, ctx, state, text)
-    elif phase == "date":
-        await _handle_date(update, ctx, state, text)
-
-
-# ── Phase handlers ─────────────────────────────────────────────────────────────
-
-async def _handle_pick(update, ctx, state, text):
-    """User is choosing a number from the results list."""
-    lower = text.lower()
-
-    if lower == "cancel":
-        ctx.user_data.pop("search", None)
-        await update.message.reply_text("Search cancelled.")
-        return
-
-    if lower in ("other", "0", "none"):
-        attempt = state["attempt"] + 1
-        if attempt > MAX_ATTEMPTS:
-            ctx.user_data.pop("search", None)
-            await update.message.reply_text(
-                "No match found. Search directly on Yahoo Finance:\n"
-                f"{YAHOO_SEARCH}\n\n"
-                "Then use: /watch TICKER EXCHANGE"
-            )
-            return
-        state["attempt"] = attempt
-        state["awaiting_query"] = True
-        await update.message.reply_text(
-            f"Try a different spelling or the full company name "
-            f"(attempt {attempt}/{MAX_ATTEMPTS}):"
-        )
-        return
-
-    if state.get("awaiting_query"):
+    if phase == "awaiting_query" or state.get("awaiting_query"):
         state["awaiting_query"] = False
-        await _run_search(update, ctx, text, attempt=state["attempt"])
+        await _run_search(update.message.reply_text, ctx, text, attempt=state["attempt"])
         return
 
-    if not re.match(r"^[1-9]$", text):
-        return  # not our message, ignore
-
-    idx = int(text) - 1
-    results = state.get("results", [])
-    if idx >= len(results):
-        await update.message.reply_text(
-            f"Pick a number between 1 and {len(results)}, or reply 'other'."
-        )
-        return
-
-    pick = results[idx]
-    state["selected"] = pick
-    state["phase"]    = "confirm"
-    exch = f" — {pick['exchange']}" if pick["exchange"] else ""
-    await update.message.reply_text(
-        f"You picked: {pick['name']} ({pick['ticker']}){exch}\n\n"
-        f"Add to watchlist? Reply yes or no"
-    )
-
-
-async def _handle_confirm(update, ctx, state, text):
-    """User said yes or no to adding the stock."""
-    lower = text.lower()
-
-    if lower in ("cancel", "no"):
-        ctx.user_data.pop("search", None)
-        ticker = state["selected"]["ticker"]
-        msg = "Cancelled." if lower == "cancel" else f"Ok, {ticker} not added."
-        await update.message.reply_text(msg)
-        return
-
-    if lower == "yes":
-        state["phase"] = "date"
-        await update.message.reply_text(
-            "Entry date?\n\n"
-            "Reply today for the current price, or enter a date:\n"
-            "DD/MM/YYYY — e.g. 15/01/2025"
-        )
-    else:
-        await update.message.reply_text("Please reply yes or no.")
-
-
-async def _handle_date(update, ctx, state, text):
-    """User provided an entry date."""
-    lower = text.lower()
-
-    if lower == "cancel":
-        ctx.user_data.pop("search", None)
-        await update.message.reply_text("Cancelled.")
-        return
-
-    entry_date = None
-    if lower != "today":
+    if phase == "date_manual":
         try:
             entry_date = _parse_date(text)
             if entry_date > date.today():
-                await update.message.reply_text("❌ Date cannot be in the future. Try again or reply today.")
+                await update.message.reply_text(
+                    "❌ Date cannot be in the future. Reply again with a past date:"
+                )
                 return
         except (ValueError, IndexError):
             await update.message.reply_text(
-                "❌ Couldn't read that date. Use DD/MM/YYYY (e.g. 15/01/2025) or reply today."
+                "❌ Couldn't read that. Use DD/MM/YYYY — e.g. 15/01/2025"
             )
             return
-
-    pick        = state["selected"]
-    telegram_id = get_account_id(update)
-    ctx.user_data.pop("search", None)
-    await _do_watch(update, pick["ticker"], pick["exchange"], pick["name"], telegram_id, entry_date)
+        pick        = state["selected"]
+        telegram_id = get_account_id(update)
+        ctx.user_data.pop("search", None)
+        await _do_watch(update.message.reply_text, pick, telegram_id, entry_date)
 
 
 # ── Internal helpers ───────────────────────────────────────────────────────────
 
-async def _run_search(update, ctx, query: str, attempt: int) -> None:
+async def _run_search(reply_fn, ctx: ContextTypes.DEFAULT_TYPE, query: str, attempt: int) -> None:
     results = search_tickers(query)
 
     if not results:
         if attempt >= MAX_ATTEMPTS:
             ctx.user_data.pop("search", None)
-            await update.message.reply_text(
+            await reply_fn(
                 f"Couldn't find anything for \"{query}\".\n\n"
                 "Search directly on Yahoo Finance:\n"
                 f"{YAHOO_SEARCH}\n\n"
@@ -195,46 +219,42 @@ async def _run_search(update, ctx, query: str, attempt: int) -> None:
             )
         else:
             ctx.user_data["search"] = {
-                "attempt": attempt + 1, "awaiting_query": True, "phase": "pick"
+                "attempt": attempt + 1, "awaiting_query": True, "phase": "pick",
             }
-            await update.message.reply_text(
-                f"Couldn't find anything for \"{query}\". "
-                "Try a different spelling or the full company name:"
+            await reply_fn(
+                f"Couldn't find \"{query}\". Reply with a different name:"
             )
         return
 
     ctx.user_data["search"] = {
-        "results":       results,
-        "attempt":       attempt,
-        "awaiting_query": False,
-        "phase":         "pick",
+        "results": results, "attempt": attempt,
+        "awaiting_query": False, "phase": "pick",
     }
-
-    lines = [f"Results for \"{query}\" — reply with a number:\n"]
-    for i, r in enumerate(results, 1):
-        exch = f" — {r['exchange']}" if r["exchange"] else ""
-        lines.append(f"{i}. {r['name']} ({r['ticker']}){exch}")
-    lines.append("\n0. None of these / try again")
-    lines.append("cancel — cancel")
-
-    await update.message.reply_text("\n".join(lines))
+    await reply_fn(
+        f"Results for \"{query}\" — tap to select:",
+        reply_markup=_pick_keyboard(results),
+    )
 
 
-async def _do_watch(update, ticker, exchange, name, telegram_id, entry_date) -> None:
+async def _do_watch(reply_fn, pick: dict, telegram_id: str, entry_date) -> None:
+    ticker   = pick["ticker"]
+    exchange = pick["exchange"]
+    name     = pick["name"]
+
     if not exchange:
-        await update.message.reply_text(
+        await reply_fn(
             f"Found {ticker} ({name}) but couldn't detect its exchange.\n"
-            f"Add it manually: /watch {ticker} EXCHANGE\n"
+            f"Add manually: /watch {ticker} EXCHANGE\n"
             "(Exchange: NASDAQ, NYSE, NSE, BSE)"
         )
         return
     try:
         result   = ws.add_stock(telegram_id, ticker, exchange, entry_date)
         currency = CURRENCY_SYMBOL.get(exchange, "")
-        await update.message.reply_text(
+        await reply_fn(
             f"✅ Added {ticker} ({name}) to watchlist\n"
             f"Exchange: {exchange}\n"
             f"Entry price: {currency}{result['added_price']:,.2f} ({result['price_label']})"
         )
     except ws.WatchlistError as e:
-        await update.message.reply_text(f"❌ {e}")
+        await reply_fn(f"❌ {e}")
