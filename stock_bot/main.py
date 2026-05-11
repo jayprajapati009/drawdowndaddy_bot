@@ -73,7 +73,8 @@ _COMMAND_DESCRIPTIONS = {
 
 
 def _latest_changelog() -> str:
-    """Return the most recent entry from CHANGELOG.md as plain text."""
+    """Return the most recent CHANGELOG.md entry formatted for Telegram."""
+    import re
     try:
         text = Path("CHANGELOG.md").read_text(encoding="utf-8")
     except FileNotFoundError:
@@ -84,11 +85,27 @@ def _latest_changelog() -> str:
             if in_entry:
                 break
             in_entry = True
-            entry.append(line.lstrip("# ").strip())
+            # "2026-05-11 — Some title" → "📋 11 May 2026 — Some title"
+            heading = line.lstrip("# ").strip()
+            parts   = heading.split(" — ", 1)
+            try:
+                from datetime import datetime as _dt
+                d = _dt.strptime(parts[0].strip(), "%Y-%m-%d")
+                date_str = d.strftime("%-d %B %Y")
+            except ValueError:
+                date_str = parts[0].strip()
+            title = parts[1].strip() if len(parts) > 1 else ""
+            entry.append(f"📋 {date_str}  —  {title}")
         elif in_entry:
             clean = line.lstrip("-*• ").strip()
-            if clean and not clean.startswith("---"):
-                entry.append(f"• {clean}")
+            if not clean or clean.startswith("---"):
+                continue
+            # Strip **bold** markers and `backticks`
+            clean = re.sub(r"\*\*(.+?)\*\*", r"\1", clean)
+            clean = re.sub(r"`(.+?)`", r"\1", clean)
+            # Keep only the short description before the em-dash detail
+            short = clean.split(" — ")[0].strip()
+            entry.append(f"  ✦ {short}")
     return "\n".join(entry)
 
 
@@ -147,7 +164,7 @@ def main() -> None:
             try:
                 await application.bot.send_message(
                     chat_id=cfg.alert_chat_id,
-                    text=f"🔄 {cfg.bot_name} restarted\n\n{changelog}",
+                    text=f"🔄 {cfg.bot_name} is back online\n\n{changelog}\n\nType /help to see all commands.",
                 )
                 logger.info("Restart notification sent")
             except Exception as exc:  # noqa: BLE001
