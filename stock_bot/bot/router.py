@@ -112,11 +112,12 @@ class _SilentMessage:
         self._msg    = real_message
         self._buffer = buffer
 
-    async def reply_text(self, text, **kwargs):
-        first_line = str(text).split("\n")[0]
-        self._buffer.append(first_line)
+    async def reply_text(self, text, **_kwargs):  # noqa: ANN001
+        lines = [ln.strip() for ln in str(text).splitlines() if ln.strip()]
+        entry = " — ".join(lines[:2]) if len(lines) >= 2 else (lines[0] if lines else "")
+        self._buffer.append(entry)
 
-    def __getattr__(self, name):
+    def __getattr__(self, name: str):  # noqa: ANN001
         return getattr(self._msg, name)
 
 
@@ -128,10 +129,10 @@ class _SilentUpdate:
         self._message = _SilentMessage(real_update.message, buffer)
 
     @property
-    def message(self):
+    def message(self) -> _SilentMessage:
         return self._message
 
-    def __getattr__(self, name):
+    def __getattr__(self, name: str):  # noqa: ANN001
         return getattr(self._update, name)
 
 
@@ -144,19 +145,11 @@ def register_handlers(app: Application, features: Features) -> dict:
 
     app.add_error_handler(_error_handler)
 
-    async def _dispatch_multi_command(update: Update, ctx: ContextTypes.DEFAULT_TYPE) -> None:
-        text = update.message.text or ""
-        cmd_lines = [l.strip() for l in text.splitlines() if l.strip().startswith("/")]
-        if len(cmd_lines) <= 1:
-            return
-
-        bulk = len(cmd_lines) > _BULK_THRESHOLD
+    async def _run_bulk(update, ctx, cmd_lines):
+        """Execute cmd_lines silently and return a formatted summary string."""
         buffer: list[str] = []
-        dispatch_update = _SilentUpdate(update, buffer) if bulk else update
-
-        ok = 0
-        errors: list[str] = []
-
+        silent = _SilentUpdate(update, buffer)
+        ok, errors = 0, []
         for line in cmd_lines:
             parts   = line.split()
             raw_cmd = parts[0].lstrip("/").split("@")[0].lower()
@@ -164,26 +157,39 @@ def register_handlers(app: Application, features: Features) -> dict:
             fn = command_map.get(raw_cmd)
             try:
                 if fn:
-                    await fn(dispatch_update, ctx)
+                    await fn(silent, ctx)
                     ok += 1
-                elif not bulk:
-                    await update.message.reply_text(f"Unknown command: /{raw_cmd}")
                 else:
                     errors.append(f"❓ Unknown: /{raw_cmd}")
-            except Exception as exc:
+            except (ValueError, RuntimeError, KeyError) as exc:
                 logger.warning("Bulk dispatch error on /%s: %s", raw_cmd, exc)
                 errors.append(f"❌ /{raw_cmd}: {exc}")
+        header = f"📦 Bulk import: {ok}/{len(cmd_lines)} done\n"
+        body   = "\n".join(f"• {e}" for e in buffer) + (
+            "\n" + "\n".join(errors) if errors else ""
+        )
+        return header + body
 
-        if bulk:
-            lines = [f"📦 Bulk import: {ok}/{len(cmd_lines)} done\n"]
-            for entry in buffer:
-                lines.append(f"• {entry}")
-            for err in errors:
-                lines.append(err)
-            summary = "\n".join(lines)
-            # Telegram message limit is 4096 chars — split if needed
+    async def _dispatch_multi_command(update: Update, ctx: ContextTypes.DEFAULT_TYPE) -> None:
+        text = update.message.text or ""
+        cmd_lines = [ln.strip() for ln in text.splitlines() if ln.strip().startswith("/")]
+        if len(cmd_lines) <= 1:
+            return
+
+        if len(cmd_lines) > _BULK_THRESHOLD:
+            summary = await _run_bulk(update, ctx, cmd_lines)
             for i in range(0, len(summary), 4000):
                 await update.message.reply_text(summary[i:i + 4000])
+        else:
+            for line in cmd_lines:
+                parts   = line.split()
+                raw_cmd = parts[0].lstrip("/").split("@")[0].lower()
+                ctx.args = parts[1:]
+                fn = command_map.get(raw_cmd)
+                if fn:
+                    await fn(update, ctx)
+                else:
+                    await update.message.reply_text(f"Unknown command: /{raw_cmd}")
 
         raise ApplicationHandlerStop
 
