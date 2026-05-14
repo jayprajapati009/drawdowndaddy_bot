@@ -4,6 +4,14 @@ Most recent changes appear first.
 
 ---
 
+## 2026-05-14 — Price alert actions + restart message
+
+- **Price alerts now have buttons** — when an alert fires, tap Keep watching or Remove alert directly in the message instead of typing commands
+- **Restart message fixed** — bot now posts a clean, readable update to the group every time it restarts
+- **Prompt log and changelog** — all changes are now tracked in CHANGELOG.md and prompt_log.md on git
+
+---
+
 ## 2026-05-11 — Transaction history + bulk import fixes
 
 - **Full buy history preserved** — bought lots no longer disappear after selling; /history now shows every buy, with "(sold)" tag on consumed ones

@@ -5,6 +5,28 @@ Each entry records what the user asked for and what was changed.
 
 ---
 
+## 2026-05-14
+
+### User Requests
+- Price alerts keep spamming — after alert fires, show inline buttons to keep or remove it
+- Restart message was not readable — `**bold**` showing as raw markdown, long descriptions
+- CHANGELOG.md not being updated after new changes — missing today's entry
+
+### Changes Made
+- `alert_service.py`: `_check_one_price_alert` now sends `InlineKeyboardMarkup` with keep/cancel buttons alongside the alert message
+- `price_alert_handlers.py`: `handle_price_alert_callback` handles `palert:keep:{id}` and `palert:cancel:{id}` — keep appends "👀 Still watching.", cancel deactivates alert and appends "🗑 Alert removed."
+- `router.py`: registered `CallbackQueryHandler` for `^palert:` pattern
+- `main.py`: `_latest_changelog()` now strips `**bold**` and backticks, formats date as "14 May 2026", truncates each bullet to the short description before " — " detail
+- `CHANGELOG.md`: added 2026-05-14 entry (this change)
+- `prompt_log.md`: added this entry
+
+### Notes
+- CHANGELOG.md must be updated manually after every session — it is the source for the restart notification
+- The restart notification reads the first `##` section from CHANGELOG.md; always add new entries at the top
+- `palert:keep` does not reset the cooldown — the alert will fire again after the configured `alert_cooldown_hours`
+
+---
+
 ## 2026-05-11
 
 ### User Requests
