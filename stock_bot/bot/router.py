@@ -55,7 +55,8 @@ from stock_bot.bot.handlers.report_handlers import (
     cmd_weekly_report, cmd_stock_details,
 )
 from stock_bot.bot.handlers.price_alert_handlers import (
-    cmd_set_price_alert, cmd_remove_price_alert, cmd_view_price_alerts, cmd_view_all_price_alerts,
+    cmd_set_price_alert, cmd_remove_price_alert, cmd_view_price_alerts,
+    cmd_view_all_price_alerts, handle_price_alert_callback,
 )
 
 
@@ -201,8 +202,9 @@ def register_handlers(app: Application, features: Features) -> dict:
     for cmd, fn in command_map.items():
         app.add_handler(CommandHandler(cmd, fn))
 
-    # Inline button handler for the search flow (works with group privacy mode)
-    app.add_handler(CallbackQueryHandler(handle_search_callback, pattern=r"^search:"))
+    # Inline button handlers
+    app.add_handler(CallbackQueryHandler(handle_search_callback,       pattern=r"^search:"))
+    app.add_handler(CallbackQueryHandler(handle_price_alert_callback,  pattern=r"^palert:"))
 
     # Reply handler for typed date / new query after "none of these".
     # Only fires for replies to the bot's messages, which are received

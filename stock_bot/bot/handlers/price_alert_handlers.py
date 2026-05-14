@@ -159,3 +159,30 @@ async def cmd_view_all_price_alerts(update: Update, ctx: ContextTypes.DEFAULT_TY
         lines.append(f"  {arrow} {currency}{a['target_price']:,.2f} ({a['direction']})")
 
     await update.message.reply_text("\n".join(lines))
+
+
+async def handle_price_alert_callback(update: Update, ctx: ContextTypes.DEFAULT_TYPE) -> None:
+    """
+    Handles inline button responses to price alert notifications.
+    callback_data: palert:keep:{id}  or  palert:cancel:{id}
+    """
+    cq = update.callback_query
+    await cq.answer()
+
+    try:
+        _, action, alert_id_str = cq.data.split(":")
+        alert_id = int(alert_id_str)
+    except (ValueError, AttributeError):
+        await cq.edit_message_reply_markup(reply_markup=None)
+        return
+
+    original = cq.message.text or ""
+
+    if action == "cancel":
+        with get_connection() as conn:
+            q.deactivate_price_alert(conn, alert_id)
+        await cq.edit_message_text(original + "\n\n🗑 Alert removed.")
+        logger.info("Price alert %s deactivated via inline button", alert_id)
+
+    elif action == "keep":
+        await cq.edit_message_text(original + "\n\n👀 Still watching.")

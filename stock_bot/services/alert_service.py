@@ -12,7 +12,7 @@ config the service:
 import logging
 from datetime import datetime, timedelta, timezone
 
-from telegram import Bot
+from telegram import Bot, InlineKeyboardButton, InlineKeyboardMarkup
 
 from stock_bot.config import CURRENCY_SYMBOL
 from stock_bot.database.db import get_connection
@@ -78,7 +78,11 @@ async def _check_one_price_alert(bot: Bot, chat_id: str, cfg, cooldown_hours: in
         f"Target: {currency}{target_price:,.2f} ({direction})\n"
         f"Current price: {currency}{current_price:,.2f}"
     )
-    await bot.send_message(chat_id=chat_id, text=message)
+    keyboard = InlineKeyboardMarkup([[
+        InlineKeyboardButton("👀 Keep watching", callback_data=f"palert:keep:{cfg['id']}"),
+        InlineKeyboardButton("🗑 Remove alert",  callback_data=f"palert:cancel:{cfg['id']}"),
+    ]])
+    await bot.send_message(chat_id=chat_id, text=message, reply_markup=keyboard)
     logger.info("Price alert sent for %s @ %s (current %.2f)", ticker, target_price, current_price)
 
 
