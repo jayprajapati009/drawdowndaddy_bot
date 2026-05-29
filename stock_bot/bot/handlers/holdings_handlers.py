@@ -176,36 +176,14 @@ async def cmd_transactions(update: Update, ctx: ContextTypes.DEFAULT_TYPE) -> No
         await update.message.reply_text("No transactions found.")
         return
 
-    col_date   = max(len("Date"),   max(len(str(t["transacted_at"])[:10]) for t in txns))
-    col_ticker = max(len("Ticker"), max(len(t["ticker"])                  for t in txns))
-    col_action = max(len("Type"),   max(len(t["action"])                  for t in txns))
-    col_qty    = max(len("Qty"),    max(len(f"{t['quantity']:g}")          for t in txns))
-    col_price  = max(len("Price"),  max(len(f"{t['price']:,.2f}")          for t in txns))
-
-    def _row(date, ticker, action, qty, price):
-        return f"│ {date:<{col_date}} │ {ticker:<{col_ticker}} │ {action:<{col_action}} │ {qty:>{col_qty}} │ {price:>{col_price}} │"
-
-    def _divider(l, m, r):
-        return f"{l}{'─'*(col_date+2)}{m}{'─'*(col_ticker+2)}{m}{'─'*(col_action+2)}{m}{'─'*(col_qty+2)}{m}{'─'*(col_price+2)}{r}"
-
-    lines = [
-        f"📜 Last {label} transactions",
-        "```",
-        _divider("┌", "┬", "┐"),
-        _row("Date", "Ticker", "Type", "Qty", "Price"),
-        _divider("├", "┼", "┤"),
-    ]
+    lines = [f"📜 *Last {label} transactions*\n"]
     for t in txns:
-        lines.append(_row(
-            str(t["transacted_at"])[:10],
-            t["ticker"],
-            t["action"],
-            f"{t['quantity']:g}",
-            f"{t['price']:,.2f}",
-        ))
-        if t["notes"]:
-            lines.append(f"│ {'':>{col_date}}   {'':>{col_ticker}}   {t['notes']}")
-    lines += [_divider("└", "┴", "┘"), "```"]
+        action_emoji = "🟢" if t["action"] == "BUY" else "🔴"
+        date_str = str(t["transacted_at"])[:10]
+        note_str = f" — {t['notes']}" if t["notes"] else ""
+        lines.append(
+            f"{action_emoji} {t['ticker']} {t['action']} {t['quantity']} @ {t['price']:,.2f} on {date_str}{note_str}"
+        )
 
     await update.message.reply_text("\n".join(lines), parse_mode="Markdown")
 
