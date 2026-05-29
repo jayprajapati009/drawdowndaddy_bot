@@ -4,6 +4,13 @@ Most recent changes appear first.
 
 ---
 
+## 2026-05-29 — Transactions command
+
+- **/transactions** — see your last 10 trades across all stocks in one place; use `/transactions 20` for more or `/transactions all` for everything
+- **Table format** — transactions display as a clean fixed-width table with columns for date, ticker, type, qty, and price
+
+---
+
 ## 2026-05-14 — Price alert actions + restart message
 
 - **Price alerts now have buttons** — when an alert fires, tap Keep watching or Remove alert directly in the message instead of typing commands
