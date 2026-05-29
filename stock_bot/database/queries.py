@@ -262,6 +262,21 @@ def get_open_buy_lots(
     ).fetchall()
 
 
+def get_recent_transactions(
+    conn: sqlite3.Connection, user_id: int, limit: int | None
+) -> list[sqlite3.Row]:
+    sql = """
+        SELECT l.*, h.ticker
+          FROM lots l
+          JOIN holdings h ON h.id = l.holding_id
+         WHERE h.user_id = ?
+         ORDER BY l.transacted_at DESC
+    """
+    if limit is not None:
+        return conn.execute(sql + " LIMIT ?", (user_id, limit)).fetchall()
+    return conn.execute(sql, (user_id,)).fetchall()
+
+
 def mark_lot_consumed(conn: sqlite3.Connection, lot_id: int) -> None:
     conn.execute("UPDATE lots SET consumed=TRUE WHERE id=?", (lot_id,))
 

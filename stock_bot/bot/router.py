@@ -49,7 +49,7 @@ from stock_bot.bot.handlers.alert_handlers import (
     cmd_set_alert, cmd_remove_alert, cmd_view_alerts,
 )
 from stock_bot.bot.handlers.holdings_handlers import (
-    cmd_buy, cmd_sell, cmd_view_holdings, cmd_transaction_history,
+    cmd_buy, cmd_sell, cmd_view_holdings, cmd_transaction_history, cmd_transactions,
 )
 from stock_bot.bot.handlers.report_handlers import (
     cmd_weekly_report, cmd_stock_details,
@@ -90,10 +90,11 @@ def _build_command_map(features: Features) -> dict:
         })
     if features.holdings:
         cmds.update({
-            "buy":      cmd_buy,
-            "sell":     cmd_sell,
-            "holdings": cmd_view_holdings,
-            "history":  cmd_transaction_history,
+            "buy":          cmd_buy,
+            "sell":         cmd_sell,
+            "holdings":     cmd_view_holdings,
+            "history":      cmd_transaction_history,
+            "transactions": cmd_transactions,
         })
     if features.reports:
         cmds.update({

@@ -219,6 +219,27 @@ def get_stock_returns(telegram_id: str, ticker: str) -> Optional[dict]:
     }
 
 
+def get_recent_transactions(telegram_id: str, limit: int | None) -> list[dict]:
+    """Return the most recent *limit* transactions across all tickers (newest first).
+    Pass limit=None to fetch all."""
+    with get_connection() as conn:
+        user_id = q.get_user_id(conn, telegram_id)
+        if user_id is None:
+            return []
+        rows = q.get_recent_transactions(conn, user_id, limit)
+        return [
+            {
+                "ticker":        row["ticker"],
+                "action":        row["action"],
+                "quantity":      row["quantity"],
+                "price":         row["price"],
+                "transacted_at": row["transacted_at"],
+                "notes":         row["notes"],
+            }
+            for row in rows
+        ]
+
+
 def get_transaction_history(telegram_id: str, ticker: str) -> list[dict]:
     """Return all lots (BUY and SELL) for *ticker*, oldest first."""
     with get_connection() as conn:

@@ -153,6 +153,41 @@ async def cmd_view_holdings(update: Update, ctx: ContextTypes.DEFAULT_TYPE) -> N
     await update.message.reply_text("\n".join(lines), parse_mode="Markdown")
 
 
+async def cmd_transactions(update: Update, ctx: ContextTypes.DEFAULT_TYPE) -> None:
+    """Usage: /transactions [N|all]  — default 10"""
+    arg = ctx.args[0].lower() if ctx.args else "10"
+    if arg == "all":
+        limit = None
+        label = "all"
+    else:
+        try:
+            limit = int(arg)
+            if limit <= 0:
+                raise ValueError
+            label = str(limit)
+        except ValueError:
+            await update.message.reply_text("Usage: /transactions [N|all]")
+            return
+
+    telegram_id = get_account_id(update)
+    txns = hs.get_recent_transactions(telegram_id, limit)
+
+    if not txns:
+        await update.message.reply_text("No transactions found.")
+        return
+
+    lines = [f"📜 *Last {label} transactions*\n"]
+    for t in txns:
+        action_emoji = "🟢" if t["action"] == "BUY" else "🔴"
+        date_str = str(t["transacted_at"])[:10]
+        note_str = f" — {t['notes']}" if t["notes"] else ""
+        lines.append(
+            f"{action_emoji} {t['ticker']} {t['action']} {t['quantity']} @ {t['price']:,.2f} on {date_str}{note_str}"
+        )
+
+    await update.message.reply_text("\n".join(lines), parse_mode="Markdown")
+
+
 async def cmd_transaction_history(update: Update, ctx: ContextTypes.DEFAULT_TYPE) -> None:
     """Usage: /transaction_history TICKER"""
     args = ctx.args
