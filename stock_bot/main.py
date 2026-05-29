@@ -66,7 +66,8 @@ _COMMAND_DESCRIPTIONS = {
     "buy":        "Log a buy — TICKER EXCHANGE QTY PRICE [note]",
     "sell":       "Log a sell (FIFO) — TICKER QTY PRICE [note]",
     "holdings":   "Open positions with avg cost & P&L",
-    "history":    "Full buy/sell log for a stock — TICKER",
+    "history":      "Full buy/sell log for a stock — TICKER",
+    "transactions": "Recent transactions across all stocks — [N|all]",
     "report":     "Weekly watchlist + holdings summary",
     "stock":      "Deep-dive on one stock — TICKER",
 }
