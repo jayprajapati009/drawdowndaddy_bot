@@ -38,10 +38,14 @@ from telegram.ext import Application
 
 from pathlib import Path
 
-from stock_bot.config import MARKET_HOURS
+from stock_bot.config import (
+    EST, INDIAN_EXCHANGES, IST, MARKET_HOURS, MORNING_SCAN_LOCAL_TIME, US_EXCHANGES,
+)
 from stock_bot.database.db import init_db
 from stock_bot.bot.router import register_handlers
-from stock_bot.services.alert_service import backfill_default_ema_alerts, run_alert_check
+from stock_bot.services.alert_service import (
+    backfill_default_ema_alerts, run_alert_check, run_morning_scan,
+)
 
 logger = logging.getLogger(__name__)
 
@@ -59,6 +63,7 @@ _COMMAND_DESCRIPTIONS = {
     "alert":      "Add EMA alert — TICKER EMA_10W/20W/30W/40W THRESHOLD%",
     "unalert":    "Remove an EMA alert — TICKER EMA_10W/20W/30W/40W",
     "alerts":     "List active EMA alerts for a stock — TICKER",
+    "scan":       "Which stocks are below their weekly EMAs, right now",
     "palert":     "Set price alert — TICKER PRICE",
     "unpalert":   "Remove price alert — TICKER PRICE",
     "palerts":    "List price alerts for a stock — TICKER",
@@ -156,6 +161,24 @@ def main() -> None:
         id="alert_check",
         name="Alert check",
     )
+
+    # Pre-market EMA scans — one per market region, weekdays, before the open
+    scan_hour, scan_minute = MORNING_SCAN_LOCAL_TIME
+    for region, tz, exchanges in (
+        ("India", IST, INDIAN_EXCHANGES),
+        ("US",    EST, US_EXCHANGES),
+    ):
+        scheduler.add_job(
+            run_morning_scan,
+            trigger="cron",
+            day_of_week="mon-fri",
+            hour=scan_hour,
+            minute=scan_minute,
+            timezone=tz,
+            args=[app.bot, cfg.alert_chat_id, exchanges, region],
+            id=f"morning_scan_{region.lower()}",
+            name=f"Morning EMA scan ({region})",
+        )
 
     async def on_startup(application: Application) -> None:
         scheduler.start()

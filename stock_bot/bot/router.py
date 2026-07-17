@@ -46,7 +46,7 @@ from stock_bot.bot.handlers.watchlist_handlers import (
     cmd_add_watchlist, cmd_remove_watchlist, cmd_view_watchlist, cmd_set_checkpoint,
 )
 from stock_bot.bot.handlers.alert_handlers import (
-    cmd_set_alert, cmd_remove_alert, cmd_view_alerts,
+    cmd_set_alert, cmd_remove_alert, cmd_view_alerts, cmd_scan,
 )
 from stock_bot.bot.handlers.holdings_handlers import (
     cmd_buy, cmd_sell, cmd_view_holdings, cmd_transaction_history, cmd_transactions,
@@ -80,6 +80,7 @@ def _build_command_map(features: Features) -> dict:
             "alert":   cmd_set_alert,
             "unalert": cmd_remove_alert,
             "alerts":  cmd_view_alerts,
+            "scan":    cmd_scan,
         })
     if features.price_alerts:
         cmds.update({

@@ -9,6 +9,7 @@ config the service:
   4. Sends a Telegram notification and logs the event
 """
 
+import asyncio
 import logging
 import sqlite3
 from datetime import datetime, timedelta, timezone
@@ -19,10 +20,13 @@ from stock_bot.config import (
     CURRENCY_SYMBOL,
     DEFAULT_ALERT_INDICATORS,
     DEFAULT_ALERT_THRESHOLD_PCT,
+    EMA_SPANS,
 )
 from stock_bot.database.db import get_connection
 from stock_bot.database import queries as q
-from stock_bot.services.price_fetcher import clear_cache, get_current_price, get_ema
+from stock_bot.services.price_fetcher import (
+    clear_cache, get_all_emas, get_current_price, get_ema,
+)
 
 logger = logging.getLogger(__name__)
 
@@ -117,6 +121,79 @@ async def run_alert_check(bot: Bot, chat_id: str, cooldown_hours: int = 2) -> No
             logger.warning("Price alert check failed for %s @ %s: %s", cfg["ticker"], cfg["target_price"], exc)
 
 
+# ---------------------------------------------------------------------------
+# Morning EMA scan
+#
+# Runs once per market region before the trading day opens and reports which
+# stocks are trading below each weekly EMA.
+# ---------------------------------------------------------------------------
+
+def build_morning_scan_message(exchanges: set[str] | None = None) -> str | None:
+    """
+    Scan every watched stock (optionally restricted to *exchanges*) and build
+    a report of which are below each weekly EMA. Returns None when there are
+    no stocks to scan. Blocking (yfinance) — callers run it in a thread.
+    """
+    clear_cache()
+    with get_connection() as conn:
+        items = q.get_all_watchlist_items(conn)
+
+    stocks = sorted({
+        (row["ticker"], row["exchange"])
+        for row in items
+        if exchanges is None or row["exchange"] in exchanges
+    })
+    if not stocks:
+        return None
+
+    below: dict[str, list[str]] = {ind: [] for ind in EMA_SPANS}
+    above_all: list[str] = []
+    failed: list[str] = []
+
+    for ticker, _exchange in stocks:
+        price = get_current_price(ticker)
+        emas  = get_all_emas(ticker)
+        if price is None or all(v is None for v in emas.values()):
+            failed.append(ticker)
+            continue
+        is_below_any = False
+        for indicator, ema in emas.items():
+            if ema is not None and price < ema:
+                pct = (price - ema) / ema * 100
+                below[indicator].append(f"{ticker} ({pct:.1f}%)")
+                is_below_any = True
+        if not is_below_any:
+            above_all.append(ticker)
+
+    today = datetime.now(tz=timezone.utc).strftime("%d %b %Y")
+    lines = [f"🌅 *Morning EMA scan — {today}*", ""]
+    for indicator in EMA_SPANS:
+        entries = below[indicator]
+        lines.append(f"📉 Below *{indicator}*: {', '.join(entries) if entries else '—'}")
+    if above_all:
+        lines.append("")
+        lines.append(f"✅ Above all EMAs: {', '.join(above_all)}")
+    if failed:
+        lines.append("")
+        lines.append(f"⚠️ No data: {', '.join(failed)}")
+    return "\n".join(lines)
+
+
+async def run_morning_scan(
+    bot: Bot, chat_id: str, exchanges: set[str] | None = None, region: str = ""
+) -> None:
+    """Scheduler entry point: build and send the pre-market EMA scan."""
+    logger.info("Running morning EMA scan (region=%s)", region or "all")
+    message = await asyncio.to_thread(build_morning_scan_message, exchanges)
+    if message is None:
+        logger.info("Morning scan skipped — no stocks for region %s", region or "all")
+        return
+    if region:
+        message = message.replace("*Morning EMA scan", f"*Morning EMA scan ({region})")
+    await bot.send_message(chat_id=chat_id, text=message, parse_mode="Markdown")
+    logger.info("Morning scan sent (region=%s)", region or "all")
+
+
 async def _check_one_price_alert(bot: Bot, chat_id: str, cfg, cooldown_hours: int) -> None:
     ticker       = cfg["ticker"]
     exchange     = cfg["exchange"]
@@ -170,6 +247,20 @@ async def _check_one_ema_alert(bot: Bot, chat_id: str, cfg, cooldown_hours: int)
     if ema_value is None:
         return
 
+    # --- cross detection: fire when price flips sides of the EMA, no matter
+    # how far it moved between checks. last_side is updated every tick (even
+    # when the alert is cooldown-suppressed) so a cross is only reported once.
+    side      = "ABOVE" if current_price >= ema_value else "BELOW"
+    last_side = cfg["last_side"]
+    if side != last_side:
+        with get_connection() as conn:
+            q.update_alert_last_side(conn, cfg["id"], side)
+        if last_side is not None:
+            await _send_cross_alert(
+                bot, chat_id, cfg, current_price, ema_value, side, cooldown_hours
+            )
+            return  # cross alert supersedes the proximity alert this tick
+
     distance_pct = abs((current_price - ema_value) / ema_value) * 100
     if distance_pct > threshold_pct:
         return
@@ -192,3 +283,34 @@ async def _check_one_ema_alert(bot: Bot, chat_id: str, cfg, cooldown_hours: int)
     )
     await bot.send_message(chat_id=chat_id, text=message, parse_mode="Markdown")
     logger.info("Alert sent for %s / %s (distance %.2f%%)", ticker, indicator, distance_pct)
+
+
+async def _send_cross_alert(
+    bot: Bot,
+    chat_id: str,
+    cfg,
+    current_price: float,
+    ema_value: float,
+    side: str,
+    cooldown_hours: int,
+) -> None:
+    """Notify that the price crossed the EMA. Shares the config's cooldown so
+    a price whipsawing around the EMA doesn't spam one message per tick."""
+    cooldown_cutoff = datetime.now(tz=timezone.utc) - timedelta(hours=cooldown_hours)
+    with get_connection() as conn:
+        recent = q.get_recent_alert_log(conn, cfg["id"], cooldown_cutoff)
+        if recent:
+            return
+        q.log_alert(conn, cfg["id"], current_price, ema_value)
+
+    currency = CURRENCY_SYMBOL.get(cfg["exchange"], "")
+    arrow    = "📈" if side == "ABOVE" else "📉"
+    verb     = "crossed ABOVE" if side == "ABOVE" else "fell BELOW"
+    message  = (
+        f"{arrow} *CROSS ALERT: {cfg['ticker']}*\n"
+        f"Price {verb} {cfg['indicator']}\n"
+        f"Current price: {currency}{current_price:,.2f}\n"
+        f"{cfg['indicator']}: {currency}{ema_value:,.2f}"
+    )
+    await bot.send_message(chat_id=chat_id, text=message, parse_mode="Markdown")
+    logger.info("Cross alert sent for %s / %s (%s)", cfg["ticker"], cfg["indicator"], side)

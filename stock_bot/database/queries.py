@@ -152,6 +152,15 @@ def insert_alert_config_if_absent(
     return cur.rowcount > 0
 
 
+def update_alert_last_side(
+    conn: sqlite3.Connection, alert_config_id: int, side: str
+) -> None:
+    conn.execute(
+        "UPDATE alert_configs SET last_side=? WHERE id=?",
+        (side, alert_config_id),
+    )
+
+
 def deactivate_alert(
     conn: sqlite3.Connection, watchlist_id: int, indicator: str
 ) -> bool:

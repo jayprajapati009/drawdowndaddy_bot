@@ -118,6 +118,9 @@ def _migrate(conn: sqlite3.Connection) -> None:
     migrations = [
         "ALTER TABLE lots ADD COLUMN cost_basis REAL",
         "ALTER TABLE lots ADD COLUMN consumed BOOLEAN DEFAULT FALSE",
+        # Which side of the EMA the price was on at the last check
+        # ('ABOVE'/'BELOW') — a flip means the price crossed the EMA.
+        "ALTER TABLE alert_configs ADD COLUMN last_side TEXT",
     ]
     for sql in migrations:
         try:

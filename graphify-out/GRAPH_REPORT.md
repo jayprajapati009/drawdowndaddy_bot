@@ -1,12 +1,12 @@
-# Graph Report - /home/jp/jay/telegram_bot  (2026-07-16)
+# Graph Report - /home/jp/jay/telegram_bot  (2026-07-17)
 
 ## Corpus Check
-- 26 files · ~27,988 words
+- 26 files · ~42,945 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 303 nodes · 492 edges · 51 communities detected
-- Extraction: 61% EXTRACTED · 39% INFERRED · 0% AMBIGUOUS · INFERRED: 192 edges (avg confidence: 0.78)
+- 327 nodes · 516 edges · 62 communities detected
+- Extraction: 60% EXTRACTED · 40% INFERRED · 0% AMBIGUOUS · INFERRED: 206 edges (avg confidence: 0.78)
 - Token cost: 0 input · 0 output
 
 ## Community Hubs (Navigation)
@@ -61,72 +61,83 @@
 - [[_COMMUNITY_Community 48|Community 48]]
 - [[_COMMUNITY_Community 49|Community 49]]
 - [[_COMMUNITY_Community 50|Community 50]]
+- [[_COMMUNITY_Community 51|Community 51]]
+- [[_COMMUNITY_Community 52|Community 52]]
+- [[_COMMUNITY_Community 53|Community 53]]
+- [[_COMMUNITY_Community 54|Community 54]]
+- [[_COMMUNITY_Community 55|Community 55]]
+- [[_COMMUNITY_Community 56|Community 56]]
+- [[_COMMUNITY_Community 57|Community 57]]
+- [[_COMMUNITY_Community 58|Community 58]]
+- [[_COMMUNITY_Community 59|Community 59]]
+- [[_COMMUNITY_Community 60|Community 60]]
+- [[_COMMUNITY_Community 61|Community 61]]
 
 ## God Nodes (most connected - your core abstractions)
-1. `get_connection()` - 27 edges
+1. `get_connection()` - 29 edges
 2. `get_account_id()` - 21 edges
 3. `get_user_id()` - 16 edges
 4. `cmd_stock_details()` - 15 edges
 5. `sell()` - 13 edges
-6. `add_stock()` - 12 edges
-7. `get_current_price()` - 12 edges
-8. `get_watchlist_with_prices()` - 11 edges
-9. `get_positions()` - 11 edges
-10. `set_checkpoint()` - 10 edges
+6. `get_current_price()` - 13 edges
+7. `Features` - 12 edges
+8. `add_stock()` - 12 edges
+9. `get_watchlist_with_prices()` - 11 edges
+10. `get_positions()` - 11 edges
 
 ## Surprising Connections (you probably didn't know these)
+- `cmd_transactions()` --calls--> `get_recent_transactions()`  [INFERRED]
+  /home/jp/jay/telegram_bot/stock_bot/bot/handlers/holdings_handlers.py → /home/jp/jay/telegram_bot/stock_bot/database/queries.py
 - `main()` --calls--> `init_db()`  [INFERRED]
   /home/jp/jay/telegram_bot/stock_bot/main.py → /home/jp/jay/telegram_bot/stock_bot/database/db.py
 - `main()` --calls--> `backfill_default_ema_alerts()`  [INFERRED]
   /home/jp/jay/telegram_bot/stock_bot/main.py → /home/jp/jay/telegram_bot/stock_bot/services/alert_service.py
-- `Maps Telegram commands to their handler functions.` --uses--> `Features`  [INFERRED]
-  /home/jp/jay/telegram_bot/stock_bot/bot/router.py → /home/jp/jay/telegram_bot/stock_bot/bot_config.py
-- `Build the active command map based on enabled features.` --uses--> `Features`  [INFERRED]
-  /home/jp/jay/telegram_bot/stock_bot/bot/router.py → /home/jp/jay/telegram_bot/stock_bot/bot_config.py
-- `Proxy for Message that buffers reply_text calls instead of sending them.` --uses--> `Features`  [INFERRED]
-  /home/jp/jay/telegram_bot/stock_bot/bot/router.py → /home/jp/jay/telegram_bot/stock_bot/bot_config.py
+- `Features` --uses--> `Maps Telegram commands to their handler functions.`  [INFERRED]
+  /home/jp/jay/telegram_bot/stock_bot/bot_config.py → /home/jp/jay/telegram_bot/stock_bot/bot/router.py
+- `Features` --uses--> `Build the active command map based on enabled features.`  [INFERRED]
+  /home/jp/jay/telegram_bot/stock_bot/bot_config.py → /home/jp/jay/telegram_bot/stock_bot/bot/router.py
 
 ## Communities
 
 ### Community 0 - "Community 0"
-Cohesion: 0.08
-Nodes (42): cmd_remove_alert(), cmd_set_alert(), cmd_view_alerts(), Telegram command handlers for alert configuration., Usage: /set_alert TICKER INDICATOR THRESHOLD_PCT     Example: /set_alert RELIANC, Usage: /remove_alert TICKER INDICATOR, Usage: /view_alerts TICKER, _check_one_price_alert() (+34 more)
+Cohesion: 0.07
+Nodes (42): cmd_remove_alert(), cmd_scan(), cmd_set_alert(), cmd_view_alerts(), Telegram command handlers for alert configuration., Usage: /view_alerts TICKER, Usage: /set_alert TICKER INDICATOR THRESHOLD_PCT     Example: /set_alert RELIANC, Usage: /remove_alert TICKER INDICATOR (+34 more)
 
 ### Community 1 - "Community 1"
 Cohesion: 0.09
-Nodes (33): cmd_help(), cmd_start(), /start and /help handlers., Register the user and show a welcome message., get_account_id(), cmd_buy(), cmd_sell(), cmd_transaction_history() (+25 more)
+Nodes (36): fmt_pct(), Format a percentage value for display, e.g. '+12.34%' or 'N/A'., get_positions(), Return all current open positions with quantity, average cost, current     price, _fetch_weekly(), get_all_emas(), get_current_price(), get_ema() (+28 more)
 
 ### Community 2 - "Community 2"
-Cohesion: 0.09
-Nodes (20): BotConfig, Features, load(), Loads and validates a per-bot JSON config file.  Secret values (token, chat ID), Replace ${VAR_NAME} with the corresponding environment variable., _resolve_env(), Settings, _latest_changelog() (+12 more)
+Cohesion: 0.08
+Nodes (24): BotConfig, Features, load(), Loads and validates a per-bot JSON config file.  Secret values (token, chat ID), Replace ${VAR_NAME} with the corresponding environment variable., _resolve_env(), Settings, _latest_changelog() (+16 more)
 
 ### Community 3 - "Community 3"
-Cohesion: 0.09
-Nodes (29): _check_one_ema_alert(), Main entry point called by the scheduler.     *chat_id* is the Telegram chat tha, run_alert_check(), cmd_view_all_price_alerts(), clear_cache(), _fetch_weekly(), get_current_price(), get_ema() (+21 more)
+Cohesion: 0.1
+Nodes (30): _check_one_price_alert(), buy(), get_recent_transactions(), get_stock_returns(), get_transaction_history(), HoldingsError, Holdings and lot management.  Cost basis and P&L are always computed from raw lo, Returns simple and time-weighted returns for *ticker*.      SELL lots store cost (+22 more)
 
 ### Community 4 - "Community 4"
-Cohesion: 0.09
-Nodes (28): backfill_default_ema_alerts(), ensure_default_ema_alerts(), ensure_watchlist_defaults(), Alert checking and notification dispatch.  Called by APScheduler on a configurab, Seed the default EMA alert configs for one watchlist row.     Returns the indica, Make sure *ticker* has a watchlist row (alerts are anchored to it) and     the d, One-shot seeding at startup: give every existing watchlist stock and every     p, Exception (+20 more)
-
-### Community 5 - "Community 5"
 Cohesion: 0.11
 Nodes (21): _all_log_files(), _compress_old_files(), configure(), _delete_by_age(), _directory_size(), _enforce_size_limit(), _log_directory_stats(), Smart log file manager.  Rotation:  daily at midnight via TimedRotatingFileHandl (+13 more)
 
+### Community 5 - "Community 5"
+Cohesion: 0.1
+Nodes (23): _connect(), get_connection(), init_db(), _migrate(), Database connection management and schema initialisation.  Uses raw sqlite3 so t, Create all tables if they don't exist. Safe to call multiple times., Apply any schema changes that new code requires on existing DBs., Yield a sqlite3 connection with row_factory and foreign keys enabled. (+15 more)
+
 ### Community 6 - "Community 6"
+Cohesion: 0.1
+Nodes (25): backfill_default_ema_alerts(), ensure_default_ema_alerts(), ensure_watchlist_defaults(), Seed the default EMA alert configs for one watchlist row.     Returns the indica, Make sure *ticker* has a watchlist row (alerts are anchored to it) and     the d, One-shot seeding at startup: give every existing watchlist stock and every     p, Exception, add_checkpoint() (+17 more)
+
+### Community 7 - "Community 7"
 Cohesion: 0.15
 Nodes (18): cmd_search(), cmd_set_date(), _confirm_keyboard(), _date_keyboard(), _do_watch(), handle_date_reply(), handle_search_callback(), _parse_date() (+10 more)
 
-### Community 7 - "Community 7"
-Cohesion: 0.18
-Nodes (17): fmt_pct(), Shared utilities for all handlers., Format a percentage value for display, e.g. '+12.34%' or 'N/A'., Decorator: ensure the shared account exists in the DB before running the handler, require_registered(), get_all_emas(), Return every configured EMA value for *ticker* in one call., cmd_stock_details() (+9 more)
-
 ### Community 8 - "Community 8"
-Cohesion: 0.15
-Nodes (13): cmd_remove_price_alert(), cmd_set_price_alert(), cmd_view_price_alerts(), handle_price_alert_callback(), Handlers for price-level alerts (/palert, /unpalert, /palerts)., Usage: /palerts TICKER, Handles inline button responses to price alert notifications.     callback_data:, Usage: /palert TICKER PRICE     Automatically sets direction: ABOVE if target > (+5 more)
+Cohesion: 0.13
+Nodes (18): build_morning_scan_message(), _check_one_ema_alert(), Alert checking and notification dispatch.  Called by APScheduler on a configurab, Main entry point called by the scheduler.     *chat_id* is the Telegram chat tha, Scan every watched stock (optionally restricted to *exchanges*) and build     a, Scheduler entry point: build and send the pre-market EMA scan., Notify that the price crossed the EMA. Shares the config's cooldown so     a pri, run_alert_check() (+10 more)
 
 ### Community 9 - "Community 9"
-Cohesion: 0.32
-Nodes (6): _connect(), init_db(), _migrate(), Database connection management and schema initialisation.  Uses raw sqlite3 so t, Create all tables if they don't exist. Safe to call multiple times., Apply any schema changes that new code requires on existing DBs.
+Cohesion: 0.5
+Nodes (3): Shared utilities for all handlers., Decorator: ensure the shared account exists in the DB before running the handler, require_registered()
 
 ### Community 10 - "Community 10"
 Cohesion: 1.0
@@ -158,142 +169,186 @@ Nodes (0):
 
 ### Community 17 - "Community 17"
 Cohesion: 1.0
-Nodes (1): Return True if at least one tracked market is currently open.
+Nodes (1): Seed the default EMA alert configs for one watchlist row.     Returns the indica
 
 ### Community 18 - "Community 18"
 Cohesion: 1.0
-Nodes (1): Wrapper so APScheduler can call the async alert check.
+Nodes (1): Make sure *ticker* has a watchlist row (alerts are anchored to it) and     the d
 
 ### Community 19 - "Community 19"
 Cohesion: 1.0
-Nodes (1): Add *ticker* to the user's watchlist at the current market price.     Returns a
+Nodes (1): One-shot seeding at startup: give every existing watchlist stock and every     p
 
 ### Community 20 - "Community 20"
 Cohesion: 1.0
-Nodes (1): Remove *ticker* from the user's watchlist. Raises WatchlistError if not found.
+Nodes (1): Main entry point called by the scheduler.     *chat_id* is the Telegram chat tha
 
 ### Community 21 - "Community 21"
 Cohesion: 1.0
-Nodes (1): Return the full watchlist with live prices and return percentages.     Each entr
+Nodes (1): Register the user and show a welcome message.
 
 ### Community 22 - "Community 22"
 Cohesion: 1.0
-Nodes (1): Mark the current price of *ticker* as a named checkpoint.
+Nodes (1): Usage: /set_alert TICKER INDICATOR THRESHOLD_PCT     Example: /set_alert RELIANC
 
 ### Community 23 - "Community 23"
 Cohesion: 1.0
-Nodes (1): Log a BUY lot. Returns lot details.
+Nodes (1): Usage: /remove_alert TICKER INDICATOR
 
 ### Community 24 - "Community 24"
 Cohesion: 1.0
-Nodes (1): Log a SELL using FIFO lot matching.     Returns realised P&L and a breakdown of
+Nodes (1): Usage: /view_alerts TICKER
 
 ### Community 25 - "Community 25"
 Cohesion: 1.0
-Nodes (1): Return all current open positions with quantity, average cost, current     price
+Nodes (1): Yield a sqlite3 connection with row_factory and foreign keys enabled.
 
 ### Community 26 - "Community 26"
 Cohesion: 1.0
-Nodes (1): Return all lots (BUY and SELL) for *ticker*, oldest first.
+Nodes (1): Return every holding across all users (used by the default-alert backfill).
 
 ### Community 27 - "Community 27"
 Cohesion: 1.0
-Nodes (1): Call at the start of each scheduler tick to flush stale data.
+Nodes (1): Return open (unconsumed) BUY lots oldest-first for FIFO matching.
 
 ### Community 28 - "Community 28"
 Cohesion: 1.0
-Nodes (1): Fetch the most recent closing price for *ticker*.
+Nodes (1): Return True if at least one tracked market is currently open.
 
 ### Community 29 - "Community 29"
 Cohesion: 1.0
-Nodes (1): Return the most recent value of *indicator* (e.g. 'EMA_10W') for *ticker*.     R
+Nodes (1): Wrapper so APScheduler can call the async alert check.
 
 ### Community 30 - "Community 30"
 Cohesion: 1.0
-Nodes (1): Return a dict of all configured EMA values for *ticker*.
+Nodes (1): Add *ticker* to the user's watchlist at the current market price.     Returns a
 
 ### Community 31 - "Community 31"
 Cohesion: 1.0
-Nodes (1): Main entry point called by the scheduler.     *chat_id* is the Telegram chat tha
+Nodes (1): Remove *ticker* from the user's watchlist. Raises WatchlistError if not found.
 
 ### Community 32 - "Community 32"
 Cohesion: 1.0
-Nodes (1): Attach all command handlers to the Application instance.
+Nodes (1): Return the full watchlist with live prices and return percentages.     Each entr
 
 ### Community 33 - "Community 33"
 Cohesion: 1.0
-Nodes (1): Format a percentage value for display, e.g. '+12.34%' or 'N/A'.
+Nodes (1): Mark the current price of *ticker* as a named checkpoint.
 
 ### Community 34 - "Community 34"
 Cohesion: 1.0
-Nodes (1): Decorator: ensure the calling user exists in the DB before running the handler.
+Nodes (1): Log a BUY lot. Returns lot details.
 
 ### Community 35 - "Community 35"
 Cohesion: 1.0
-Nodes (1): Register the user and show a welcome message.
+Nodes (1): Log a SELL using FIFO lot matching.     Returns realised P&L and a breakdown of
 
 ### Community 36 - "Community 36"
 Cohesion: 1.0
-Nodes (1): Usage: /set_alert TICKER INDICATOR THRESHOLD_PCT     Example: /set_alert RELIANC
+Nodes (1): Return all current open positions with quantity, average cost, current     price
 
 ### Community 37 - "Community 37"
 Cohesion: 1.0
-Nodes (1): Usage: /remove_alert TICKER INDICATOR
+Nodes (1): Return all lots (BUY and SELL) for *ticker*, oldest first.
 
 ### Community 38 - "Community 38"
 Cohesion: 1.0
-Nodes (1): Usage: /view_alerts TICKER
+Nodes (1): Call at the start of each scheduler tick to flush stale data.
 
 ### Community 39 - "Community 39"
 Cohesion: 1.0
-Nodes (1): Usage: /buy TICKER EXCHANGE QUANTITY PRICE [notes]
+Nodes (1): Fetch the most recent closing price for *ticker*.
 
 ### Community 40 - "Community 40"
 Cohesion: 1.0
-Nodes (1): Usage: /sell TICKER QUANTITY PRICE [notes]
+Nodes (1): Return the most recent value of *indicator* (e.g. 'EMA_10W') for *ticker*.     R
 
 ### Community 41 - "Community 41"
 Cohesion: 1.0
-Nodes (1): Usage: /transaction_history TICKER
+Nodes (1): Return a dict of all configured EMA values for *ticker*.
 
 ### Community 42 - "Community 42"
 Cohesion: 1.0
-Nodes (1): Usage: /add_watchlist TICKER EXCHANGE
+Nodes (1): Main entry point called by the scheduler.     *chat_id* is the Telegram chat tha
 
 ### Community 43 - "Community 43"
 Cohesion: 1.0
-Nodes (1): Usage: /remove_watchlist TICKER
+Nodes (1): Attach all command handlers to the Application instance.
 
 ### Community 44 - "Community 44"
 Cohesion: 1.0
-Nodes (1): Usage: /view_watchlist
+Nodes (1): Format a percentage value for display, e.g. '+12.34%' or 'N/A'.
 
 ### Community 45 - "Community 45"
 Cohesion: 1.0
-Nodes (1): Usage: /set_checkpoint TICKER LABEL
+Nodes (1): Decorator: ensure the calling user exists in the DB before running the handler.
 
 ### Community 46 - "Community 46"
 Cohesion: 1.0
-Nodes (1): Usage: /weekly_report
+Nodes (1): Register the user and show a welcome message.
 
 ### Community 47 - "Community 47"
 Cohesion: 1.0
-Nodes (1): Usage: /stock_details TICKER
+Nodes (1): Usage: /set_alert TICKER INDICATOR THRESHOLD_PCT     Example: /set_alert RELIANC
 
 ### Community 48 - "Community 48"
 Cohesion: 1.0
-Nodes (1): Create all tables if they don't exist. Safe to call multiple times.
+Nodes (1): Usage: /remove_alert TICKER INDICATOR
 
 ### Community 49 - "Community 49"
 Cohesion: 1.0
-Nodes (1): Yield a sqlite3 connection with row_factory and foreign keys enabled.
+Nodes (1): Usage: /view_alerts TICKER
 
 ### Community 50 - "Community 50"
+Cohesion: 1.0
+Nodes (1): Usage: /buy TICKER EXCHANGE QUANTITY PRICE [notes]
+
+### Community 51 - "Community 51"
+Cohesion: 1.0
+Nodes (1): Usage: /sell TICKER QUANTITY PRICE [notes]
+
+### Community 52 - "Community 52"
+Cohesion: 1.0
+Nodes (1): Usage: /transaction_history TICKER
+
+### Community 53 - "Community 53"
+Cohesion: 1.0
+Nodes (1): Usage: /add_watchlist TICKER EXCHANGE
+
+### Community 54 - "Community 54"
+Cohesion: 1.0
+Nodes (1): Usage: /remove_watchlist TICKER
+
+### Community 55 - "Community 55"
+Cohesion: 1.0
+Nodes (1): Usage: /view_watchlist
+
+### Community 56 - "Community 56"
+Cohesion: 1.0
+Nodes (1): Usage: /set_checkpoint TICKER LABEL
+
+### Community 57 - "Community 57"
+Cohesion: 1.0
+Nodes (1): Usage: /weekly_report
+
+### Community 58 - "Community 58"
+Cohesion: 1.0
+Nodes (1): Usage: /stock_details TICKER
+
+### Community 59 - "Community 59"
+Cohesion: 1.0
+Nodes (1): Create all tables if they don't exist. Safe to call multiple times.
+
+### Community 60 - "Community 60"
+Cohesion: 1.0
+Nodes (1): Yield a sqlite3 connection with row_factory and foreign keys enabled.
+
+### Community 61 - "Community 61"
 Cohesion: 1.0
 Nodes (1): Return all BUY lots ordered oldest-first (for FIFO sell matching).
 
 ## Knowledge Gaps
-- **121 isolated node(s):** `Loads and validates a per-bot JSON config file.  Secret values (token, chat ID)`, `Replace ${VAR_NAME} with the corresponding environment variable.`, `Central configuration for the stock alert bot. All secrets come from environment`, `Smart log file manager.  Rotation:  daily at midnight via TimedRotatingFileHandl`, `Set the log directory and file before setup_logging() is called.` (+116 more)
+- **140 isolated node(s):** `Loads and validates a per-bot JSON config file.  Secret values (token, chat ID)`, `Replace ${VAR_NAME} with the corresponding environment variable.`, `Central configuration for the stock alert bot. All secrets come from environment`, `Smart log file manager.  Rotation:  daily at midnight via TimedRotatingFileHandl`, `Set the log directory and file before setup_logging() is called.` (+135 more)
   These have ≤1 connection - possible missing edges or undocumented components.
 - **Thin community `Community 10`** (2 nodes): `Central configuration for the stock alert bot. All secrets come from environment`, `config.py`
   Too small to be a meaningful cluster - may be noise or needs more connections extracted.
@@ -309,86 +364,108 @@ Nodes (1): Return all BUY lots ordered oldest-first (for FIFO sell matching).
   Too small to be a meaningful cluster - may be noise or needs more connections extracted.
 - **Thin community `Community 16`** (1 nodes): `__init__.py`
   Too small to be a meaningful cluster - may be noise or needs more connections extracted.
-- **Thin community `Community 17`** (1 nodes): `Return True if at least one tracked market is currently open.`
+- **Thin community `Community 17`** (1 nodes): `Seed the default EMA alert configs for one watchlist row.     Returns the indica`
   Too small to be a meaningful cluster - may be noise or needs more connections extracted.
-- **Thin community `Community 18`** (1 nodes): `Wrapper so APScheduler can call the async alert check.`
+- **Thin community `Community 18`** (1 nodes): `Make sure *ticker* has a watchlist row (alerts are anchored to it) and     the d`
   Too small to be a meaningful cluster - may be noise or needs more connections extracted.
-- **Thin community `Community 19`** (1 nodes): `Add *ticker* to the user's watchlist at the current market price.     Returns a`
+- **Thin community `Community 19`** (1 nodes): `One-shot seeding at startup: give every existing watchlist stock and every     p`
   Too small to be a meaningful cluster - may be noise or needs more connections extracted.
-- **Thin community `Community 20`** (1 nodes): `Remove *ticker* from the user's watchlist. Raises WatchlistError if not found.`
+- **Thin community `Community 20`** (1 nodes): `Main entry point called by the scheduler.     *chat_id* is the Telegram chat tha`
   Too small to be a meaningful cluster - may be noise or needs more connections extracted.
-- **Thin community `Community 21`** (1 nodes): `Return the full watchlist with live prices and return percentages.     Each entr`
+- **Thin community `Community 21`** (1 nodes): `Register the user and show a welcome message.`
   Too small to be a meaningful cluster - may be noise or needs more connections extracted.
-- **Thin community `Community 22`** (1 nodes): `Mark the current price of *ticker* as a named checkpoint.`
+- **Thin community `Community 22`** (1 nodes): `Usage: /set_alert TICKER INDICATOR THRESHOLD_PCT     Example: /set_alert RELIANC`
   Too small to be a meaningful cluster - may be noise or needs more connections extracted.
-- **Thin community `Community 23`** (1 nodes): `Log a BUY lot. Returns lot details.`
+- **Thin community `Community 23`** (1 nodes): `Usage: /remove_alert TICKER INDICATOR`
   Too small to be a meaningful cluster - may be noise or needs more connections extracted.
-- **Thin community `Community 24`** (1 nodes): `Log a SELL using FIFO lot matching.     Returns realised P&L and a breakdown of`
+- **Thin community `Community 24`** (1 nodes): `Usage: /view_alerts TICKER`
   Too small to be a meaningful cluster - may be noise or needs more connections extracted.
-- **Thin community `Community 25`** (1 nodes): `Return all current open positions with quantity, average cost, current     price`
+- **Thin community `Community 25`** (1 nodes): `Yield a sqlite3 connection with row_factory and foreign keys enabled.`
   Too small to be a meaningful cluster - may be noise or needs more connections extracted.
-- **Thin community `Community 26`** (1 nodes): `Return all lots (BUY and SELL) for *ticker*, oldest first.`
+- **Thin community `Community 26`** (1 nodes): `Return every holding across all users (used by the default-alert backfill).`
   Too small to be a meaningful cluster - may be noise or needs more connections extracted.
-- **Thin community `Community 27`** (1 nodes): `Call at the start of each scheduler tick to flush stale data.`
+- **Thin community `Community 27`** (1 nodes): `Return open (unconsumed) BUY lots oldest-first for FIFO matching.`
   Too small to be a meaningful cluster - may be noise or needs more connections extracted.
-- **Thin community `Community 28`** (1 nodes): `Fetch the most recent closing price for *ticker*.`
+- **Thin community `Community 28`** (1 nodes): `Return True if at least one tracked market is currently open.`
   Too small to be a meaningful cluster - may be noise or needs more connections extracted.
-- **Thin community `Community 29`** (1 nodes): `Return the most recent value of *indicator* (e.g. 'EMA_10W') for *ticker*.     R`
+- **Thin community `Community 29`** (1 nodes): `Wrapper so APScheduler can call the async alert check.`
   Too small to be a meaningful cluster - may be noise or needs more connections extracted.
-- **Thin community `Community 30`** (1 nodes): `Return a dict of all configured EMA values for *ticker*.`
+- **Thin community `Community 30`** (1 nodes): `Add *ticker* to the user's watchlist at the current market price.     Returns a`
   Too small to be a meaningful cluster - may be noise or needs more connections extracted.
-- **Thin community `Community 31`** (1 nodes): `Main entry point called by the scheduler.     *chat_id* is the Telegram chat tha`
+- **Thin community `Community 31`** (1 nodes): `Remove *ticker* from the user's watchlist. Raises WatchlistError if not found.`
   Too small to be a meaningful cluster - may be noise or needs more connections extracted.
-- **Thin community `Community 32`** (1 nodes): `Attach all command handlers to the Application instance.`
+- **Thin community `Community 32`** (1 nodes): `Return the full watchlist with live prices and return percentages.     Each entr`
   Too small to be a meaningful cluster - may be noise or needs more connections extracted.
-- **Thin community `Community 33`** (1 nodes): `Format a percentage value for display, e.g. '+12.34%' or 'N/A'.`
+- **Thin community `Community 33`** (1 nodes): `Mark the current price of *ticker* as a named checkpoint.`
   Too small to be a meaningful cluster - may be noise or needs more connections extracted.
-- **Thin community `Community 34`** (1 nodes): `Decorator: ensure the calling user exists in the DB before running the handler.`
+- **Thin community `Community 34`** (1 nodes): `Log a BUY lot. Returns lot details.`
   Too small to be a meaningful cluster - may be noise or needs more connections extracted.
-- **Thin community `Community 35`** (1 nodes): `Register the user and show a welcome message.`
+- **Thin community `Community 35`** (1 nodes): `Log a SELL using FIFO lot matching.     Returns realised P&L and a breakdown of`
   Too small to be a meaningful cluster - may be noise or needs more connections extracted.
-- **Thin community `Community 36`** (1 nodes): `Usage: /set_alert TICKER INDICATOR THRESHOLD_PCT     Example: /set_alert RELIANC`
+- **Thin community `Community 36`** (1 nodes): `Return all current open positions with quantity, average cost, current     price`
   Too small to be a meaningful cluster - may be noise or needs more connections extracted.
-- **Thin community `Community 37`** (1 nodes): `Usage: /remove_alert TICKER INDICATOR`
+- **Thin community `Community 37`** (1 nodes): `Return all lots (BUY and SELL) for *ticker*, oldest first.`
   Too small to be a meaningful cluster - may be noise or needs more connections extracted.
-- **Thin community `Community 38`** (1 nodes): `Usage: /view_alerts TICKER`
+- **Thin community `Community 38`** (1 nodes): `Call at the start of each scheduler tick to flush stale data.`
   Too small to be a meaningful cluster - may be noise or needs more connections extracted.
-- **Thin community `Community 39`** (1 nodes): `Usage: /buy TICKER EXCHANGE QUANTITY PRICE [notes]`
+- **Thin community `Community 39`** (1 nodes): `Fetch the most recent closing price for *ticker*.`
   Too small to be a meaningful cluster - may be noise or needs more connections extracted.
-- **Thin community `Community 40`** (1 nodes): `Usage: /sell TICKER QUANTITY PRICE [notes]`
+- **Thin community `Community 40`** (1 nodes): `Return the most recent value of *indicator* (e.g. 'EMA_10W') for *ticker*.     R`
   Too small to be a meaningful cluster - may be noise or needs more connections extracted.
-- **Thin community `Community 41`** (1 nodes): `Usage: /transaction_history TICKER`
+- **Thin community `Community 41`** (1 nodes): `Return a dict of all configured EMA values for *ticker*.`
   Too small to be a meaningful cluster - may be noise or needs more connections extracted.
-- **Thin community `Community 42`** (1 nodes): `Usage: /add_watchlist TICKER EXCHANGE`
+- **Thin community `Community 42`** (1 nodes): `Main entry point called by the scheduler.     *chat_id* is the Telegram chat tha`
   Too small to be a meaningful cluster - may be noise or needs more connections extracted.
-- **Thin community `Community 43`** (1 nodes): `Usage: /remove_watchlist TICKER`
+- **Thin community `Community 43`** (1 nodes): `Attach all command handlers to the Application instance.`
   Too small to be a meaningful cluster - may be noise or needs more connections extracted.
-- **Thin community `Community 44`** (1 nodes): `Usage: /view_watchlist`
+- **Thin community `Community 44`** (1 nodes): `Format a percentage value for display, e.g. '+12.34%' or 'N/A'.`
   Too small to be a meaningful cluster - may be noise or needs more connections extracted.
-- **Thin community `Community 45`** (1 nodes): `Usage: /set_checkpoint TICKER LABEL`
+- **Thin community `Community 45`** (1 nodes): `Decorator: ensure the calling user exists in the DB before running the handler.`
   Too small to be a meaningful cluster - may be noise or needs more connections extracted.
-- **Thin community `Community 46`** (1 nodes): `Usage: /weekly_report`
+- **Thin community `Community 46`** (1 nodes): `Register the user and show a welcome message.`
   Too small to be a meaningful cluster - may be noise or needs more connections extracted.
-- **Thin community `Community 47`** (1 nodes): `Usage: /stock_details TICKER`
+- **Thin community `Community 47`** (1 nodes): `Usage: /set_alert TICKER INDICATOR THRESHOLD_PCT     Example: /set_alert RELIANC`
   Too small to be a meaningful cluster - may be noise or needs more connections extracted.
-- **Thin community `Community 48`** (1 nodes): `Create all tables if they don't exist. Safe to call multiple times.`
+- **Thin community `Community 48`** (1 nodes): `Usage: /remove_alert TICKER INDICATOR`
   Too small to be a meaningful cluster - may be noise or needs more connections extracted.
-- **Thin community `Community 49`** (1 nodes): `Yield a sqlite3 connection with row_factory and foreign keys enabled.`
+- **Thin community `Community 49`** (1 nodes): `Usage: /view_alerts TICKER`
   Too small to be a meaningful cluster - may be noise or needs more connections extracted.
-- **Thin community `Community 50`** (1 nodes): `Return all BUY lots ordered oldest-first (for FIFO sell matching).`
+- **Thin community `Community 50`** (1 nodes): `Usage: /buy TICKER EXCHANGE QUANTITY PRICE [notes]`
+  Too small to be a meaningful cluster - may be noise or needs more connections extracted.
+- **Thin community `Community 51`** (1 nodes): `Usage: /sell TICKER QUANTITY PRICE [notes]`
+  Too small to be a meaningful cluster - may be noise or needs more connections extracted.
+- **Thin community `Community 52`** (1 nodes): `Usage: /transaction_history TICKER`
+  Too small to be a meaningful cluster - may be noise or needs more connections extracted.
+- **Thin community `Community 53`** (1 nodes): `Usage: /add_watchlist TICKER EXCHANGE`
+  Too small to be a meaningful cluster - may be noise or needs more connections extracted.
+- **Thin community `Community 54`** (1 nodes): `Usage: /remove_watchlist TICKER`
+  Too small to be a meaningful cluster - may be noise or needs more connections extracted.
+- **Thin community `Community 55`** (1 nodes): `Usage: /view_watchlist`
+  Too small to be a meaningful cluster - may be noise or needs more connections extracted.
+- **Thin community `Community 56`** (1 nodes): `Usage: /set_checkpoint TICKER LABEL`
+  Too small to be a meaningful cluster - may be noise or needs more connections extracted.
+- **Thin community `Community 57`** (1 nodes): `Usage: /weekly_report`
+  Too small to be a meaningful cluster - may be noise or needs more connections extracted.
+- **Thin community `Community 58`** (1 nodes): `Usage: /stock_details TICKER`
+  Too small to be a meaningful cluster - may be noise or needs more connections extracted.
+- **Thin community `Community 59`** (1 nodes): `Create all tables if they don't exist. Safe to call multiple times.`
+  Too small to be a meaningful cluster - may be noise or needs more connections extracted.
+- **Thin community `Community 60`** (1 nodes): `Yield a sqlite3 connection with row_factory and foreign keys enabled.`
+  Too small to be a meaningful cluster - may be noise or needs more connections extracted.
+- **Thin community `Community 61`** (1 nodes): `Return all BUY lots ordered oldest-first (for FIFO sell matching).`
   Too small to be a meaningful cluster - may be noise or needs more connections extracted.
 
 ## Suggested Questions
 _Questions this graph is uniquely positioned to answer:_
 
-- **Why does `get_connection()` connect `Community 0` to `Community 1`, `Community 3`, `Community 4`, `Community 7`, `Community 8`, `Community 9`?**
-  _High betweenness centrality (0.132) - this node is a cross-community bridge._
-- **Why does `_SilentMessage` connect `Community 2` to `Community 1`?**
-  _High betweenness centrality (0.097) - this node is a cross-community bridge._
-- **Why does `get_account_id()` connect `Community 1` to `Community 0`, `Community 8`, `Community 6`, `Community 7`?**
-  _High betweenness centrality (0.073) - this node is a cross-community bridge._
-- **Are the 24 inferred relationships involving `get_connection()` (e.g. with `add_stock()` and `remove_stock()`) actually correct?**
-  _`get_connection()` has 24 INFERRED edges - model-reasoned connections that need verification._
+- **Why does `get_connection()` connect `Community 5` to `Community 0`, `Community 1`, `Community 3`, `Community 6`, `Community 8`?**
+  _High betweenness centrality (0.133) - this node is a cross-community bridge._
+- **Why does `_SilentMessage` connect `Community 2` to `Community 0`?**
+  _High betweenness centrality (0.100) - this node is a cross-community bridge._
+- **Why does `get_account_id()` connect `Community 0` to `Community 9`, `Community 5`, `Community 1`, `Community 7`?**
+  _High betweenness centrality (0.064) - this node is a cross-community bridge._
+- **Are the 26 inferred relationships involving `get_connection()` (e.g. with `add_stock()` and `remove_stock()`) actually correct?**
+  _`get_connection()` has 26 INFERRED edges - model-reasoned connections that need verification._
 - **Are the 20 inferred relationships involving `get_account_id()` (e.g. with `cmd_start()` and `cmd_set_alert()`) actually correct?**
   _`get_account_id()` has 20 INFERRED edges - model-reasoned connections that need verification._
 - **Are the 15 inferred relationships involving `get_user_id()` (e.g. with `add_stock()` and `remove_stock()`) actually correct?**

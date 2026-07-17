@@ -4,6 +4,14 @@ Most recent changes appear first.
 
 ---
 
+## 2026-07-17 — EMA cross alerts + pre-market morning scan
+
+- **Cross alerts** — get notified whenever a price crosses any of your weekly EMAs, no matter how fast it moved; catches crashes that blow through the 2% proximity band between checks
+- **Morning EMA scan** — every weekday before the market opens (8:30 IST for NSE/BSE, 8:30 ET for US), the bot posts which stocks are trading below their 10/20/30/40-week EMAs
+- **/scan** — run the same below-EMA report on demand any time
+
+---
+
 ## 2026-07-16 — Automatic weekly EMA alerts
 
 - **Default EMA triggers everywhere** — every stock you /watch, /buy, or /sell now automatically gets alerts on the 10, 20, 30, and 40-week EMAs (fires when price comes within 2% of the EMA)

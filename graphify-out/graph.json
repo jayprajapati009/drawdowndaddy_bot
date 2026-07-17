@@ -16,7 +16,7 @@
       "label": "_latest_changelog()",
       "file_type": "code",
       "source_file": "/home/jp/jay/telegram_bot/stock_bot/main.py",
-      "source_location": "L76",
+      "source_location": "L81",
       "id": "main_latest_changelog",
       "community": 2,
       "norm_label": "_latest_changelog()"
@@ -25,7 +25,7 @@
       "label": "_any_market_open()",
       "file_type": "code",
       "source_file": "/home/jp/jay/telegram_bot/stock_bot/main.py",
-      "source_location": "L113",
+      "source_location": "L118",
       "id": "main_any_market_open",
       "community": 2,
       "norm_label": "_any_market_open()"
@@ -34,7 +34,7 @@
       "label": "main()",
       "file_type": "code",
       "source_file": "/home/jp/jay/telegram_bot/stock_bot/main.py",
-      "source_location": "L127",
+      "source_location": "L132",
       "id": "main_main",
       "community": 2,
       "norm_label": "main()"
@@ -52,8 +52,8 @@
       "label": "Return the most recent CHANGELOG.md entry formatted for Telegram.",
       "file_type": "rationale",
       "source_file": "/home/jp/jay/telegram_bot/stock_bot/main.py",
-      "source_location": "L77",
-      "id": "main_rationale_77",
+      "source_location": "L82",
+      "id": "main_rationale_82",
       "community": 2,
       "norm_label": "return the most recent changelog.md entry formatted for telegram."
     },
@@ -116,18 +116,18 @@
       "file_type": "rationale",
       "source_file": "/home/jp/jay/telegram_bot/stock_bot/bot_config.py",
       "source_location": "L1",
-      "id": "bot_config_rationale_1",
       "community": 2,
-      "norm_label": "loads and validates a per-bot json config file.  secret values (token, chat id)"
+      "norm_label": "loads and validates a per-bot json config file.  secret values (token, chat id)",
+      "id": "bot_config_rationale_1"
     },
     {
       "label": "Replace ${VAR_NAME} with the corresponding environment variable.",
       "file_type": "rationale",
       "source_file": "/home/jp/jay/telegram_bot/stock_bot/bot_config.py",
       "source_location": "L20",
-      "id": "bot_config_rationale_20",
       "community": 2,
-      "norm_label": "replace ${var_name} with the corresponding environment variable."
+      "norm_label": "replace ${var_name} with the corresponding environment variable.",
+      "id": "bot_config_rationale_20"
     },
     {
       "label": "__init__.py",
@@ -144,7 +144,7 @@
       "source_file": "/home/jp/jay/telegram_bot/stock_bot/logger.py",
       "source_location": "L1",
       "id": "home_jp_jay_telegram_bot_stock_bot_logger_py",
-      "community": 5,
+      "community": 4,
       "norm_label": "logger.py"
     },
     {
@@ -153,7 +153,7 @@
       "source_file": "/home/jp/jay/telegram_bot/stock_bot/logger.py",
       "source_location": "L31",
       "id": "logger_colouredformatter",
-      "community": 5,
+      "community": 4,
       "norm_label": "_colouredformatter"
     },
     {
@@ -162,7 +162,7 @@
       "source_file": "/home/jp/jay/telegram_bot/stock_bot/logger.py",
       "source_location": "L32",
       "id": "logger_colouredformatter_format",
-      "community": 5,
+      "community": 4,
       "norm_label": ".format()"
     },
     {
@@ -171,7 +171,7 @@
       "source_file": "/home/jp/jay/telegram_bot/stock_bot/logger.py",
       "source_location": "L38",
       "id": "logger_setup_logging",
-      "community": 5,
+      "community": 4,
       "norm_label": "setup_logging()"
     },
     {
@@ -179,9 +179,9 @@
       "file_type": "rationale",
       "source_file": "/home/jp/jay/telegram_bot/stock_bot/logger.py",
       "source_location": "L1",
-      "id": "logger_rationale_1",
-      "community": 5,
-      "norm_label": "logging configuration.  call setup_logging() once at startup (done in main.py)."
+      "community": 4,
+      "norm_label": "logging configuration.  call setup_logging() once at startup (done in main.py).",
+      "id": "logger_rationale_1"
     },
     {
       "label": "config.py",
@@ -207,7 +207,7 @@
       "source_file": "/home/jp/jay/telegram_bot/stock_bot/log_manager.py",
       "source_location": "L1",
       "id": "home_jp_jay_telegram_bot_stock_bot_log_manager_py",
-      "community": 5,
+      "community": 4,
       "norm_label": "log_manager.py"
     },
     {
@@ -216,7 +216,7 @@
       "source_file": "/home/jp/jay/telegram_bot/stock_bot/log_manager.py",
       "source_location": "L33",
       "id": "log_manager_configure",
-      "community": 5,
+      "community": 4,
       "norm_label": "configure()"
     },
     {
@@ -225,7 +225,7 @@
       "source_file": "/home/jp/jay/telegram_bot/stock_bot/log_manager.py",
       "source_location": "L45",
       "id": "log_manager_smartrotatingfilehandler",
-      "community": 5,
+      "community": 4,
       "norm_label": "smartrotatingfilehandler"
     },
     {
@@ -234,7 +234,7 @@
       "source_file": "/home/jp/jay/telegram_bot/stock_bot/log_manager.py",
       "source_location": "L53",
       "id": "log_manager_smartrotatingfilehandler_init",
-      "community": 5,
+      "community": 4,
       "norm_label": ".__init__()"
     },
     {
@@ -243,7 +243,7 @@
       "source_file": "/home/jp/jay/telegram_bot/stock_bot/log_manager.py",
       "source_location": "L69",
       "id": "log_manager_date_namer",
-      "community": 5,
+      "community": 4,
       "norm_label": "_date_namer()"
     },
     {
@@ -252,7 +252,7 @@
       "source_file": "/home/jp/jay/telegram_bot/stock_bot/log_manager.py",
       "source_location": "L73",
       "id": "log_manager_smartrotatingfilehandler_dorollover",
-      "community": 5,
+      "community": 4,
       "norm_label": ".dorollover()"
     },
     {
@@ -261,7 +261,7 @@
       "source_file": "/home/jp/jay/telegram_bot/stock_bot/log_manager.py",
       "source_location": "L84",
       "id": "log_manager_rotated_log_files",
-      "community": 5,
+      "community": 4,
       "norm_label": "_rotated_log_files()"
     },
     {
@@ -270,7 +270,7 @@
       "source_file": "/home/jp/jay/telegram_bot/stock_bot/log_manager.py",
       "source_location": "L96",
       "id": "log_manager_all_log_files",
-      "community": 5,
+      "community": 4,
       "norm_label": "_all_log_files()"
     },
     {
@@ -279,7 +279,7 @@
       "source_file": "/home/jp/jay/telegram_bot/stock_bot/log_manager.py",
       "source_location": "L104",
       "id": "log_manager_compress_old_files",
-      "community": 5,
+      "community": 4,
       "norm_label": "_compress_old_files()"
     },
     {
@@ -288,7 +288,7 @@
       "source_file": "/home/jp/jay/telegram_bot/stock_bot/log_manager.py",
       "source_location": "L127",
       "id": "log_manager_run_cleanup",
-      "community": 5,
+      "community": 4,
       "norm_label": "run_cleanup()"
     },
     {
@@ -297,7 +297,7 @@
       "source_file": "/home/jp/jay/telegram_bot/stock_bot/log_manager.py",
       "source_location": "L137",
       "id": "log_manager_delete_by_age",
-      "community": 5,
+      "community": 4,
       "norm_label": "_delete_by_age()"
     },
     {
@@ -306,7 +306,7 @@
       "source_file": "/home/jp/jay/telegram_bot/stock_bot/log_manager.py",
       "source_location": "L153",
       "id": "log_manager_enforce_size_limit",
-      "community": 5,
+      "community": 4,
       "norm_label": "_enforce_size_limit()"
     },
     {
@@ -315,7 +315,7 @@
       "source_file": "/home/jp/jay/telegram_bot/stock_bot/log_manager.py",
       "source_location": "L181",
       "id": "log_manager_directory_size",
-      "community": 5,
+      "community": 4,
       "norm_label": "_directory_size()"
     },
     {
@@ -324,7 +324,7 @@
       "source_file": "/home/jp/jay/telegram_bot/stock_bot/log_manager.py",
       "source_location": "L186",
       "id": "log_manager_log_directory_stats",
-      "community": 5,
+      "community": 4,
       "norm_label": "_log_directory_stats()"
     },
     {
@@ -332,81 +332,81 @@
       "file_type": "rationale",
       "source_file": "/home/jp/jay/telegram_bot/stock_bot/log_manager.py",
       "source_location": "L1",
-      "id": "log_manager_rationale_1",
-      "community": 5,
-      "norm_label": "smart log file manager.  rotation:  daily at midnight via timedrotatingfilehandl"
+      "community": 4,
+      "norm_label": "smart log file manager.  rotation:  daily at midnight via timedrotatingfilehandl",
+      "id": "log_manager_rationale_1"
     },
     {
       "label": "Set the log directory and file before setup_logging() is called.",
       "file_type": "rationale",
       "source_file": "/home/jp/jay/telegram_bot/stock_bot/log_manager.py",
       "source_location": "L34",
-      "id": "log_manager_rationale_34",
-      "community": 5,
-      "norm_label": "set the log directory and file before setup_logging() is called."
+      "community": 4,
+      "norm_label": "set the log directory and file before setup_logging() is called.",
+      "id": "log_manager_rationale_34"
     },
     {
       "label": "Daily-rotating handler that:     - names rotated files stockbot.log.YYYY-MM-DD",
       "file_type": "rationale",
       "source_file": "/home/jp/jay/telegram_bot/stock_bot/log_manager.py",
       "source_location": "L46",
-      "id": "log_manager_rationale_46",
-      "community": 5,
-      "norm_label": "daily-rotating handler that:     - names rotated files stockbot.log.yyyy-mm-dd"
+      "community": 4,
+      "norm_label": "daily-rotating handler that:     - names rotated files stockbot.log.yyyy-mm-dd",
+      "id": "log_manager_rationale_46"
     },
     {
       "label": "Keep the handler's default YYYY-MM-DD suffix as-is.",
       "file_type": "rationale",
       "source_file": "/home/jp/jay/telegram_bot/stock_bot/log_manager.py",
       "source_location": "L70",
-      "id": "log_manager_rationale_70",
       "community": 12,
-      "norm_label": "keep the handler's default yyyy-mm-dd suffix as-is."
+      "norm_label": "keep the handler's default yyyy-mm-dd suffix as-is.",
+      "id": "log_manager_rationale_70"
     },
     {
       "label": "Return all rotated log files (not the active stockbot.log) sorted     oldest-fir",
       "file_type": "rationale",
       "source_file": "/home/jp/jay/telegram_bot/stock_bot/log_manager.py",
       "source_location": "L85",
-      "id": "log_manager_rationale_85",
-      "community": 5,
-      "norm_label": "return all rotated log files (not the active stockbot.log) sorted     oldest-fir"
+      "community": 4,
+      "norm_label": "return all rotated log files (not the active stockbot.log) sorted     oldest-fir",
+      "id": "log_manager_rationale_85"
     },
     {
       "label": "All log files including .gz, oldest first.",
       "file_type": "rationale",
       "source_file": "/home/jp/jay/telegram_bot/stock_bot/log_manager.py",
       "source_location": "L97",
-      "id": "log_manager_rationale_97",
-      "community": 5,
-      "norm_label": "all log files including .gz, oldest first."
+      "community": 4,
+      "norm_label": "all log files including .gz, oldest first.",
+      "id": "log_manager_rationale_97"
     },
     {
       "label": "Gzip-compress every rotated plain-text log except the most recent     *uncompres",
       "file_type": "rationale",
       "source_file": "/home/jp/jay/telegram_bot/stock_bot/log_manager.py",
       "source_location": "L105",
-      "id": "log_manager_rationale_105",
-      "community": 5,
-      "norm_label": "gzip-compress every rotated plain-text log except the most recent     *uncompres"
+      "community": 4,
+      "norm_label": "gzip-compress every rotated plain-text log except the most recent     *uncompres",
+      "id": "log_manager_rationale_105"
     },
     {
       "label": "Enforce both the age limit and the size limit.     Safe to call at any time; ski",
       "file_type": "rationale",
       "source_file": "/home/jp/jay/telegram_bot/stock_bot/log_manager.py",
       "source_location": "L128",
-      "id": "log_manager_rationale_128",
-      "community": 5,
-      "norm_label": "enforce both the age limit and the size limit.     safe to call at any time; ski"
+      "community": 4,
+      "norm_label": "enforce both the age limit and the size limit.     safe to call at any time; ski",
+      "id": "log_manager_rationale_128"
     },
     {
       "label": "Total bytes used by all files in LOG_DIR.",
       "file_type": "rationale",
       "source_file": "/home/jp/jay/telegram_bot/stock_bot/log_manager.py",
       "source_location": "L182",
-      "id": "log_manager_rationale_182",
-      "community": 5,
-      "norm_label": "total bytes used by all files in log_dir."
+      "community": 4,
+      "norm_label": "total bytes used by all files in log_dir.",
+      "id": "log_manager_rationale_182"
     },
     {
       "label": "watchlist_service.py",
@@ -414,7 +414,7 @@
       "source_file": "/home/jp/jay/telegram_bot/stock_bot/services/watchlist_service.py",
       "source_location": "L1",
       "id": "home_jp_jay_telegram_bot_stock_bot_services_watchlist_service_py",
-      "community": 4,
+      "community": 6,
       "norm_label": "watchlist_service.py"
     },
     {
@@ -423,7 +423,7 @@
       "source_file": "/home/jp/jay/telegram_bot/stock_bot/services/watchlist_service.py",
       "source_location": "L17",
       "id": "watchlist_service_watchlisterror",
-      "community": 4,
+      "community": 6,
       "norm_label": "watchlisterror"
     },
     {
@@ -432,7 +432,7 @@
       "source_file": "",
       "source_location": "",
       "id": "exception",
-      "community": 4,
+      "community": 6,
       "norm_label": "exception"
     },
     {
@@ -441,7 +441,7 @@
       "source_file": "/home/jp/jay/telegram_bot/stock_bot/services/watchlist_service.py",
       "source_location": "L21",
       "id": "watchlist_service_add_stock",
-      "community": 4,
+      "community": 6,
       "norm_label": "add_stock()"
     },
     {
@@ -450,7 +450,7 @@
       "source_file": "/home/jp/jay/telegram_bot/stock_bot/services/watchlist_service.py",
       "source_location": "L73",
       "id": "watchlist_service_remove_stock",
-      "community": 4,
+      "community": 6,
       "norm_label": "remove_stock()"
     },
     {
@@ -459,7 +459,7 @@
       "source_file": "/home/jp/jay/telegram_bot/stock_bot/services/watchlist_service.py",
       "source_location": "L84",
       "id": "watchlist_service_get_watchlist_with_prices",
-      "community": 3,
+      "community": 1,
       "norm_label": "get_watchlist_with_prices()"
     },
     {
@@ -468,7 +468,7 @@
       "source_file": "/home/jp/jay/telegram_bot/stock_bot/services/watchlist_service.py",
       "source_location": "L131",
       "id": "watchlist_service_set_checkpoint",
-      "community": 4,
+      "community": 6,
       "norm_label": "set_checkpoint()"
     },
     {
@@ -476,7 +476,7 @@
       "file_type": "rationale",
       "source_file": "/home/jp/jay/telegram_bot/stock_bot/services/watchlist_service.py",
       "source_location": "L1",
-      "community": 4,
+      "community": 6,
       "norm_label": "watchlist business logic.",
       "id": "watchlist_service_rationale_1"
     },
@@ -485,36 +485,36 @@
       "file_type": "rationale",
       "source_file": "/home/jp/jay/telegram_bot/stock_bot/services/watchlist_service.py",
       "source_location": "L27",
-      "id": "watchlist_service_rationale_27",
-      "community": 4,
-      "norm_label": "add *ticker* to the user's watchlist.      if *entry_date* is provided, fetches"
+      "community": 6,
+      "norm_label": "add *ticker* to the user's watchlist.      if *entry_date* is provided, fetches",
+      "id": "watchlist_service_rationale_27"
     },
     {
       "label": "Remove *ticker* from the user's watchlist. Raises WatchlistError if not found.",
       "file_type": "rationale",
       "source_file": "/home/jp/jay/telegram_bot/stock_bot/services/watchlist_service.py",
       "source_location": "L74",
-      "id": "watchlist_service_rationale_74",
-      "community": 4,
-      "norm_label": "remove *ticker* from the user's watchlist. raises watchlisterror if not found."
+      "community": 6,
+      "norm_label": "remove *ticker* from the user's watchlist. raises watchlisterror if not found.",
+      "id": "watchlist_service_rationale_74"
     },
     {
       "label": "Return the full watchlist with live prices and return percentages.     Each entr",
       "file_type": "rationale",
       "source_file": "/home/jp/jay/telegram_bot/stock_bot/services/watchlist_service.py",
       "source_location": "L85",
-      "id": "watchlist_service_rationale_85",
-      "community": 3,
-      "norm_label": "return the full watchlist with live prices and return percentages.     each entr"
+      "community": 1,
+      "norm_label": "return the full watchlist with live prices and return percentages.     each entr",
+      "id": "watchlist_service_rationale_85"
     },
     {
       "label": "Mark the price of *ticker* as a named checkpoint.     Uses historical close if *",
       "file_type": "rationale",
       "source_file": "/home/jp/jay/telegram_bot/stock_bot/services/watchlist_service.py",
       "source_location": "L137",
-      "id": "watchlist_service_rationale_137",
-      "community": 4,
-      "norm_label": "mark the price of *ticker* as a named checkpoint.     uses historical close if *"
+      "community": 6,
+      "norm_label": "mark the price of *ticker* as a named checkpoint.     uses historical close if *",
+      "id": "watchlist_service_rationale_137"
     },
     {
       "label": "__init__.py",
@@ -531,7 +531,7 @@
       "source_file": "/home/jp/jay/telegram_bot/stock_bot/services/holdings_service.py",
       "source_location": "L1",
       "id": "home_jp_jay_telegram_bot_stock_bot_services_holdings_service_py",
-      "community": 0,
+      "community": 3,
       "norm_label": "holdings_service.py"
     },
     {
@@ -540,7 +540,7 @@
       "source_file": "/home/jp/jay/telegram_bot/stock_bot/services/holdings_service.py",
       "source_location": "L19",
       "id": "holdings_service_holdingserror",
-      "community": 0,
+      "community": 3,
       "norm_label": "holdingserror"
     },
     {
@@ -549,7 +549,7 @@
       "source_file": "/home/jp/jay/telegram_bot/stock_bot/services/holdings_service.py",
       "source_location": "L23",
       "id": "holdings_service_buy",
-      "community": 0,
+      "community": 3,
       "norm_label": "buy()"
     },
     {
@@ -558,7 +558,7 @@
       "source_file": "/home/jp/jay/telegram_bot/stock_bot/services/holdings_service.py",
       "source_location": "L54",
       "id": "holdings_service_sell",
-      "community": 0,
+      "community": 3,
       "norm_label": "sell()"
     },
     {
@@ -567,7 +567,7 @@
       "source_file": "/home/jp/jay/telegram_bot/stock_bot/services/holdings_service.py",
       "source_location": "L130",
       "id": "holdings_service_get_positions",
-      "community": 0,
+      "community": 1,
       "norm_label": "get_positions()"
     },
     {
@@ -576,7 +576,7 @@
       "source_file": "/home/jp/jay/telegram_bot/stock_bot/services/holdings_service.py",
       "source_location": "L169",
       "id": "holdings_service_get_stock_returns",
-      "community": 0,
+      "community": 3,
       "norm_label": "get_stock_returns()"
     },
     {
@@ -585,7 +585,7 @@
       "source_file": "/home/jp/jay/telegram_bot/stock_bot/services/holdings_service.py",
       "source_location": "L234",
       "id": "holdings_service_get_recent_transactions",
-      "community": 0,
+      "community": 3,
       "norm_label": "get_recent_transactions()"
     },
     {
@@ -594,7 +594,7 @@
       "source_file": "/home/jp/jay/telegram_bot/stock_bot/services/holdings_service.py",
       "source_location": "L255",
       "id": "holdings_service_get_transaction_history",
-      "community": 0,
+      "community": 3,
       "norm_label": "get_transaction_history()"
     },
     {
@@ -602,7 +602,7 @@
       "file_type": "rationale",
       "source_file": "/home/jp/jay/telegram_bot/stock_bot/services/holdings_service.py",
       "source_location": "L1",
-      "community": 0,
+      "community": 3,
       "norm_label": "holdings and lot management.  cost basis and p&l are always computed from raw lo",
       "id": "holdings_service_rationale_1"
     },
@@ -611,63 +611,63 @@
       "file_type": "rationale",
       "source_file": "/home/jp/jay/telegram_bot/stock_bot/services/holdings_service.py",
       "source_location": "L20",
-      "id": "holdings_service_rationale_20",
-      "community": 0,
-      "norm_label": "raised for invalid or impossible holdings operations."
+      "community": 3,
+      "norm_label": "raised for invalid or impossible holdings operations.",
+      "id": "holdings_service_rationale_20"
     },
     {
       "label": "Log a BUY lot. Returns lot details. trade_date is ISO format YYYY-MM-DD.",
       "file_type": "rationale",
       "source_file": "/home/jp/jay/telegram_bot/stock_bot/services/holdings_service.py",
       "source_location": "L32",
-      "id": "holdings_service_rationale_32",
-      "community": 0,
-      "norm_label": "log a buy lot. returns lot details. trade_date is iso format yyyy-mm-dd."
+      "community": 3,
+      "norm_label": "log a buy lot. returns lot details. trade_date is iso format yyyy-mm-dd.",
+      "id": "holdings_service_rationale_32"
     },
     {
       "label": "Log a SELL using FIFO lot matching.     Returns realised P&L and a breakdown of",
       "file_type": "rationale",
       "source_file": "/home/jp/jay/telegram_bot/stock_bot/services/holdings_service.py",
       "source_location": "L62",
-      "id": "holdings_service_rationale_62",
-      "community": 0,
-      "norm_label": "log a sell using fifo lot matching.     returns realised p&l and a breakdown of"
+      "community": 3,
+      "norm_label": "log a sell using fifo lot matching.     returns realised p&l and a breakdown of",
+      "id": "holdings_service_rationale_62"
     },
     {
       "label": "Return all current open positions with quantity, average cost, current     price",
       "file_type": "rationale",
       "source_file": "/home/jp/jay/telegram_bot/stock_bot/services/holdings_service.py",
       "source_location": "L131",
-      "id": "holdings_service_rationale_131",
-      "community": 0,
-      "norm_label": "return all current open positions with quantity, average cost, current     price"
+      "community": 1,
+      "norm_label": "return all current open positions with quantity, average cost, current     price",
+      "id": "holdings_service_rationale_131"
     },
     {
       "label": "Returns simple and time-weighted returns for *ticker*.      SELL lots store cost",
       "file_type": "rationale",
       "source_file": "/home/jp/jay/telegram_bot/stock_bot/services/holdings_service.py",
       "source_location": "L170",
-      "id": "holdings_service_rationale_170",
-      "community": 0,
-      "norm_label": "returns simple and time-weighted returns for *ticker*.      sell lots store cost"
+      "community": 3,
+      "norm_label": "returns simple and time-weighted returns for *ticker*.      sell lots store cost",
+      "id": "holdings_service_rationale_170"
     },
     {
       "label": "Return the most recent *limit* transactions across all tickers (newest first).",
       "file_type": "rationale",
       "source_file": "/home/jp/jay/telegram_bot/stock_bot/services/holdings_service.py",
       "source_location": "L235",
-      "id": "holdings_service_rationale_235",
-      "community": 0,
-      "norm_label": "return the most recent *limit* transactions across all tickers (newest first)."
+      "community": 3,
+      "norm_label": "return the most recent *limit* transactions across all tickers (newest first).",
+      "id": "holdings_service_rationale_235"
     },
     {
       "label": "Return all lots (BUY and SELL) for *ticker*, oldest first.",
       "file_type": "rationale",
       "source_file": "/home/jp/jay/telegram_bot/stock_bot/services/holdings_service.py",
       "source_location": "L256",
-      "id": "holdings_service_rationale_256",
-      "community": 0,
-      "norm_label": "return all lots (buy and sell) for *ticker*, oldest first."
+      "community": 3,
+      "norm_label": "return all lots (buy and sell) for *ticker*, oldest first.",
+      "id": "holdings_service_rationale_256"
     },
     {
       "label": "price_fetcher.py",
@@ -675,7 +675,7 @@
       "source_file": "/home/jp/jay/telegram_bot/stock_bot/services/price_fetcher.py",
       "source_location": "L1",
       "id": "home_jp_jay_telegram_bot_stock_bot_services_price_fetcher_py",
-      "community": 3,
+      "community": 1,
       "norm_label": "price_fetcher.py"
     },
     {
@@ -684,7 +684,7 @@
       "source_file": "/home/jp/jay/telegram_bot/stock_bot/services/price_fetcher.py",
       "source_location": "L33",
       "id": "price_fetcher_clear_cache",
-      "community": 3,
+      "community": 8,
       "norm_label": "clear_cache()"
     },
     {
@@ -693,7 +693,7 @@
       "source_file": "/home/jp/jay/telegram_bot/stock_bot/services/price_fetcher.py",
       "source_location": "L42",
       "id": "price_fetcher_get_current_price",
-      "community": 3,
+      "community": 1,
       "norm_label": "get_current_price()"
     },
     {
@@ -702,7 +702,7 @@
       "source_file": "/home/jp/jay/telegram_bot/stock_bot/services/price_fetcher.py",
       "source_location": "L68",
       "id": "price_fetcher_get_ema",
-      "community": 3,
+      "community": 1,
       "norm_label": "get_ema()"
     },
     {
@@ -711,7 +711,7 @@
       "source_file": "/home/jp/jay/telegram_bot/stock_bot/services/price_fetcher.py",
       "source_location": "L85",
       "id": "price_fetcher_get_prices_batch",
-      "community": 3,
+      "community": 1,
       "norm_label": "get_prices_batch()"
     },
     {
@@ -720,7 +720,7 @@
       "source_file": "/home/jp/jay/telegram_bot/stock_bot/services/price_fetcher.py",
       "source_location": "L95",
       "id": "price_fetcher_get_all_emas",
-      "community": 7,
+      "community": 1,
       "norm_label": "get_all_emas()"
     },
     {
@@ -729,7 +729,7 @@
       "source_file": "/home/jp/jay/telegram_bot/stock_bot/services/price_fetcher.py",
       "source_location": "L100",
       "id": "price_fetcher_get_rsi",
-      "community": 3,
+      "community": 1,
       "norm_label": "get_rsi()"
     },
     {
@@ -738,7 +738,7 @@
       "source_file": "/home/jp/jay/telegram_bot/stock_bot/services/price_fetcher.py",
       "source_location": "L122",
       "id": "price_fetcher_get_price_on_date",
-      "community": 3,
+      "community": 1,
       "norm_label": "get_price_on_date()"
     },
     {
@@ -747,7 +747,7 @@
       "source_file": "/home/jp/jay/telegram_bot/stock_bot/services/price_fetcher.py",
       "source_location": "L179",
       "id": "price_fetcher_fetch_weekly",
-      "community": 3,
+      "community": 1,
       "norm_label": "_fetch_weekly()"
     },
     {
@@ -756,7 +756,7 @@
       "source_file": "/home/jp/jay/telegram_bot/stock_bot/services/price_fetcher.py",
       "source_location": "L210",
       "id": "price_fetcher_normalise",
-      "community": 3,
+      "community": 1,
       "norm_label": "_normalise()"
     },
     {
@@ -764,7 +764,7 @@
       "file_type": "rationale",
       "source_file": "/home/jp/jay/telegram_bot/stock_bot/services/price_fetcher.py",
       "source_location": "L1",
-      "community": 3,
+      "community": 1,
       "norm_label": "yfinance wrapper with ema calculation.  all data is fetched as weekly ohlcv; clo",
       "id": "price_fetcher_rationale_1"
     },
@@ -773,25 +773,25 @@
       "file_type": "rationale",
       "source_file": "/home/jp/jay/telegram_bot/stock_bot/services/price_fetcher.py",
       "source_location": "L34",
-      "id": "price_fetcher_rationale_34",
-      "community": 3,
-      "norm_label": "flush stale data at the start of each scheduler tick."
+      "community": 8,
+      "norm_label": "flush stale data at the start of each scheduler tick.",
+      "id": "price_fetcher_rationale_34"
     },
     {
       "label": "Return the most recent closing price for *ticker*.     Retries up to _RETRY_ATTE",
       "file_type": "rationale",
       "source_file": "/home/jp/jay/telegram_bot/stock_bot/services/price_fetcher.py",
       "source_location": "L43",
-      "id": "price_fetcher_rationale_43",
-      "community": 3,
-      "norm_label": "return the most recent closing price for *ticker*.     retries up to _retry_atte"
+      "community": 1,
+      "norm_label": "return the most recent closing price for *ticker*.     retries up to _retry_atte",
+      "id": "price_fetcher_rationale_43"
     },
     {
       "label": "Download weekly OHLCV data for *ticker*, enough history to seed an EMA     of *s",
       "file_type": "rationale",
       "source_file": "/home/jp/jay/telegram_bot/stock_bot/services/price_fetcher.py",
       "source_location": "L69",
-      "community": 3,
+      "community": 1,
       "norm_label": "download weekly ohlcv data for *ticker*, enough history to seed an ema     of *s",
       "id": "price_fetcher_rationale_69"
     },
@@ -800,54 +800,54 @@
       "file_type": "rationale",
       "source_file": "/home/jp/jay/telegram_bot/stock_bot/services/price_fetcher.py",
       "source_location": "L86",
-      "id": "price_fetcher_rationale_86",
-      "community": 3,
-      "norm_label": "fetch current prices for multiple tickers in parallel."
+      "community": 1,
+      "norm_label": "fetch current prices for multiple tickers in parallel.",
+      "id": "price_fetcher_rationale_86"
     },
     {
       "label": "Return every configured EMA value for *ticker* in one call.",
       "file_type": "rationale",
       "source_file": "/home/jp/jay/telegram_bot/stock_bot/services/price_fetcher.py",
       "source_location": "L96",
-      "id": "price_fetcher_rationale_96",
-      "community": 7,
-      "norm_label": "return every configured ema value for *ticker* in one call."
+      "community": 1,
+      "norm_label": "return every configured ema value for *ticker* in one call.",
+      "id": "price_fetcher_rationale_96"
     },
     {
       "label": "Return the most recent weekly RSI for *ticker* using Wilder's smoothing.     Ret",
       "file_type": "rationale",
       "source_file": "/home/jp/jay/telegram_bot/stock_bot/services/price_fetcher.py",
       "source_location": "L101",
-      "id": "price_fetcher_rationale_101",
-      "community": 3,
-      "norm_label": "return the most recent weekly rsi for *ticker* using wilder's smoothing.     ret"
+      "community": 1,
+      "norm_label": "return the most recent weekly rsi for *ticker* using wilder's smoothing.     ret",
+      "id": "price_fetcher_rationale_101"
     },
     {
       "label": "Return the closing price for *ticker* on *target_date*.      If the market was c",
       "file_type": "rationale",
       "source_file": "/home/jp/jay/telegram_bot/stock_bot/services/price_fetcher.py",
       "source_location": "L123",
-      "id": "price_fetcher_rationale_123",
-      "community": 3,
-      "norm_label": "return the closing price for *ticker* on *target_date*.      if the market was c"
+      "community": 1,
+      "norm_label": "return the closing price for *ticker* on *target_date*.      if the market was c",
+      "id": "price_fetcher_rationale_123"
     },
     {
       "label": "Download 2 years of weekly closes for *ticker*, normalise, cache, and return.",
       "file_type": "rationale",
       "source_file": "/home/jp/jay/telegram_bot/stock_bot/services/price_fetcher.py",
       "source_location": "L180",
-      "id": "price_fetcher_rationale_180",
-      "community": 3,
-      "norm_label": "download 2 years of weekly closes for *ticker*, normalise, cache, and return."
+      "community": 1,
+      "norm_label": "download 2 years of weekly closes for *ticker*, normalise, cache, and return.",
+      "id": "price_fetcher_rationale_180"
     },
     {
       "label": "Validate and normalise a raw yfinance DataFrame into a consistent schema:",
       "file_type": "rationale",
       "source_file": "/home/jp/jay/telegram_bot/stock_bot/services/price_fetcher.py",
       "source_location": "L211",
-      "id": "price_fetcher_rationale_211",
-      "community": 3,
-      "norm_label": "validate and normalise a raw yfinance dataframe into a consistent schema:"
+      "community": 1,
+      "norm_label": "validate and normalise a raw yfinance dataframe into a consistent schema:",
+      "id": "price_fetcher_rationale_211"
     },
     {
       "label": "ticker_search.py",
@@ -855,7 +855,7 @@
       "source_file": "/home/jp/jay/telegram_bot/stock_bot/services/ticker_search.py",
       "source_location": "L1",
       "id": "home_jp_jay_telegram_bot_stock_bot_services_ticker_search_py",
-      "community": 6,
+      "community": 7,
       "norm_label": "ticker_search.py"
     },
     {
@@ -864,7 +864,7 @@
       "source_file": "/home/jp/jay/telegram_bot/stock_bot/services/ticker_search.py",
       "source_location": "L32",
       "id": "ticker_search_search_tickers",
-      "community": 6,
+      "community": 7,
       "norm_label": "search_tickers()"
     },
     {
@@ -872,18 +872,18 @@
       "file_type": "rationale",
       "source_file": "/home/jp/jay/telegram_bot/stock_bot/services/ticker_search.py",
       "source_location": "L1",
-      "id": "ticker_search_rationale_1",
-      "community": 6,
-      "norm_label": "yahoo finance ticker search.  wraps yf.search so handlers get clean, exchange-no"
+      "community": 7,
+      "norm_label": "yahoo finance ticker search.  wraps yf.search so handlers get clean, exchange-no",
+      "id": "ticker_search_rationale_1"
     },
     {
       "label": "Search Yahoo Finance for *query*.     Returns up to *max_results* dicts: {ticker",
       "file_type": "rationale",
       "source_file": "/home/jp/jay/telegram_bot/stock_bot/services/ticker_search.py",
       "source_location": "L33",
-      "id": "ticker_search_rationale_33",
-      "community": 6,
-      "norm_label": "search yahoo finance for *query*.     returns up to *max_results* dicts: {ticker"
+      "community": 7,
+      "norm_label": "search yahoo finance for *query*.     returns up to *max_results* dicts: {ticker",
+      "id": "ticker_search_rationale_33"
     },
     {
       "label": "alert_service.py",
@@ -891,69 +891,96 @@
       "source_file": "/home/jp/jay/telegram_bot/stock_bot/services/alert_service.py",
       "source_location": "L1",
       "id": "home_jp_jay_telegram_bot_stock_bot_services_alert_service_py",
-      "community": 4,
+      "community": 8,
       "norm_label": "alert_service.py"
     },
     {
       "label": "ensure_default_ema_alerts()",
       "file_type": "code",
       "source_file": "/home/jp/jay/telegram_bot/stock_bot/services/alert_service.py",
-      "source_location": "L38",
+      "source_location": "L42",
       "id": "alert_service_ensure_default_ema_alerts",
-      "community": 4,
+      "community": 6,
       "norm_label": "ensure_default_ema_alerts()"
     },
     {
       "label": "ensure_watchlist_defaults()",
       "file_type": "code",
       "source_file": "/home/jp/jay/telegram_bot/stock_bot/services/alert_service.py",
-      "source_location": "L53",
+      "source_location": "L57",
       "id": "alert_service_ensure_watchlist_defaults",
-      "community": 4,
+      "community": 6,
       "norm_label": "ensure_watchlist_defaults()"
     },
     {
       "label": "backfill_default_ema_alerts()",
       "file_type": "code",
       "source_file": "/home/jp/jay/telegram_bot/stock_bot/services/alert_service.py",
-      "source_location": "L74",
+      "source_location": "L78",
       "id": "alert_service_backfill_default_ema_alerts",
-      "community": 4,
+      "community": 6,
       "norm_label": "backfill_default_ema_alerts()"
     },
     {
       "label": "run_alert_check()",
       "file_type": "code",
       "source_file": "/home/jp/jay/telegram_bot/stock_bot/services/alert_service.py",
-      "source_location": "L95",
+      "source_location": "L99",
       "id": "alert_service_run_alert_check",
-      "community": 3,
+      "community": 8,
       "norm_label": "run_alert_check()"
+    },
+    {
+      "label": "build_morning_scan_message()",
+      "file_type": "code",
+      "source_file": "/home/jp/jay/telegram_bot/stock_bot/services/alert_service.py",
+      "source_location": "L131",
+      "id": "alert_service_build_morning_scan_message",
+      "community": 8,
+      "norm_label": "build_morning_scan_message()"
+    },
+    {
+      "label": "run_morning_scan()",
+      "file_type": "code",
+      "source_file": "/home/jp/jay/telegram_bot/stock_bot/services/alert_service.py",
+      "source_location": "L182",
+      "id": "alert_service_run_morning_scan",
+      "community": 8,
+      "norm_label": "run_morning_scan()"
     },
     {
       "label": "_check_one_price_alert()",
       "file_type": "code",
       "source_file": "/home/jp/jay/telegram_bot/stock_bot/services/alert_service.py",
-      "source_location": "L120",
+      "source_location": "L197",
       "id": "alert_service_check_one_price_alert",
-      "community": 0,
+      "community": 3,
       "norm_label": "_check_one_price_alert()"
     },
     {
       "label": "_check_one_ema_alert()",
       "file_type": "code",
       "source_file": "/home/jp/jay/telegram_bot/stock_bot/services/alert_service.py",
-      "source_location": "L159",
+      "source_location": "L236",
       "id": "alert_service_check_one_ema_alert",
-      "community": 3,
+      "community": 8,
       "norm_label": "_check_one_ema_alert()"
+    },
+    {
+      "label": "_send_cross_alert()",
+      "file_type": "code",
+      "source_file": "/home/jp/jay/telegram_bot/stock_bot/services/alert_service.py",
+      "source_location": "L288",
+      "id": "alert_service_send_cross_alert",
+      "community": 8,
+      "norm_label": "_send_cross_alert()"
     },
     {
       "label": "Alert checking and notification dispatch.  Called by APScheduler on a configurab",
       "file_type": "rationale",
       "source_file": "/home/jp/jay/telegram_bot/stock_bot/services/alert_service.py",
       "source_location": "L1",
-      "community": 4,
+      "community": 8,
       "norm_label": "alert checking and notification dispatch.  called by apscheduler on a configurab",
       "id": "alert_service_rationale_1"
     },
@@ -961,37 +988,64 @@
       "label": "Seed the default EMA alert configs for one watchlist row.     Returns the indica",
       "file_type": "rationale",
       "source_file": "/home/jp/jay/telegram_bot/stock_bot/services/alert_service.py",
-      "source_location": "L39",
-      "id": "alert_service_rationale_39",
-      "community": 4,
+      "source_location": "L43",
+      "id": "alert_service_rationale_43",
+      "community": 6,
       "norm_label": "seed the default ema alert configs for one watchlist row.     returns the indica"
     },
     {
       "label": "Make sure *ticker* has a watchlist row (alerts are anchored to it) and     the d",
       "file_type": "rationale",
       "source_file": "/home/jp/jay/telegram_bot/stock_bot/services/alert_service.py",
-      "source_location": "L60",
-      "id": "alert_service_rationale_60",
-      "community": 4,
+      "source_location": "L64",
+      "id": "alert_service_rationale_64",
+      "community": 6,
       "norm_label": "make sure *ticker* has a watchlist row (alerts are anchored to it) and     the d"
     },
     {
       "label": "One-shot seeding at startup: give every existing watchlist stock and every     p",
       "file_type": "rationale",
       "source_file": "/home/jp/jay/telegram_bot/stock_bot/services/alert_service.py",
-      "source_location": "L75",
-      "id": "alert_service_rationale_75",
-      "community": 4,
+      "source_location": "L79",
+      "id": "alert_service_rationale_79",
+      "community": 6,
       "norm_label": "one-shot seeding at startup: give every existing watchlist stock and every     p"
     },
     {
       "label": "Main entry point called by the scheduler.     *chat_id* is the Telegram chat tha",
       "file_type": "rationale",
       "source_file": "/home/jp/jay/telegram_bot/stock_bot/services/alert_service.py",
-      "source_location": "L96",
-      "id": "alert_service_rationale_96",
-      "community": 3,
+      "source_location": "L100",
+      "id": "alert_service_rationale_100",
+      "community": 8,
       "norm_label": "main entry point called by the scheduler.     *chat_id* is the telegram chat tha"
+    },
+    {
+      "label": "Scan every watched stock (optionally restricted to *exchanges*) and build     a",
+      "file_type": "rationale",
+      "source_file": "/home/jp/jay/telegram_bot/stock_bot/services/alert_service.py",
+      "source_location": "L132",
+      "id": "alert_service_rationale_132",
+      "community": 8,
+      "norm_label": "scan every watched stock (optionally restricted to *exchanges*) and build     a"
+    },
+    {
+      "label": "Scheduler entry point: build and send the pre-market EMA scan.",
+      "file_type": "rationale",
+      "source_file": "/home/jp/jay/telegram_bot/stock_bot/services/alert_service.py",
+      "source_location": "L185",
+      "id": "alert_service_rationale_185",
+      "community": 8,
+      "norm_label": "scheduler entry point: build and send the pre-market ema scan."
+    },
+    {
+      "label": "Notify that the price crossed the EMA. Shares the config's cooldown so     a pri",
+      "file_type": "rationale",
+      "source_file": "/home/jp/jay/telegram_bot/stock_bot/services/alert_service.py",
+      "source_location": "L297",
+      "id": "alert_service_rationale_297",
+      "community": 8,
+      "norm_label": "notify that the price crossed the ema. shares the config's cooldown so     a pri"
     },
     {
       "label": "__init__.py",
@@ -1042,7 +1096,7 @@
       "label": "_SilentMessage",
       "file_type": "code",
       "source_file": "/home/jp/jay/telegram_bot/stock_bot/bot/router.py",
-      "source_location": "L110",
+      "source_location": "L111",
       "id": "router_silentmessage",
       "community": 2,
       "norm_label": "_silentmessage"
@@ -1051,7 +1105,7 @@
       "label": ".__init__()",
       "file_type": "code",
       "source_file": "/home/jp/jay/telegram_bot/stock_bot/bot/router.py",
-      "source_location": "L113",
+      "source_location": "L114",
       "id": "router_silentmessage_init",
       "community": 2,
       "norm_label": ".__init__()"
@@ -1060,16 +1114,16 @@
       "label": ".reply_text()",
       "file_type": "code",
       "source_file": "/home/jp/jay/telegram_bot/stock_bot/bot/router.py",
-      "source_location": "L117",
+      "source_location": "L118",
       "id": "router_silentmessage_reply_text",
-      "community": 1,
+      "community": 0,
       "norm_label": ".reply_text()"
     },
     {
       "label": ".__getattr__()",
       "file_type": "code",
       "source_file": "/home/jp/jay/telegram_bot/stock_bot/bot/router.py",
-      "source_location": "L122",
+      "source_location": "L123",
       "id": "router_silentmessage_getattr",
       "community": 2,
       "norm_label": ".__getattr__()"
@@ -1078,7 +1132,7 @@
       "label": "_SilentUpdate",
       "file_type": "code",
       "source_file": "/home/jp/jay/telegram_bot/stock_bot/bot/router.py",
-      "source_location": "L126",
+      "source_location": "L127",
       "id": "router_silentupdate",
       "community": 2,
       "norm_label": "_silentupdate"
@@ -1087,7 +1141,7 @@
       "label": ".__init__()",
       "file_type": "code",
       "source_file": "/home/jp/jay/telegram_bot/stock_bot/bot/router.py",
-      "source_location": "L129",
+      "source_location": "L130",
       "id": "router_silentupdate_init",
       "community": 2,
       "norm_label": ".__init__()"
@@ -1096,7 +1150,7 @@
       "label": "message()",
       "file_type": "code",
       "source_file": "/home/jp/jay/telegram_bot/stock_bot/bot/router.py",
-      "source_location": "L134",
+      "source_location": "L135",
       "id": "router_message",
       "community": 2,
       "norm_label": "message()"
@@ -1105,7 +1159,7 @@
       "label": ".__getattr__()",
       "file_type": "code",
       "source_file": "/home/jp/jay/telegram_bot/stock_bot/bot/router.py",
-      "source_location": "L137",
+      "source_location": "L138",
       "id": "router_silentupdate_getattr",
       "community": 2,
       "norm_label": ".__getattr__()"
@@ -1114,7 +1168,7 @@
       "label": "register_handlers()",
       "file_type": "code",
       "source_file": "/home/jp/jay/telegram_bot/stock_bot/bot/router.py",
-      "source_location": "L141",
+      "source_location": "L142",
       "id": "router_register_handlers",
       "community": 2,
       "norm_label": "register_handlers()"
@@ -1133,16 +1187,16 @@
       "file_type": "rationale",
       "source_file": "/home/jp/jay/telegram_bot/stock_bot/bot/router.py",
       "source_location": "L64",
-      "id": "router_rationale_64",
       "community": 2,
-      "norm_label": "build the active command map based on enabled features."
+      "norm_label": "build the active command map based on enabled features.",
+      "id": "router_rationale_64"
     },
     {
       "label": "Proxy for Message that buffers reply_text calls instead of sending them.",
       "file_type": "rationale",
       "source_file": "/home/jp/jay/telegram_bot/stock_bot/bot/router.py",
-      "source_location": "L111",
-      "id": "router_rationale_111",
+      "source_location": "L112",
+      "id": "router_rationale_112",
       "community": 2,
       "norm_label": "proxy for message that buffers reply_text calls instead of sending them."
     },
@@ -1150,8 +1204,8 @@
       "label": "Proxy for Update that injects _SilentMessage during bulk dispatch.",
       "file_type": "rationale",
       "source_file": "/home/jp/jay/telegram_bot/stock_bot/bot/router.py",
-      "source_location": "L127",
-      "id": "router_rationale_127",
+      "source_location": "L128",
+      "id": "router_rationale_128",
       "community": 2,
       "norm_label": "proxy for update that injects _silentmessage during bulk dispatch."
     },
@@ -1159,8 +1213,8 @@
       "label": "Attach command handlers to the Application based on enabled features.     Return",
       "file_type": "rationale",
       "source_file": "/home/jp/jay/telegram_bot/stock_bot/bot/router.py",
-      "source_location": "L142",
-      "id": "router_rationale_142",
+      "source_location": "L143",
+      "id": "router_rationale_143",
       "community": 2,
       "norm_label": "attach command handlers to the application based on enabled features.     return"
     },
@@ -1170,7 +1224,7 @@
       "source_file": "/home/jp/jay/telegram_bot/stock_bot/bot/handlers/_helpers.py",
       "source_location": "L1",
       "id": "home_jp_jay_telegram_bot_stock_bot_bot_handlers_helpers_py",
-      "community": 7,
+      "community": 9,
       "norm_label": "_helpers.py"
     },
     {
@@ -1179,7 +1233,7 @@
       "source_file": "/home/jp/jay/telegram_bot/stock_bot/bot/handlers/_helpers.py",
       "source_location": "L18",
       "id": "helpers_get_account_id",
-      "community": 1,
+      "community": 0,
       "norm_label": "get_account_id()"
     },
     {
@@ -1188,7 +1242,7 @@
       "source_file": "/home/jp/jay/telegram_bot/stock_bot/bot/handlers/_helpers.py",
       "source_location": "L22",
       "id": "helpers_fmt_pct",
-      "community": 7,
+      "community": 1,
       "norm_label": "fmt_pct()"
     },
     {
@@ -1197,7 +1251,7 @@
       "source_file": "/home/jp/jay/telegram_bot/stock_bot/bot/handlers/_helpers.py",
       "source_location": "L30",
       "id": "helpers_require_registered",
-      "community": 7,
+      "community": 9,
       "norm_label": "require_registered()"
     },
     {
@@ -1205,7 +1259,7 @@
       "file_type": "rationale",
       "source_file": "/home/jp/jay/telegram_bot/stock_bot/bot/handlers/_helpers.py",
       "source_location": "L1",
-      "community": 7,
+      "community": 9,
       "norm_label": "shared utilities for all handlers.",
       "id": "helpers_rationale_1"
     },
@@ -1214,18 +1268,18 @@
       "file_type": "rationale",
       "source_file": "/home/jp/jay/telegram_bot/stock_bot/bot/handlers/_helpers.py",
       "source_location": "L23",
-      "id": "helpers_rationale_23",
-      "community": 7,
-      "norm_label": "format a percentage value for display, e.g. '+12.34%' or 'n/a'."
+      "community": 1,
+      "norm_label": "format a percentage value for display, e.g. '+12.34%' or 'n/a'.",
+      "id": "helpers_rationale_23"
     },
     {
       "label": "Decorator: ensure the shared account exists in the DB before running the handler",
       "file_type": "rationale",
       "source_file": "/home/jp/jay/telegram_bot/stock_bot/bot/handlers/_helpers.py",
       "source_location": "L31",
-      "id": "helpers_rationale_31",
-      "community": 7,
-      "norm_label": "decorator: ensure the shared account exists in the db before running the handler"
+      "community": 9,
+      "norm_label": "decorator: ensure the shared account exists in the db before running the handler",
+      "id": "helpers_rationale_31"
     },
     {
       "label": "__init__.py",
@@ -1242,25 +1296,25 @@
       "source_file": "/home/jp/jay/telegram_bot/stock_bot/bot/handlers/general_handlers.py",
       "source_location": "L1",
       "id": "home_jp_jay_telegram_bot_stock_bot_bot_handlers_general_handlers_py",
-      "community": 1,
+      "community": 0,
       "norm_label": "general_handlers.py"
     },
     {
       "label": "cmd_start()",
       "file_type": "code",
       "source_file": "/home/jp/jay/telegram_bot/stock_bot/bot/handlers/general_handlers.py",
-      "source_location": "L92",
+      "source_location": "L97",
       "id": "general_handlers_cmd_start",
-      "community": 1,
+      "community": 0,
       "norm_label": "cmd_start()"
     },
     {
       "label": "cmd_help()",
       "file_type": "code",
       "source_file": "/home/jp/jay/telegram_bot/stock_bot/bot/handlers/general_handlers.py",
-      "source_location": "L106",
+      "source_location": "L112",
       "id": "general_handlers_cmd_help",
-      "community": 1,
+      "community": 0,
       "norm_label": "cmd_help()"
     },
     {
@@ -1268,7 +1322,7 @@
       "file_type": "rationale",
       "source_file": "/home/jp/jay/telegram_bot/stock_bot/bot/handlers/general_handlers.py",
       "source_location": "L1",
-      "community": 1,
+      "community": 0,
       "norm_label": "/start and /help handlers.",
       "id": "general_handlers_rationale_1"
     },
@@ -1276,9 +1330,9 @@
       "label": "Register the user and show a welcome message.",
       "file_type": "rationale",
       "source_file": "/home/jp/jay/telegram_bot/stock_bot/bot/handlers/general_handlers.py",
-      "source_location": "L93",
-      "id": "general_handlers_rationale_93",
-      "community": 1,
+      "source_location": "L98",
+      "id": "general_handlers_rationale_98",
+      "community": 0,
       "norm_label": "register the user and show a welcome message."
     },
     {
@@ -1294,7 +1348,7 @@
       "label": "cmd_set_alert()",
       "file_type": "code",
       "source_file": "/home/jp/jay/telegram_bot/stock_bot/bot/handlers/alert_handlers.py",
-      "source_location": "L14",
+      "source_location": "L17",
       "id": "alert_handlers_cmd_set_alert",
       "community": 0,
       "norm_label": "cmd_set_alert()"
@@ -1303,16 +1357,25 @@
       "label": "cmd_remove_alert()",
       "file_type": "code",
       "source_file": "/home/jp/jay/telegram_bot/stock_bot/bot/handlers/alert_handlers.py",
-      "source_location": "L61",
+      "source_location": "L64",
       "id": "alert_handlers_cmd_remove_alert",
       "community": 0,
       "norm_label": "cmd_remove_alert()"
     },
     {
+      "label": "cmd_scan()",
+      "file_type": "code",
+      "source_file": "/home/jp/jay/telegram_bot/stock_bot/bot/handlers/alert_handlers.py",
+      "source_location": "L92",
+      "id": "alert_handlers_cmd_scan",
+      "community": 0,
+      "norm_label": "cmd_scan()"
+    },
+    {
       "label": "cmd_view_alerts()",
       "file_type": "code",
       "source_file": "/home/jp/jay/telegram_bot/stock_bot/bot/handlers/alert_handlers.py",
-      "source_location": "L89",
+      "source_location": "L102",
       "id": "alert_handlers_cmd_view_alerts",
       "community": 0,
       "norm_label": "cmd_view_alerts()"
@@ -1330,8 +1393,8 @@
       "label": "Usage: /set_alert TICKER INDICATOR THRESHOLD_PCT     Example: /set_alert RELIANC",
       "file_type": "rationale",
       "source_file": "/home/jp/jay/telegram_bot/stock_bot/bot/handlers/alert_handlers.py",
-      "source_location": "L15",
-      "id": "alert_handlers_rationale_15",
+      "source_location": "L18",
+      "id": "alert_handlers_rationale_18",
       "community": 0,
       "norm_label": "usage: /set_alert ticker indicator threshold_pct     example: /set_alert relianc"
     },
@@ -1339,17 +1402,26 @@
       "label": "Usage: /remove_alert TICKER INDICATOR",
       "file_type": "rationale",
       "source_file": "/home/jp/jay/telegram_bot/stock_bot/bot/handlers/alert_handlers.py",
-      "source_location": "L62",
-      "id": "alert_handlers_rationale_62",
+      "source_location": "L65",
+      "id": "alert_handlers_rationale_65",
       "community": 0,
       "norm_label": "usage: /remove_alert ticker indicator"
+    },
+    {
+      "label": "Usage: /scan \u2014 run the EMA scan now (same report as the morning scan)",
+      "file_type": "rationale",
+      "source_file": "/home/jp/jay/telegram_bot/stock_bot/bot/handlers/alert_handlers.py",
+      "source_location": "L93",
+      "id": "alert_handlers_rationale_93",
+      "community": 0,
+      "norm_label": "usage: /scan \u2014 run the ema scan now (same report as the morning scan)"
     },
     {
       "label": "Usage: /view_alerts TICKER",
       "file_type": "rationale",
       "source_file": "/home/jp/jay/telegram_bot/stock_bot/bot/handlers/alert_handlers.py",
-      "source_location": "L90",
-      "id": "alert_handlers_rationale_90",
+      "source_location": "L103",
+      "id": "alert_handlers_rationale_103",
       "community": 0,
       "norm_label": "usage: /view_alerts ticker"
     },
@@ -1359,7 +1431,7 @@
       "source_file": "/home/jp/jay/telegram_bot/stock_bot/bot/handlers/holdings_handlers.py",
       "source_location": "L1",
       "id": "home_jp_jay_telegram_bot_stock_bot_bot_handlers_holdings_handlers_py",
-      "community": 1,
+      "community": 0,
       "norm_label": "holdings_handlers.py"
     },
     {
@@ -1368,7 +1440,7 @@
       "source_file": "/home/jp/jay/telegram_bot/stock_bot/bot/handlers/holdings_handlers.py",
       "source_location": "L17",
       "id": "holdings_handlers_parse_date",
-      "community": 1,
+      "community": 0,
       "norm_label": "_parse_date()"
     },
     {
@@ -1377,7 +1449,7 @@
       "source_file": "/home/jp/jay/telegram_bot/stock_bot/bot/handlers/holdings_handlers.py",
       "source_location": "L21",
       "id": "holdings_handlers_extract_date",
-      "community": 1,
+      "community": 0,
       "norm_label": "_extract_date()"
     },
     {
@@ -1386,7 +1458,7 @@
       "source_file": "/home/jp/jay/telegram_bot/stock_bot/bot/handlers/holdings_handlers.py",
       "source_location": "L37",
       "id": "holdings_handlers_cmd_buy",
-      "community": 1,
+      "community": 0,
       "norm_label": "cmd_buy()"
     },
     {
@@ -1395,7 +1467,7 @@
       "source_file": "/home/jp/jay/telegram_bot/stock_bot/bot/handlers/holdings_handlers.py",
       "source_location": "L82",
       "id": "holdings_handlers_cmd_sell",
-      "community": 1,
+      "community": 0,
       "norm_label": "cmd_sell()"
     },
     {
@@ -1404,7 +1476,7 @@
       "source_file": "/home/jp/jay/telegram_bot/stock_bot/bot/handlers/holdings_handlers.py",
       "source_location": "L125",
       "id": "holdings_handlers_cmd_view_holdings",
-      "community": 1,
+      "community": 0,
       "norm_label": "cmd_view_holdings()"
     },
     {
@@ -1413,7 +1485,7 @@
       "source_file": "/home/jp/jay/telegram_bot/stock_bot/bot/handlers/holdings_handlers.py",
       "source_location": "L159",
       "id": "holdings_handlers_cmd_transactions",
-      "community": 1,
+      "community": 0,
       "norm_label": "cmd_transactions()"
     },
     {
@@ -1422,7 +1494,7 @@
       "source_file": "/home/jp/jay/telegram_bot/stock_bot/bot/handlers/holdings_handlers.py",
       "source_location": "L194",
       "id": "holdings_handlers_cmd_transaction_history",
-      "community": 1,
+      "community": 0,
       "norm_label": "cmd_transaction_history()"
     },
     {
@@ -1430,7 +1502,7 @@
       "file_type": "rationale",
       "source_file": "/home/jp/jay/telegram_bot/stock_bot/bot/handlers/holdings_handlers.py",
       "source_location": "L1",
-      "community": 1,
+      "community": 0,
       "norm_label": "telegram command handlers for holdings and transaction management.",
       "id": "holdings_handlers_rationale_1"
     },
@@ -1439,25 +1511,25 @@
       "file_type": "rationale",
       "source_file": "/home/jp/jay/telegram_bot/stock_bot/bot/handlers/holdings_handlers.py",
       "source_location": "L22",
-      "id": "holdings_handlers_rationale_22",
-      "community": 1,
-      "norm_label": "if args[date_pos] looks like dd/mm/yyyy, pop it and return (iso_date, rest)."
+      "community": 0,
+      "norm_label": "if args[date_pos] looks like dd/mm/yyyy, pop it and return (iso_date, rest).",
+      "id": "holdings_handlers_rationale_22"
     },
     {
       "label": "Usage: /buy TICKER EXCHANGE QUANTITY PRICE [DD/MM/YYYY] [notes]",
       "file_type": "rationale",
       "source_file": "/home/jp/jay/telegram_bot/stock_bot/bot/handlers/holdings_handlers.py",
       "source_location": "L38",
-      "id": "holdings_handlers_rationale_38",
-      "community": 1,
-      "norm_label": "usage: /buy ticker exchange quantity price [dd/mm/yyyy] [notes]"
+      "community": 0,
+      "norm_label": "usage: /buy ticker exchange quantity price [dd/mm/yyyy] [notes]",
+      "id": "holdings_handlers_rationale_38"
     },
     {
       "label": "Usage: /view_holdings",
       "file_type": "rationale",
       "source_file": "/home/jp/jay/telegram_bot/stock_bot/bot/handlers/holdings_handlers.py",
       "source_location": "L83",
-      "community": 1,
+      "community": 0,
       "norm_label": "usage: /view_holdings",
       "id": "holdings_handlers_rationale_83"
     },
@@ -1466,27 +1538,27 @@
       "file_type": "rationale",
       "source_file": "/home/jp/jay/telegram_bot/stock_bot/bot/handlers/holdings_handlers.py",
       "source_location": "L126",
-      "id": "holdings_handlers_rationale_126",
-      "community": 1,
-      "norm_label": "usage: /view_holdings"
+      "community": 0,
+      "norm_label": "usage: /view_holdings",
+      "id": "holdings_handlers_rationale_126"
     },
     {
       "label": "Usage: /transactions [N|all]  \u2014 default 10",
       "file_type": "rationale",
       "source_file": "/home/jp/jay/telegram_bot/stock_bot/bot/handlers/holdings_handlers.py",
       "source_location": "L160",
-      "id": "holdings_handlers_rationale_160",
-      "community": 1,
-      "norm_label": "usage: /transactions [n|all]  \u2014 default 10"
+      "community": 0,
+      "norm_label": "usage: /transactions [n|all]  \u2014 default 10",
+      "id": "holdings_handlers_rationale_160"
     },
     {
       "label": "Usage: /transaction_history TICKER",
       "file_type": "rationale",
       "source_file": "/home/jp/jay/telegram_bot/stock_bot/bot/handlers/holdings_handlers.py",
       "source_location": "L195",
-      "id": "holdings_handlers_rationale_195",
-      "community": 1,
-      "norm_label": "usage: /transaction_history ticker"
+      "community": 0,
+      "norm_label": "usage: /transaction_history ticker",
+      "id": "holdings_handlers_rationale_195"
     },
     {
       "label": "price_alert_handlers.py",
@@ -1494,7 +1566,7 @@
       "source_file": "/home/jp/jay/telegram_bot/stock_bot/bot/handlers/price_alert_handlers.py",
       "source_location": "L1",
       "id": "home_jp_jay_telegram_bot_stock_bot_bot_handlers_price_alert_handlers_py",
-      "community": 8,
+      "community": 5,
       "norm_label": "price_alert_handlers.py"
     },
     {
@@ -1503,7 +1575,7 @@
       "source_file": "/home/jp/jay/telegram_bot/stock_bot/bot/handlers/price_alert_handlers.py",
       "source_location": "L18",
       "id": "price_alert_handlers_cmd_set_price_alert",
-      "community": 8,
+      "community": 5,
       "norm_label": "cmd_set_price_alert()"
     },
     {
@@ -1512,7 +1584,7 @@
       "source_file": "/home/jp/jay/telegram_bot/stock_bot/bot/handlers/price_alert_handlers.py",
       "source_location": "L75",
       "id": "price_alert_handlers_cmd_remove_price_alert",
-      "community": 8,
+      "community": 5,
       "norm_label": "cmd_remove_price_alert()"
     },
     {
@@ -1521,7 +1593,7 @@
       "source_file": "/home/jp/jay/telegram_bot/stock_bot/bot/handlers/price_alert_handlers.py",
       "source_location": "L117",
       "id": "price_alert_handlers_cmd_view_price_alerts",
-      "community": 8,
+      "community": 5,
       "norm_label": "cmd_view_price_alerts()"
     },
     {
@@ -1530,7 +1602,7 @@
       "source_file": "/home/jp/jay/telegram_bot/stock_bot/bot/handlers/price_alert_handlers.py",
       "source_location": "L142",
       "id": "price_alert_handlers_cmd_view_all_price_alerts",
-      "community": 3,
+      "community": 5,
       "norm_label": "cmd_view_all_price_alerts()"
     },
     {
@@ -1539,7 +1611,7 @@
       "source_file": "/home/jp/jay/telegram_bot/stock_bot/bot/handlers/price_alert_handlers.py",
       "source_location": "L164",
       "id": "price_alert_handlers_handle_price_alert_callback",
-      "community": 8,
+      "community": 5,
       "norm_label": "handle_price_alert_callback()"
     },
     {
@@ -1547,45 +1619,45 @@
       "file_type": "rationale",
       "source_file": "/home/jp/jay/telegram_bot/stock_bot/bot/handlers/price_alert_handlers.py",
       "source_location": "L1",
-      "id": "price_alert_handlers_rationale_1",
-      "community": 8,
-      "norm_label": "handlers for price-level alerts (/palert, /unpalert, /palerts)."
+      "community": 5,
+      "norm_label": "handlers for price-level alerts (/palert, /unpalert, /palerts).",
+      "id": "price_alert_handlers_rationale_1"
     },
     {
       "label": "Usage: /palert TICKER PRICE     Automatically sets direction: ABOVE if target >",
       "file_type": "rationale",
       "source_file": "/home/jp/jay/telegram_bot/stock_bot/bot/handlers/price_alert_handlers.py",
       "source_location": "L19",
-      "id": "price_alert_handlers_rationale_19",
-      "community": 8,
-      "norm_label": "usage: /palert ticker price     automatically sets direction: above if target >"
+      "community": 5,
+      "norm_label": "usage: /palert ticker price     automatically sets direction: above if target >",
+      "id": "price_alert_handlers_rationale_19"
     },
     {
       "label": "Usage: /unpalert TICKER PRICE     Removes the price alert closest to the given t",
       "file_type": "rationale",
       "source_file": "/home/jp/jay/telegram_bot/stock_bot/bot/handlers/price_alert_handlers.py",
       "source_location": "L76",
-      "id": "price_alert_handlers_rationale_76",
-      "community": 8,
-      "norm_label": "usage: /unpalert ticker price     removes the price alert closest to the given t"
+      "community": 5,
+      "norm_label": "usage: /unpalert ticker price     removes the price alert closest to the given t",
+      "id": "price_alert_handlers_rationale_76"
     },
     {
       "label": "Usage: /palerts TICKER",
       "file_type": "rationale",
       "source_file": "/home/jp/jay/telegram_bot/stock_bot/bot/handlers/price_alert_handlers.py",
       "source_location": "L118",
-      "id": "price_alert_handlers_rationale_118",
-      "community": 8,
-      "norm_label": "usage: /palerts ticker"
+      "community": 5,
+      "norm_label": "usage: /palerts ticker",
+      "id": "price_alert_handlers_rationale_118"
     },
     {
       "label": "Handles inline button responses to price alert notifications.     callback_data:",
       "file_type": "rationale",
       "source_file": "/home/jp/jay/telegram_bot/stock_bot/bot/handlers/price_alert_handlers.py",
       "source_location": "L165",
-      "id": "price_alert_handlers_rationale_165",
-      "community": 8,
-      "norm_label": "handles inline button responses to price alert notifications.     callback_data:"
+      "community": 5,
+      "norm_label": "handles inline button responses to price alert notifications.     callback_data:",
+      "id": "price_alert_handlers_rationale_165"
     },
     {
       "label": "watchlist_handlers.py",
@@ -1593,7 +1665,7 @@
       "source_file": "/home/jp/jay/telegram_bot/stock_bot/bot/handlers/watchlist_handlers.py",
       "source_location": "L1",
       "id": "home_jp_jay_telegram_bot_stock_bot_bot_handlers_watchlist_handlers_py",
-      "community": 1,
+      "community": 0,
       "norm_label": "watchlist_handlers.py"
     },
     {
@@ -1602,7 +1674,7 @@
       "source_file": "/home/jp/jay/telegram_bot/stock_bot/bot/handlers/watchlist_handlers.py",
       "source_location": "L19",
       "id": "watchlist_handlers_parse_date",
-      "community": 1,
+      "community": 0,
       "norm_label": "_parse_date()"
     },
     {
@@ -1611,7 +1683,7 @@
       "source_file": "/home/jp/jay/telegram_bot/stock_bot/bot/handlers/watchlist_handlers.py",
       "source_location": "L24",
       "id": "watchlist_handlers_cmd_add_watchlist",
-      "community": 1,
+      "community": 0,
       "norm_label": "cmd_add_watchlist()"
     },
     {
@@ -1620,7 +1692,7 @@
       "source_file": "/home/jp/jay/telegram_bot/stock_bot/bot/handlers/watchlist_handlers.py",
       "source_location": "L103",
       "id": "watchlist_handlers_cmd_remove_watchlist",
-      "community": 1,
+      "community": 0,
       "norm_label": "cmd_remove_watchlist()"
     },
     {
@@ -1629,7 +1701,7 @@
       "source_file": "/home/jp/jay/telegram_bot/stock_bot/bot/handlers/watchlist_handlers.py",
       "source_location": "L120",
       "id": "watchlist_handlers_cmd_view_watchlist",
-      "community": 1,
+      "community": 0,
       "norm_label": "cmd_view_watchlist()"
     },
     {
@@ -1638,7 +1710,7 @@
       "source_file": "/home/jp/jay/telegram_bot/stock_bot/bot/handlers/watchlist_handlers.py",
       "source_location": "L145",
       "id": "watchlist_handlers_cmd_set_checkpoint",
-      "community": 1,
+      "community": 0,
       "norm_label": "cmd_set_checkpoint()"
     },
     {
@@ -1646,7 +1718,7 @@
       "file_type": "rationale",
       "source_file": "/home/jp/jay/telegram_bot/stock_bot/bot/handlers/watchlist_handlers.py",
       "source_location": "L1",
-      "community": 1,
+      "community": 0,
       "norm_label": "telegram command handlers for watchlist operations.",
       "id": "watchlist_handlers_rationale_1"
     },
@@ -1655,45 +1727,45 @@
       "file_type": "rationale",
       "source_file": "/home/jp/jay/telegram_bot/stock_bot/bot/handlers/watchlist_handlers.py",
       "source_location": "L20",
-      "id": "watchlist_handlers_rationale_20",
-      "community": 1,
-      "norm_label": "parse dd/mm/yyyy into a date object. raises valueerror on bad format."
+      "community": 0,
+      "norm_label": "parse dd/mm/yyyy into a date object. raises valueerror on bad format.",
+      "id": "watchlist_handlers_rationale_20"
     },
     {
       "label": "Usage:       /watch TICKER EXCHANGE            \u2014 use today's price       /watch",
       "file_type": "rationale",
       "source_file": "/home/jp/jay/telegram_bot/stock_bot/bot/handlers/watchlist_handlers.py",
       "source_location": "L25",
-      "id": "watchlist_handlers_rationale_25",
-      "community": 1,
-      "norm_label": "usage:       /watch ticker exchange            \u2014 use today's price       /watch"
+      "community": 0,
+      "norm_label": "usage:       /watch ticker exchange            \u2014 use today's price       /watch",
+      "id": "watchlist_handlers_rationale_25"
     },
     {
       "label": "Usage: /remove_watchlist TICKER",
       "file_type": "rationale",
       "source_file": "/home/jp/jay/telegram_bot/stock_bot/bot/handlers/watchlist_handlers.py",
       "source_location": "L104",
-      "id": "watchlist_handlers_rationale_104",
-      "community": 1,
-      "norm_label": "usage: /remove_watchlist ticker"
+      "community": 0,
+      "norm_label": "usage: /remove_watchlist ticker",
+      "id": "watchlist_handlers_rationale_104"
     },
     {
       "label": "Usage: /view_watchlist",
       "file_type": "rationale",
       "source_file": "/home/jp/jay/telegram_bot/stock_bot/bot/handlers/watchlist_handlers.py",
       "source_location": "L121",
-      "id": "watchlist_handlers_rationale_121",
-      "community": 1,
-      "norm_label": "usage: /view_watchlist"
+      "community": 0,
+      "norm_label": "usage: /view_watchlist",
+      "id": "watchlist_handlers_rationale_121"
     },
     {
       "label": "Usage:       /mark TICKER LABEL       /mark TICKER LABEL DD/MM/YYYY",
       "file_type": "rationale",
       "source_file": "/home/jp/jay/telegram_bot/stock_bot/bot/handlers/watchlist_handlers.py",
       "source_location": "L146",
-      "id": "watchlist_handlers_rationale_146",
-      "community": 1,
-      "norm_label": "usage:       /mark ticker label       /mark ticker label dd/mm/yyyy"
+      "community": 0,
+      "norm_label": "usage:       /mark ticker label       /mark ticker label dd/mm/yyyy",
+      "id": "watchlist_handlers_rationale_146"
     },
     {
       "label": "search_handlers.py",
@@ -1701,7 +1773,7 @@
       "source_file": "/home/jp/jay/telegram_bot/stock_bot/bot/handlers/search_handlers.py",
       "source_location": "L1",
       "id": "home_jp_jay_telegram_bot_stock_bot_bot_handlers_search_handlers_py",
-      "community": 6,
+      "community": 7,
       "norm_label": "search_handlers.py"
     },
     {
@@ -1710,7 +1782,7 @@
       "source_file": "/home/jp/jay/telegram_bot/stock_bot/bot/handlers/search_handlers.py",
       "source_location": "L34",
       "id": "search_handlers_parse_date",
-      "community": 6,
+      "community": 7,
       "norm_label": "_parse_date()"
     },
     {
@@ -1719,7 +1791,7 @@
       "source_file": "/home/jp/jay/telegram_bot/stock_bot/bot/handlers/search_handlers.py",
       "source_location": "L40",
       "id": "search_handlers_pick_keyboard",
-      "community": 6,
+      "community": 7,
       "norm_label": "_pick_keyboard()"
     },
     {
@@ -1728,7 +1800,7 @@
       "source_file": "/home/jp/jay/telegram_bot/stock_bot/bot/handlers/search_handlers.py",
       "source_location": "L54",
       "id": "search_handlers_confirm_keyboard",
-      "community": 6,
+      "community": 7,
       "norm_label": "_confirm_keyboard()"
     },
     {
@@ -1737,7 +1809,7 @@
       "source_file": "/home/jp/jay/telegram_bot/stock_bot/bot/handlers/search_handlers.py",
       "source_location": "L61",
       "id": "search_handlers_date_keyboard",
-      "community": 6,
+      "community": 7,
       "norm_label": "_date_keyboard()"
     },
     {
@@ -1746,7 +1818,7 @@
       "source_file": "/home/jp/jay/telegram_bot/stock_bot/bot/handlers/search_handlers.py",
       "source_location": "L70",
       "id": "search_handlers_cmd_search",
-      "community": 6,
+      "community": 7,
       "norm_label": "cmd_search()"
     },
     {
@@ -1755,7 +1827,7 @@
       "source_file": "/home/jp/jay/telegram_bot/stock_bot/bot/handlers/search_handlers.py",
       "source_location": "L85",
       "id": "search_handlers_handle_search_callback",
-      "community": 6,
+      "community": 7,
       "norm_label": "handle_search_callback()"
     },
     {
@@ -1764,7 +1836,7 @@
       "source_file": "/home/jp/jay/telegram_bot/stock_bot/bot/handlers/search_handlers.py",
       "source_location": "L171",
       "id": "search_handlers_cmd_set_date",
-      "community": 6,
+      "community": 7,
       "norm_label": "cmd_set_date()"
     },
     {
@@ -1773,7 +1845,7 @@
       "source_file": "/home/jp/jay/telegram_bot/stock_bot/bot/handlers/search_handlers.py",
       "source_location": "L199",
       "id": "search_handlers_handle_date_reply",
-      "community": 6,
+      "community": 7,
       "norm_label": "handle_date_reply()"
     },
     {
@@ -1782,7 +1854,7 @@
       "source_file": "/home/jp/jay/telegram_bot/stock_bot/bot/handlers/search_handlers.py",
       "source_location": "L237",
       "id": "search_handlers_run_search",
-      "community": 6,
+      "community": 7,
       "norm_label": "_run_search()"
     },
     {
@@ -1791,7 +1863,7 @@
       "source_file": "/home/jp/jay/telegram_bot/stock_bot/bot/handlers/search_handlers.py",
       "source_location": "L268",
       "id": "search_handlers_do_watch",
-      "community": 6,
+      "community": 7,
       "norm_label": "_do_watch()"
     },
     {
@@ -1799,45 +1871,45 @@
       "file_type": "rationale",
       "source_file": "/home/jp/jay/telegram_bot/stock_bot/bot/handlers/search_handlers.py",
       "source_location": "L1",
-      "id": "search_handlers_rationale_1",
-      "community": 6,
-      "norm_label": "/search handler \u2014 lets users find tickers by company name.  uses inline keyboard"
+      "community": 7,
+      "norm_label": "/search handler \u2014 lets users find tickers by company name.  uses inline keyboard",
+      "id": "search_handlers_rationale_1"
     },
     {
       "label": "Usage: /search COMPANY NAME",
       "file_type": "rationale",
       "source_file": "/home/jp/jay/telegram_bot/stock_bot/bot/handlers/search_handlers.py",
       "source_location": "L71",
-      "id": "search_handlers_rationale_71",
-      "community": 6,
-      "norm_label": "usage: /search company name"
+      "community": 7,
+      "norm_label": "usage: /search company name",
+      "id": "search_handlers_rationale_71"
     },
     {
       "label": "CallbackQueryHandler \u2014 handles all inline button presses for the search flow.",
       "file_type": "rationale",
       "source_file": "/home/jp/jay/telegram_bot/stock_bot/bot/handlers/search_handlers.py",
       "source_location": "L86",
-      "id": "search_handlers_rationale_86",
-      "community": 6,
-      "norm_label": "callbackqueryhandler \u2014 handles all inline button presses for the search flow."
+      "community": 7,
+      "norm_label": "callbackqueryhandler \u2014 handles all inline button presses for the search flow.",
+      "id": "search_handlers_rationale_86"
     },
     {
       "label": "Usage: /date DD/MM/YYYY \u2014 completes a pending /search date entry.",
       "file_type": "rationale",
       "source_file": "/home/jp/jay/telegram_bot/stock_bot/bot/handlers/search_handlers.py",
       "source_location": "L172",
-      "id": "search_handlers_rationale_172",
-      "community": 6,
-      "norm_label": "usage: /date dd/mm/yyyy \u2014 completes a pending /search date entry."
+      "community": 7,
+      "norm_label": "usage: /date dd/mm/yyyy \u2014 completes a pending /search date entry.",
+      "id": "search_handlers_rationale_172"
     },
     {
       "label": "Catches text replies when the user is in the date_manual or awaiting_query phase",
       "file_type": "rationale",
       "source_file": "/home/jp/jay/telegram_bot/stock_bot/bot/handlers/search_handlers.py",
       "source_location": "L200",
-      "id": "search_handlers_rationale_200",
-      "community": 6,
-      "norm_label": "catches text replies when the user is in the date_manual or awaiting_query phase"
+      "community": 7,
+      "norm_label": "catches text replies when the user is in the date_manual or awaiting_query phase",
+      "id": "search_handlers_rationale_200"
     },
     {
       "label": "report_handlers.py",
@@ -1845,7 +1917,7 @@
       "source_file": "/home/jp/jay/telegram_bot/stock_bot/bot/handlers/report_handlers.py",
       "source_location": "L1",
       "id": "home_jp_jay_telegram_bot_stock_bot_bot_handlers_report_handlers_py",
-      "community": 7,
+      "community": 1,
       "norm_label": "report_handlers.py"
     },
     {
@@ -1854,7 +1926,7 @@
       "source_file": "/home/jp/jay/telegram_bot/stock_bot/bot/handlers/report_handlers.py",
       "source_location": "L16",
       "id": "report_handlers_tradingview_url",
-      "community": 7,
+      "community": 1,
       "norm_label": "_tradingview_url()"
     },
     {
@@ -1863,7 +1935,7 @@
       "source_file": "/home/jp/jay/telegram_bot/stock_bot/bot/handlers/report_handlers.py",
       "source_location": "L21",
       "id": "report_handlers_rsi_label",
-      "community": 7,
+      "community": 1,
       "norm_label": "_rsi_label()"
     },
     {
@@ -1872,7 +1944,7 @@
       "source_file": "/home/jp/jay/telegram_bot/stock_bot/bot/handlers/report_handlers.py",
       "source_location": "L29",
       "id": "report_handlers_section_technicals",
-      "community": 7,
+      "community": 1,
       "norm_label": "_section_technicals()"
     },
     {
@@ -1881,7 +1953,7 @@
       "source_file": "/home/jp/jay/telegram_bot/stock_bot/bot/handlers/report_handlers.py",
       "source_location": "L45",
       "id": "report_handlers_section_watchlist",
-      "community": 7,
+      "community": 1,
       "norm_label": "_section_watchlist()"
     },
     {
@@ -1890,7 +1962,7 @@
       "source_file": "/home/jp/jay/telegram_bot/stock_bot/bot/handlers/report_handlers.py",
       "source_location": "L69",
       "id": "report_handlers_signed",
-      "community": 7,
+      "community": 1,
       "norm_label": "_signed()"
     },
     {
@@ -1899,7 +1971,7 @@
       "source_file": "/home/jp/jay/telegram_bot/stock_bot/bot/handlers/report_handlers.py",
       "source_location": "L74",
       "id": "report_handlers_section_returns",
-      "community": 7,
+      "community": 1,
       "norm_label": "_section_returns()"
     },
     {
@@ -1908,7 +1980,7 @@
       "source_file": "/home/jp/jay/telegram_bot/stock_bot/bot/handlers/report_handlers.py",
       "source_location": "L97",
       "id": "report_handlers_section_history",
-      "community": 7,
+      "community": 1,
       "norm_label": "_section_history()"
     },
     {
@@ -1917,7 +1989,7 @@
       "source_file": "/home/jp/jay/telegram_bot/stock_bot/bot/handlers/report_handlers.py",
       "source_location": "L123",
       "id": "report_handlers_cmd_weekly_report",
-      "community": 7,
+      "community": 1,
       "norm_label": "cmd_weekly_report()"
     },
     {
@@ -1926,7 +1998,7 @@
       "source_file": "/home/jp/jay/telegram_bot/stock_bot/bot/handlers/report_handlers.py",
       "source_location": "L166",
       "id": "report_handlers_cmd_stock_details",
-      "community": 7,
+      "community": 1,
       "norm_label": "cmd_stock_details()"
     },
     {
@@ -1934,7 +2006,7 @@
       "file_type": "rationale",
       "source_file": "/home/jp/jay/telegram_bot/stock_bot/bot/handlers/report_handlers.py",
       "source_location": "L1",
-      "community": 7,
+      "community": 1,
       "norm_label": "report and details command handlers.",
       "id": "report_handlers_rationale_1"
     },
@@ -1953,7 +2025,7 @@
       "source_file": "/home/jp/jay/telegram_bot/stock_bot/database/db.py",
       "source_location": "L1",
       "id": "home_jp_jay_telegram_bot_stock_bot_database_db_py",
-      "community": 9,
+      "community": 5,
       "norm_label": "db.py"
     },
     {
@@ -1962,7 +2034,7 @@
       "source_file": "/home/jp/jay/telegram_bot/stock_bot/database/db.py",
       "source_location": "L18",
       "id": "db_configure",
-      "community": 9,
+      "community": 5,
       "norm_label": "configure()"
     },
     {
@@ -1971,7 +2043,7 @@
       "source_file": "/home/jp/jay/telegram_bot/stock_bot/database/db.py",
       "source_location": "L107",
       "id": "db_init_db",
-      "community": 9,
+      "community": 5,
       "norm_label": "init_db()"
     },
     {
@@ -1980,25 +2052,25 @@
       "source_file": "/home/jp/jay/telegram_bot/stock_bot/database/db.py",
       "source_location": "L116",
       "id": "db_migrate",
-      "community": 9,
+      "community": 5,
       "norm_label": "_migrate()"
     },
     {
       "label": "get_connection()",
       "file_type": "code",
       "source_file": "/home/jp/jay/telegram_bot/stock_bot/database/db.py",
-      "source_location": "L131",
+      "source_location": "L134",
       "id": "db_get_connection",
-      "community": 0,
+      "community": 5,
       "norm_label": "get_connection()"
     },
     {
       "label": "_connect()",
       "file_type": "code",
       "source_file": "/home/jp/jay/telegram_bot/stock_bot/database/db.py",
-      "source_location": "L144",
+      "source_location": "L147",
       "id": "db_connect",
-      "community": 9,
+      "community": 5,
       "norm_label": "_connect()"
     },
     {
@@ -2006,7 +2078,7 @@
       "file_type": "rationale",
       "source_file": "/home/jp/jay/telegram_bot/stock_bot/database/db.py",
       "source_location": "L1",
-      "community": 9,
+      "community": 5,
       "norm_label": "database connection management and schema initialisation.  uses raw sqlite3 so t",
       "id": "db_rationale_1"
     },
@@ -2015,26 +2087,26 @@
       "file_type": "rationale",
       "source_file": "/home/jp/jay/telegram_bot/stock_bot/database/db.py",
       "source_location": "L108",
-      "id": "db_rationale_108",
-      "community": 9,
-      "norm_label": "create all tables if they don't exist. safe to call multiple times."
+      "community": 5,
+      "norm_label": "create all tables if they don't exist. safe to call multiple times.",
+      "id": "db_rationale_108"
     },
     {
       "label": "Apply any schema changes that new code requires on existing DBs.",
       "file_type": "rationale",
       "source_file": "/home/jp/jay/telegram_bot/stock_bot/database/db.py",
       "source_location": "L117",
-      "id": "db_rationale_117",
-      "community": 9,
-      "norm_label": "apply any schema changes that new code requires on existing dbs."
+      "community": 5,
+      "norm_label": "apply any schema changes that new code requires on existing dbs.",
+      "id": "db_rationale_117"
     },
     {
       "label": "Yield a sqlite3 connection with row_factory and foreign keys enabled.",
       "file_type": "rationale",
       "source_file": "/home/jp/jay/telegram_bot/stock_bot/database/db.py",
-      "source_location": "L132",
-      "id": "db_rationale_132",
-      "community": 0,
+      "source_location": "L135",
+      "id": "db_rationale_135",
+      "community": 5,
       "norm_label": "yield a sqlite3 connection with row_factory and foreign keys enabled."
     },
     {
@@ -2043,7 +2115,7 @@
       "source_file": "/home/jp/jay/telegram_bot/stock_bot/database/queries.py",
       "source_location": "L1",
       "id": "home_jp_jay_telegram_bot_stock_bot_database_queries_py",
-      "community": 0,
+      "community": 3,
       "norm_label": "queries.py"
     },
     {
@@ -2052,7 +2124,7 @@
       "source_file": "/home/jp/jay/telegram_bot/stock_bot/database/queries.py",
       "source_location": "L16",
       "id": "queries_upsert_user",
-      "community": 1,
+      "community": 3,
       "norm_label": "upsert_user()"
     },
     {
@@ -2061,7 +2133,7 @@
       "source_file": "/home/jp/jay/telegram_bot/stock_bot/database/queries.py",
       "source_location": "L29",
       "id": "queries_get_user_id",
-      "community": 0,
+      "community": 3,
       "norm_label": "get_user_id()"
     },
     {
@@ -2070,7 +2142,7 @@
       "source_file": "/home/jp/jay/telegram_bot/stock_bot/database/queries.py",
       "source_location": "L40",
       "id": "queries_add_to_watchlist",
-      "community": 4,
+      "community": 6,
       "norm_label": "add_to_watchlist()"
     },
     {
@@ -2079,7 +2151,7 @@
       "source_file": "/home/jp/jay/telegram_bot/stock_bot/database/queries.py",
       "source_location": "L55",
       "id": "queries_remove_from_watchlist",
-      "community": 4,
+      "community": 6,
       "norm_label": "remove_from_watchlist()"
     },
     {
@@ -2088,7 +2160,7 @@
       "source_file": "/home/jp/jay/telegram_bot/stock_bot/database/queries.py",
       "source_location": "L64",
       "id": "queries_get_watchlist",
-      "community": 3,
+      "community": 1,
       "norm_label": "get_watchlist()"
     },
     {
@@ -2097,7 +2169,7 @@
       "source_file": "/home/jp/jay/telegram_bot/stock_bot/database/queries.py",
       "source_location": "L71",
       "id": "queries_get_watchlist_item",
-      "community": 4,
+      "community": 6,
       "norm_label": "get_watchlist_item()"
     },
     {
@@ -2106,7 +2178,7 @@
       "source_file": "/home/jp/jay/telegram_bot/stock_bot/database/queries.py",
       "source_location": "L80",
       "id": "queries_get_all_watchlist_items",
-      "community": 4,
+      "community": 8,
       "norm_label": "get_all_watchlist_items()"
     },
     {
@@ -2115,7 +2187,7 @@
       "source_file": "/home/jp/jay/telegram_bot/stock_bot/database/queries.py",
       "source_location": "L89",
       "id": "queries_add_checkpoint",
-      "community": 4,
+      "community": 6,
       "norm_label": "add_checkpoint()"
     },
     {
@@ -2124,7 +2196,7 @@
       "source_file": "/home/jp/jay/telegram_bot/stock_bot/database/queries.py",
       "source_location": "L103",
       "id": "queries_get_checkpoints",
-      "community": 3,
+      "community": 1,
       "norm_label": "get_checkpoints()"
     },
     {
@@ -2142,14 +2214,23 @@
       "source_file": "/home/jp/jay/telegram_bot/stock_bot/database/queries.py",
       "source_location": "L135",
       "id": "queries_insert_alert_config_if_absent",
-      "community": 4,
+      "community": 6,
       "norm_label": "insert_alert_config_if_absent()"
+    },
+    {
+      "label": "update_alert_last_side()",
+      "file_type": "code",
+      "source_file": "/home/jp/jay/telegram_bot/stock_bot/database/queries.py",
+      "source_location": "L155",
+      "id": "queries_update_alert_last_side",
+      "community": 8,
+      "norm_label": "update_alert_last_side()"
     },
     {
       "label": "deactivate_alert()",
       "file_type": "code",
       "source_file": "/home/jp/jay/telegram_bot/stock_bot/database/queries.py",
-      "source_location": "L155",
+      "source_location": "L164",
       "id": "queries_deactivate_alert",
       "community": 0,
       "norm_label": "deactivate_alert()"
@@ -2158,7 +2239,7 @@
       "label": "get_alert_configs()",
       "file_type": "code",
       "source_file": "/home/jp/jay/telegram_bot/stock_bot/database/queries.py",
-      "source_location": "L166",
+      "source_location": "L175",
       "id": "queries_get_alert_configs",
       "community": 0,
       "norm_label": "get_alert_configs()"
@@ -2167,189 +2248,189 @@
       "label": "get_all_active_alert_configs()",
       "file_type": "code",
       "source_file": "/home/jp/jay/telegram_bot/stock_bot/database/queries.py",
-      "source_location": "L175",
+      "source_location": "L184",
       "id": "queries_get_all_active_alert_configs",
-      "community": 3,
+      "community": 8,
       "norm_label": "get_all_active_alert_configs()"
     },
     {
       "label": "log_alert()",
       "file_type": "code",
       "source_file": "/home/jp/jay/telegram_bot/stock_bot/database/queries.py",
-      "source_location": "L188",
+      "source_location": "L197",
       "id": "queries_log_alert",
-      "community": 3,
+      "community": 8,
       "norm_label": "log_alert()"
     },
     {
       "label": "get_recent_alert_log()",
       "file_type": "code",
       "source_file": "/home/jp/jay/telegram_bot/stock_bot/database/queries.py",
-      "source_location": "L201",
+      "source_location": "L210",
       "id": "queries_get_recent_alert_log",
-      "community": 3,
+      "community": 8,
       "norm_label": "get_recent_alert_log()"
     },
     {
       "label": "get_or_create_holding()",
       "file_type": "code",
       "source_file": "/home/jp/jay/telegram_bot/stock_bot/database/queries.py",
-      "source_location": "L218",
+      "source_location": "L227",
       "id": "queries_get_or_create_holding",
-      "community": 0,
+      "community": 3,
       "norm_label": "get_or_create_holding()"
     },
     {
       "label": "get_holdings()",
       "file_type": "code",
       "source_file": "/home/jp/jay/telegram_bot/stock_bot/database/queries.py",
-      "source_location": "L233",
+      "source_location": "L242",
       "id": "queries_get_holdings",
-      "community": 0,
+      "community": 1,
       "norm_label": "get_holdings()"
     },
     {
       "label": "get_all_holdings()",
       "file_type": "code",
       "source_file": "/home/jp/jay/telegram_bot/stock_bot/database/queries.py",
-      "source_location": "L240",
+      "source_location": "L249",
       "id": "queries_get_all_holdings",
-      "community": 4,
+      "community": 6,
       "norm_label": "get_all_holdings()"
     },
     {
       "label": "get_holding()",
       "file_type": "code",
       "source_file": "/home/jp/jay/telegram_bot/stock_bot/database/queries.py",
-      "source_location": "L245",
+      "source_location": "L254",
       "id": "queries_get_holding",
-      "community": 0,
+      "community": 3,
       "norm_label": "get_holding()"
     },
     {
       "label": "add_lot()",
       "file_type": "code",
       "source_file": "/home/jp/jay/telegram_bot/stock_bot/database/queries.py",
-      "source_location": "L258",
+      "source_location": "L267",
       "id": "queries_add_lot",
-      "community": 0,
+      "community": 3,
       "norm_label": "add_lot()"
     },
     {
       "label": "get_open_buy_lots()",
       "file_type": "code",
       "source_file": "/home/jp/jay/telegram_bot/stock_bot/database/queries.py",
-      "source_location": "L279",
+      "source_location": "L288",
       "id": "queries_get_open_buy_lots",
-      "community": 0,
+      "community": 3,
       "norm_label": "get_open_buy_lots()"
     },
     {
       "label": "get_recent_transactions()",
       "file_type": "code",
       "source_file": "/home/jp/jay/telegram_bot/stock_bot/database/queries.py",
-      "source_location": "L290",
+      "source_location": "L299",
       "id": "queries_get_recent_transactions",
-      "community": 1,
+      "community": 3,
       "norm_label": "get_recent_transactions()"
     },
     {
       "label": "mark_lot_consumed()",
       "file_type": "code",
       "source_file": "/home/jp/jay/telegram_bot/stock_bot/database/queries.py",
-      "source_location": "L305",
+      "source_location": "L314",
       "id": "queries_mark_lot_consumed",
-      "community": 0,
+      "community": 3,
       "norm_label": "mark_lot_consumed()"
     },
     {
       "label": "get_lots()",
       "file_type": "code",
       "source_file": "/home/jp/jay/telegram_bot/stock_bot/database/queries.py",
-      "source_location": "L309",
+      "source_location": "L318",
       "id": "queries_get_lots",
-      "community": 0,
+      "community": 3,
       "norm_label": "get_lots()"
     },
     {
       "label": "update_lot_quantity()",
       "file_type": "code",
       "source_file": "/home/jp/jay/telegram_bot/stock_bot/database/queries.py",
-      "source_location": "L316",
+      "source_location": "L325",
       "id": "queries_update_lot_quantity",
-      "community": 0,
+      "community": 3,
       "norm_label": "update_lot_quantity()"
     },
     {
       "label": "delete_lot()",
       "file_type": "code",
       "source_file": "/home/jp/jay/telegram_bot/stock_bot/database/queries.py",
-      "source_location": "L322",
+      "source_location": "L331",
       "id": "queries_delete_lot",
-      "community": 0,
+      "community": 3,
       "norm_label": "delete_lot()"
     },
     {
       "label": "add_price_alert()",
       "file_type": "code",
       "source_file": "/home/jp/jay/telegram_bot/stock_bot/database/queries.py",
-      "source_location": "L330",
+      "source_location": "L339",
       "id": "queries_add_price_alert",
-      "community": 8,
+      "community": 5,
       "norm_label": "add_price_alert()"
     },
     {
       "label": "get_price_alerts()",
       "file_type": "code",
       "source_file": "/home/jp/jay/telegram_bot/stock_bot/database/queries.py",
-      "source_location": "L343",
+      "source_location": "L352",
       "id": "queries_get_price_alerts",
-      "community": 8,
+      "community": 5,
       "norm_label": "get_price_alerts()"
     },
     {
       "label": "get_price_alerts_by_ticker()",
       "file_type": "code",
       "source_file": "/home/jp/jay/telegram_bot/stock_bot/database/queries.py",
-      "source_location": "L352",
+      "source_location": "L361",
       "id": "queries_get_price_alerts_by_ticker",
-      "community": 8,
+      "community": 5,
       "norm_label": "get_price_alerts_by_ticker()"
     },
     {
       "label": "get_all_active_price_alerts()",
       "file_type": "code",
       "source_file": "/home/jp/jay/telegram_bot/stock_bot/database/queries.py",
-      "source_location": "L363",
+      "source_location": "L372",
       "id": "queries_get_all_active_price_alerts",
-      "community": 3,
+      "community": 5,
       "norm_label": "get_all_active_price_alerts()"
     },
     {
       "label": "deactivate_price_alert()",
       "file_type": "code",
       "source_file": "/home/jp/jay/telegram_bot/stock_bot/database/queries.py",
-      "source_location": "L372",
+      "source_location": "L381",
       "id": "queries_deactivate_price_alert",
-      "community": 8,
+      "community": 5,
       "norm_label": "deactivate_price_alert()"
     },
     {
       "label": "log_price_alert()",
       "file_type": "code",
       "source_file": "/home/jp/jay/telegram_bot/stock_bot/database/queries.py",
-      "source_location": "L379",
+      "source_location": "L388",
       "id": "queries_log_price_alert",
-      "community": 0,
+      "community": 3,
       "norm_label": "log_price_alert()"
     },
     {
       "label": "get_recent_price_alert_log()",
       "file_type": "code",
       "source_file": "/home/jp/jay/telegram_bot/stock_bot/database/queries.py",
-      "source_location": "L388",
+      "source_location": "L397",
       "id": "queries_get_recent_price_alert_log",
-      "community": 0,
+      "community": 3,
       "norm_label": "get_recent_price_alert_log()"
     },
     {
@@ -2357,7 +2438,7 @@
       "file_type": "rationale",
       "source_file": "/home/jp/jay/telegram_bot/stock_bot/database/queries.py",
       "source_location": "L1",
-      "community": 0,
+      "community": 3,
       "norm_label": "all sql operations as pure functions. every function accepts a connection as its",
       "id": "queries_rationale_1"
     },
@@ -2366,7 +2447,7 @@
       "file_type": "rationale",
       "source_file": "/home/jp/jay/telegram_bot/stock_bot/database/queries.py",
       "source_location": "L17",
-      "community": 1,
+      "community": 3,
       "norm_label": "insert user if not exists; return the user.id.",
       "id": "queries_rationale_17"
     },
@@ -2375,7 +2456,7 @@
       "file_type": "rationale",
       "source_file": "/home/jp/jay/telegram_bot/stock_bot/database/queries.py",
       "source_location": "L47",
-      "community": 4,
+      "community": 6,
       "norm_label": "return new watchlist.id or raise if duplicate.",
       "id": "queries_rationale_47"
     },
@@ -2384,7 +2465,7 @@
       "file_type": "rationale",
       "source_file": "/home/jp/jay/telegram_bot/stock_bot/database/queries.py",
       "source_location": "L56",
-      "community": 4,
+      "community": 6,
       "norm_label": "return true if a row was deleted.",
       "id": "queries_rationale_56"
     },
@@ -2393,7 +2474,7 @@
       "file_type": "rationale",
       "source_file": "/home/jp/jay/telegram_bot/stock_bot/database/queries.py",
       "source_location": "L81",
-      "community": 4,
+      "community": 8,
       "norm_label": "return every watchlist row across all users (used by alert scheduler).",
       "id": "queries_rationale_81"
     },
@@ -2402,34 +2483,169 @@
       "file_type": "rationale",
       "source_file": "/home/jp/jay/telegram_bot/stock_bot/database/queries.py",
       "source_location": "L141",
-      "id": "queries_rationale_141",
-      "community": 4,
-      "norm_label": "insert an alert config only if none exists for (watchlist_id, indicator).     ne"
+      "community": 6,
+      "norm_label": "insert an alert config only if none exists for (watchlist_id, indicator).     ne",
+      "id": "queries_rationale_141"
     },
     {
       "label": "Return every holding across all users (used by the default-alert backfill).",
       "file_type": "rationale",
       "source_file": "/home/jp/jay/telegram_bot/stock_bot/database/queries.py",
-      "source_location": "L241",
-      "id": "queries_rationale_241",
-      "community": 4,
+      "source_location": "L250",
+      "id": "queries_rationale_250",
+      "community": 6,
       "norm_label": "return every holding across all users (used by the default-alert backfill)."
     },
     {
       "label": "Return open (unconsumed) BUY lots oldest-first for FIFO matching.",
       "file_type": "rationale",
       "source_file": "/home/jp/jay/telegram_bot/stock_bot/database/queries.py",
-      "source_location": "L282",
-      "id": "queries_rationale_282",
-      "community": 0,
+      "source_location": "L291",
+      "id": "queries_rationale_291",
+      "community": 3,
       "norm_label": "return open (unconsumed) buy lots oldest-first for fifo matching."
+    },
+    {
+      "label": "Return the most recent CHANGELOG.md entry formatted for Telegram.",
+      "file_type": "rationale",
+      "source_file": "/home/jp/jay/telegram_bot/stock_bot/main.py",
+      "source_location": "L77",
+      "community": 2,
+      "norm_label": "return the most recent changelog.md entry formatted for telegram.",
+      "id": "main_rationale_77"
+    },
+    {
+      "label": "Seed the default EMA alert configs for one watchlist row.     Returns the indica",
+      "file_type": "rationale",
+      "source_file": "/home/jp/jay/telegram_bot/stock_bot/services/alert_service.py",
+      "source_location": "L39",
+      "community": 17,
+      "norm_label": "seed the default ema alert configs for one watchlist row.     returns the indica",
+      "id": "alert_service_rationale_39"
+    },
+    {
+      "label": "Make sure *ticker* has a watchlist row (alerts are anchored to it) and     the d",
+      "file_type": "rationale",
+      "source_file": "/home/jp/jay/telegram_bot/stock_bot/services/alert_service.py",
+      "source_location": "L60",
+      "community": 18,
+      "norm_label": "make sure *ticker* has a watchlist row (alerts are anchored to it) and     the d",
+      "id": "alert_service_rationale_60"
+    },
+    {
+      "label": "One-shot seeding at startup: give every existing watchlist stock and every     p",
+      "file_type": "rationale",
+      "source_file": "/home/jp/jay/telegram_bot/stock_bot/services/alert_service.py",
+      "source_location": "L75",
+      "community": 19,
+      "norm_label": "one-shot seeding at startup: give every existing watchlist stock and every     p",
+      "id": "alert_service_rationale_75"
+    },
+    {
+      "label": "Main entry point called by the scheduler.     *chat_id* is the Telegram chat tha",
+      "file_type": "rationale",
+      "source_file": "/home/jp/jay/telegram_bot/stock_bot/services/alert_service.py",
+      "source_location": "L96",
+      "community": 20,
+      "norm_label": "main entry point called by the scheduler.     *chat_id* is the telegram chat tha",
+      "id": "alert_service_rationale_96"
+    },
+    {
+      "label": "Proxy for Message that buffers reply_text calls instead of sending them.",
+      "file_type": "rationale",
+      "source_file": "/home/jp/jay/telegram_bot/stock_bot/bot/router.py",
+      "source_location": "L111",
+      "community": 2,
+      "norm_label": "proxy for message that buffers reply_text calls instead of sending them.",
+      "id": "router_rationale_111"
+    },
+    {
+      "label": "Proxy for Update that injects _SilentMessage during bulk dispatch.",
+      "file_type": "rationale",
+      "source_file": "/home/jp/jay/telegram_bot/stock_bot/bot/router.py",
+      "source_location": "L127",
+      "community": 2,
+      "norm_label": "proxy for update that injects _silentmessage during bulk dispatch.",
+      "id": "router_rationale_127"
+    },
+    {
+      "label": "Attach command handlers to the Application based on enabled features.     Return",
+      "file_type": "rationale",
+      "source_file": "/home/jp/jay/telegram_bot/stock_bot/bot/router.py",
+      "source_location": "L142",
+      "community": 2,
+      "norm_label": "attach command handlers to the application based on enabled features.     return",
+      "id": "router_rationale_142"
+    },
+    {
+      "label": "Register the user and show a welcome message.",
+      "file_type": "rationale",
+      "source_file": "/home/jp/jay/telegram_bot/stock_bot/bot/handlers/general_handlers.py",
+      "source_location": "L93",
+      "community": 21,
+      "norm_label": "register the user and show a welcome message.",
+      "id": "general_handlers_rationale_93"
+    },
+    {
+      "label": "Usage: /set_alert TICKER INDICATOR THRESHOLD_PCT     Example: /set_alert RELIANC",
+      "file_type": "rationale",
+      "source_file": "/home/jp/jay/telegram_bot/stock_bot/bot/handlers/alert_handlers.py",
+      "source_location": "L15",
+      "community": 22,
+      "norm_label": "usage: /set_alert ticker indicator threshold_pct     example: /set_alert relianc",
+      "id": "alert_handlers_rationale_15"
+    },
+    {
+      "label": "Usage: /remove_alert TICKER INDICATOR",
+      "file_type": "rationale",
+      "source_file": "/home/jp/jay/telegram_bot/stock_bot/bot/handlers/alert_handlers.py",
+      "source_location": "L62",
+      "community": 23,
+      "norm_label": "usage: /remove_alert ticker indicator",
+      "id": "alert_handlers_rationale_62"
+    },
+    {
+      "label": "Usage: /view_alerts TICKER",
+      "file_type": "rationale",
+      "source_file": "/home/jp/jay/telegram_bot/stock_bot/bot/handlers/alert_handlers.py",
+      "source_location": "L90",
+      "community": 24,
+      "norm_label": "usage: /view_alerts ticker",
+      "id": "alert_handlers_rationale_90"
+    },
+    {
+      "label": "Yield a sqlite3 connection with row_factory and foreign keys enabled.",
+      "file_type": "rationale",
+      "source_file": "/home/jp/jay/telegram_bot/stock_bot/database/db.py",
+      "source_location": "L132",
+      "community": 25,
+      "norm_label": "yield a sqlite3 connection with row_factory and foreign keys enabled.",
+      "id": "db_rationale_132"
+    },
+    {
+      "label": "Return every holding across all users (used by the default-alert backfill).",
+      "file_type": "rationale",
+      "source_file": "/home/jp/jay/telegram_bot/stock_bot/database/queries.py",
+      "source_location": "L241",
+      "community": 26,
+      "norm_label": "return every holding across all users (used by the default-alert backfill).",
+      "id": "queries_rationale_241"
+    },
+    {
+      "label": "Return open (unconsumed) BUY lots oldest-first for FIFO matching.",
+      "file_type": "rationale",
+      "source_file": "/home/jp/jay/telegram_bot/stock_bot/database/queries.py",
+      "source_location": "L282",
+      "community": 27,
+      "norm_label": "return open (unconsumed) buy lots oldest-first for fifo matching.",
+      "id": "queries_rationale_282"
     },
     {
       "label": "Return True if at least one tracked market is currently open.",
       "file_type": "rationale",
       "source_file": "/home/jp/jay/telegram_bot/stock_bot/main.py",
       "source_location": "L37",
-      "community": 17,
+      "community": 28,
       "norm_label": "return true if at least one tracked market is currently open.",
       "id": "main_rationale_37"
     },
@@ -2438,7 +2654,7 @@
       "file_type": "rationale",
       "source_file": "/home/jp/jay/telegram_bot/stock_bot/main.py",
       "source_location": "L53",
-      "community": 18,
+      "community": 29,
       "norm_label": "wrapper so apscheduler can call the async alert check.",
       "id": "main_rationale_53"
     },
@@ -2447,7 +2663,7 @@
       "file_type": "rationale",
       "source_file": "/home/jp/jay/telegram_bot/stock_bot/services/watchlist_service.py",
       "source_location": "L20",
-      "community": 19,
+      "community": 30,
       "norm_label": "add *ticker* to the user's watchlist at the current market price.     returns a",
       "id": "watchlist_service_rationale_20"
     },
@@ -2456,7 +2672,7 @@
       "file_type": "rationale",
       "source_file": "/home/jp/jay/telegram_bot/stock_bot/services/watchlist_service.py",
       "source_location": "L48",
-      "community": 20,
+      "community": 31,
       "norm_label": "remove *ticker* from the user's watchlist. raises watchlisterror if not found.",
       "id": "watchlist_service_rationale_48"
     },
@@ -2465,7 +2681,7 @@
       "file_type": "rationale",
       "source_file": "/home/jp/jay/telegram_bot/stock_bot/services/watchlist_service.py",
       "source_location": "L59",
-      "community": 21,
+      "community": 32,
       "norm_label": "return the full watchlist with live prices and return percentages.     each entr",
       "id": "watchlist_service_rationale_59"
     },
@@ -2474,7 +2690,7 @@
       "file_type": "rationale",
       "source_file": "/home/jp/jay/telegram_bot/stock_bot/services/watchlist_service.py",
       "source_location": "L102",
-      "community": 22,
+      "community": 33,
       "norm_label": "mark the current price of *ticker* as a named checkpoint.",
       "id": "watchlist_service_rationale_102"
     },
@@ -2483,7 +2699,7 @@
       "file_type": "rationale",
       "source_file": "/home/jp/jay/telegram_bot/stock_bot/services/holdings_service.py",
       "source_location": "L30",
-      "community": 23,
+      "community": 34,
       "norm_label": "log a buy lot. returns lot details.",
       "id": "holdings_service_rationale_30"
     },
@@ -2492,7 +2708,7 @@
       "file_type": "rationale",
       "source_file": "/home/jp/jay/telegram_bot/stock_bot/services/holdings_service.py",
       "source_location": "L52",
-      "community": 24,
+      "community": 35,
       "norm_label": "log a sell using fifo lot matching.     returns realised p&l and a breakdown of",
       "id": "holdings_service_rationale_52"
     },
@@ -2501,7 +2717,7 @@
       "file_type": "rationale",
       "source_file": "/home/jp/jay/telegram_bot/stock_bot/services/holdings_service.py",
       "source_location": "L110",
-      "community": 25,
+      "community": 36,
       "norm_label": "return all current open positions with quantity, average cost, current     price",
       "id": "holdings_service_rationale_110"
     },
@@ -2510,7 +2726,7 @@
       "file_type": "rationale",
       "source_file": "/home/jp/jay/telegram_bot/stock_bot/services/holdings_service.py",
       "source_location": "L140",
-      "community": 26,
+      "community": 37,
       "norm_label": "return all lots (buy and sell) for *ticker*, oldest first.",
       "id": "holdings_service_rationale_140"
     },
@@ -2519,7 +2735,7 @@
       "file_type": "rationale",
       "source_file": "/home/jp/jay/telegram_bot/stock_bot/services/price_fetcher.py",
       "source_location": "L25",
-      "community": 27,
+      "community": 38,
       "norm_label": "call at the start of each scheduler tick to flush stale data.",
       "id": "price_fetcher_rationale_25"
     },
@@ -2528,7 +2744,7 @@
       "file_type": "rationale",
       "source_file": "/home/jp/jay/telegram_bot/stock_bot/services/price_fetcher.py",
       "source_location": "L30",
-      "community": 28,
+      "community": 39,
       "norm_label": "fetch the most recent closing price for *ticker*.",
       "id": "price_fetcher_rationale_30"
     },
@@ -2537,7 +2753,7 @@
       "file_type": "rationale",
       "source_file": "/home/jp/jay/telegram_bot/stock_bot/services/price_fetcher.py",
       "source_location": "L42",
-      "community": 29,
+      "community": 40,
       "norm_label": "return the most recent value of *indicator* (e.g. 'ema_10w') for *ticker*.     r",
       "id": "price_fetcher_rationale_42"
     },
@@ -2546,7 +2762,7 @@
       "file_type": "rationale",
       "source_file": "/home/jp/jay/telegram_bot/stock_bot/services/price_fetcher.py",
       "source_location": "L60",
-      "community": 30,
+      "community": 41,
       "norm_label": "return a dict of all configured ema values for *ticker*.",
       "id": "price_fetcher_rationale_60"
     },
@@ -2555,7 +2771,7 @@
       "file_type": "rationale",
       "source_file": "/home/jp/jay/telegram_bot/stock_bot/services/alert_service.py",
       "source_location": "L26",
-      "community": 31,
+      "community": 42,
       "norm_label": "main entry point called by the scheduler.     *chat_id* is the telegram chat tha",
       "id": "alert_service_rationale_26"
     },
@@ -2564,7 +2780,7 @@
       "file_type": "rationale",
       "source_file": "/home/jp/jay/telegram_bot/stock_bot/bot/router.py",
       "source_location": "L32",
-      "community": 32,
+      "community": 43,
       "norm_label": "attach all command handlers to the application instance.",
       "id": "router_rationale_32"
     },
@@ -2573,7 +2789,7 @@
       "file_type": "rationale",
       "source_file": "/home/jp/jay/telegram_bot/stock_bot/bot/handlers/_helpers.py",
       "source_location": "L16",
-      "community": 33,
+      "community": 44,
       "norm_label": "format a percentage value for display, e.g. '+12.34%' or 'n/a'.",
       "id": "helpers_rationale_16"
     },
@@ -2582,7 +2798,7 @@
       "file_type": "rationale",
       "source_file": "/home/jp/jay/telegram_bot/stock_bot/bot/handlers/_helpers.py",
       "source_location": "L24",
-      "community": 34,
+      "community": 45,
       "norm_label": "decorator: ensure the calling user exists in the db before running the handler.",
       "id": "helpers_rationale_24"
     },
@@ -2591,7 +2807,7 @@
       "file_type": "rationale",
       "source_file": "/home/jp/jay/telegram_bot/stock_bot/bot/handlers/general_handlers.py",
       "source_location": "L41",
-      "community": 35,
+      "community": 46,
       "norm_label": "register the user and show a welcome message.",
       "id": "general_handlers_rationale_41"
     },
@@ -2600,7 +2816,7 @@
       "file_type": "rationale",
       "source_file": "/home/jp/jay/telegram_bot/stock_bot/bot/handlers/alert_handlers.py",
       "source_location": "L14",
-      "community": 36,
+      "community": 47,
       "norm_label": "usage: /set_alert ticker indicator threshold_pct     example: /set_alert relianc",
       "id": "alert_handlers_rationale_14"
     },
@@ -2609,7 +2825,7 @@
       "file_type": "rationale",
       "source_file": "/home/jp/jay/telegram_bot/stock_bot/bot/handlers/alert_handlers.py",
       "source_location": "L61",
-      "community": 37,
+      "community": 48,
       "norm_label": "usage: /remove_alert ticker indicator",
       "id": "alert_handlers_rationale_61"
     },
@@ -2618,7 +2834,7 @@
       "file_type": "rationale",
       "source_file": "/home/jp/jay/telegram_bot/stock_bot/bot/handlers/alert_handlers.py",
       "source_location": "L89",
-      "community": 38,
+      "community": 49,
       "norm_label": "usage: /view_alerts ticker",
       "id": "alert_handlers_rationale_89"
     },
@@ -2627,7 +2843,7 @@
       "file_type": "rationale",
       "source_file": "/home/jp/jay/telegram_bot/stock_bot/bot/handlers/holdings_handlers.py",
       "source_location": "L14",
-      "community": 39,
+      "community": 50,
       "norm_label": "usage: /buy ticker exchange quantity price [notes]",
       "id": "holdings_handlers_rationale_14"
     },
@@ -2636,7 +2852,7 @@
       "file_type": "rationale",
       "source_file": "/home/jp/jay/telegram_bot/stock_bot/bot/handlers/holdings_handlers.py",
       "source_location": "L48",
-      "community": 40,
+      "community": 51,
       "norm_label": "usage: /sell ticker quantity price [notes]",
       "id": "holdings_handlers_rationale_48"
     },
@@ -2645,7 +2861,7 @@
       "file_type": "rationale",
       "source_file": "/home/jp/jay/telegram_bot/stock_bot/bot/handlers/holdings_handlers.py",
       "source_location": "L117",
-      "community": 41,
+      "community": 52,
       "norm_label": "usage: /transaction_history ticker",
       "id": "holdings_handlers_rationale_117"
     },
@@ -2654,7 +2870,7 @@
       "file_type": "rationale",
       "source_file": "/home/jp/jay/telegram_bot/stock_bot/bot/handlers/watchlist_handlers.py",
       "source_location": "L16",
-      "community": 42,
+      "community": 53,
       "norm_label": "usage: /add_watchlist ticker exchange",
       "id": "watchlist_handlers_rationale_16"
     },
@@ -2663,7 +2879,7 @@
       "file_type": "rationale",
       "source_file": "/home/jp/jay/telegram_bot/stock_bot/bot/handlers/watchlist_handlers.py",
       "source_location": "L38",
-      "community": 43,
+      "community": 54,
       "norm_label": "usage: /remove_watchlist ticker",
       "id": "watchlist_handlers_rationale_38"
     },
@@ -2672,7 +2888,7 @@
       "file_type": "rationale",
       "source_file": "/home/jp/jay/telegram_bot/stock_bot/bot/handlers/watchlist_handlers.py",
       "source_location": "L55",
-      "community": 44,
+      "community": 55,
       "norm_label": "usage: /view_watchlist",
       "id": "watchlist_handlers_rationale_55"
     },
@@ -2681,7 +2897,7 @@
       "file_type": "rationale",
       "source_file": "/home/jp/jay/telegram_bot/stock_bot/bot/handlers/watchlist_handlers.py",
       "source_location": "L80",
-      "community": 45,
+      "community": 56,
       "norm_label": "usage: /set_checkpoint ticker label",
       "id": "watchlist_handlers_rationale_80"
     },
@@ -2690,7 +2906,7 @@
       "file_type": "rationale",
       "source_file": "/home/jp/jay/telegram_bot/stock_bot/bot/handlers/report_handlers.py",
       "source_location": "L15",
-      "community": 46,
+      "community": 57,
       "norm_label": "usage: /weekly_report",
       "id": "report_handlers_rationale_15"
     },
@@ -2699,7 +2915,7 @@
       "file_type": "rationale",
       "source_file": "/home/jp/jay/telegram_bot/stock_bot/bot/handlers/report_handlers.py",
       "source_location": "L56",
-      "community": 47,
+      "community": 58,
       "norm_label": "usage: /stock_details ticker",
       "id": "report_handlers_rationale_56"
     },
@@ -2708,7 +2924,7 @@
       "file_type": "rationale",
       "source_file": "/home/jp/jay/telegram_bot/stock_bot/database/db.py",
       "source_location": "L87",
-      "community": 48,
+      "community": 59,
       "norm_label": "create all tables if they don't exist. safe to call multiple times.",
       "id": "db_rationale_87"
     },
@@ -2717,7 +2933,7 @@
       "file_type": "rationale",
       "source_file": "/home/jp/jay/telegram_bot/stock_bot/database/db.py",
       "source_location": "L96",
-      "community": 49,
+      "community": 60,
       "norm_label": "yield a sqlite3 connection with row_factory and foreign keys enabled.",
       "id": "db_rationale_96"
     },
@@ -2726,7 +2942,7 @@
       "file_type": "rationale",
       "source_file": "/home/jp/jay/telegram_bot/stock_bot/database/queries.py",
       "source_location": "L251",
-      "community": 50,
+      "community": 61,
       "norm_label": "return all buy lots ordered oldest-first (for fifo sell matching).",
       "id": "queries_rationale_251"
     }
@@ -2736,7 +2952,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "/home/jp/jay/telegram_bot/stock_bot/main.py",
-      "source_location": "L76",
+      "source_location": "L81",
       "weight": 1.0,
       "_src": "home_jp_jay_telegram_bot_stock_bot_main_py",
       "_tgt": "main_latest_changelog",
@@ -2748,7 +2964,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "/home/jp/jay/telegram_bot/stock_bot/main.py",
-      "source_location": "L113",
+      "source_location": "L118",
       "weight": 1.0,
       "_src": "home_jp_jay_telegram_bot_stock_bot_main_py",
       "_tgt": "main_any_market_open",
@@ -2760,7 +2976,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "/home/jp/jay/telegram_bot/stock_bot/main.py",
-      "source_location": "L127",
+      "source_location": "L132",
       "weight": 1.0,
       "_src": "home_jp_jay_telegram_bot_stock_bot_main_py",
       "_tgt": "main_main",
@@ -2784,12 +3000,12 @@
       "relation": "rationale_for",
       "confidence": "EXTRACTED",
       "source_file": "/home/jp/jay/telegram_bot/stock_bot/main.py",
-      "source_location": "L77",
+      "source_location": "L82",
       "weight": 1.0,
-      "_src": "main_rationale_77",
+      "_src": "main_rationale_82",
       "_tgt": "main_latest_changelog",
       "source": "main_latest_changelog",
-      "target": "main_rationale_77",
+      "target": "main_rationale_82",
       "confidence_score": 1.0
     },
     {
@@ -2836,9 +3052,9 @@
       "weight": 0.8,
       "_src": "main_rationale_1",
       "_tgt": "bot_config_botconfig",
+      "confidence_score": 0.5,
       "source": "main_rationale_1",
-      "target": "bot_config_botconfig",
-      "confidence_score": 0.5
+      "target": "bot_config_botconfig"
     },
     {
       "relation": "uses",
@@ -2846,9 +3062,9 @@
       "source_file": "/home/jp/jay/telegram_bot/stock_bot/main.py",
       "source_location": "L21",
       "weight": 0.8,
-      "_src": "main_rationale_77",
+      "_src": "main_rationale_82",
       "_tgt": "bot_config_botconfig",
-      "source": "main_rationale_77",
+      "source": "main_rationale_82",
       "target": "bot_config_botconfig",
       "confidence_score": 0.5
     },
@@ -2966,10 +3182,58 @@
       "source_file": "/home/jp/jay/telegram_bot/stock_bot/bot/router.py",
       "source_location": "L17",
       "weight": 0.8,
-      "_src": "router_silentmessage",
+      "_src": "bot_config_features",
+      "_tgt": "router_silentmessage",
+      "confidence_score": 0.5,
+      "source": "bot_config_features",
+      "target": "router_silentmessage"
+    },
+    {
+      "relation": "uses",
+      "confidence": "INFERRED",
+      "source_file": "/home/jp/jay/telegram_bot/stock_bot/bot/router.py",
+      "source_location": "L17",
+      "weight": 0.8,
+      "_src": "bot_config_features",
+      "_tgt": "router_silentupdate",
+      "confidence_score": 0.5,
+      "source": "bot_config_features",
+      "target": "router_silentupdate"
+    },
+    {
+      "relation": "uses",
+      "confidence": "INFERRED",
+      "source_file": "/home/jp/jay/telegram_bot/stock_bot/bot/router.py",
+      "source_location": "L17",
+      "weight": 0.8,
+      "_src": "bot_config_features",
+      "_tgt": "router_rationale_1",
+      "confidence_score": 0.5,
+      "source": "bot_config_features",
+      "target": "router_rationale_1"
+    },
+    {
+      "relation": "uses",
+      "confidence": "INFERRED",
+      "source_file": "/home/jp/jay/telegram_bot/stock_bot/bot/router.py",
+      "source_location": "L17",
+      "weight": 0.8,
+      "_src": "bot_config_features",
+      "_tgt": "router_rationale_64",
+      "confidence_score": 0.5,
+      "source": "bot_config_features",
+      "target": "router_rationale_64"
+    },
+    {
+      "relation": "uses",
+      "confidence": "INFERRED",
+      "source_file": "/home/jp/jay/telegram_bot/stock_bot/bot/router.py",
+      "source_location": "L17",
+      "weight": 0.8,
+      "_src": "router_rationale_112",
       "_tgt": "bot_config_features",
       "source": "bot_config_features",
-      "target": "router_silentmessage",
+      "target": "router_rationale_112",
       "confidence_score": 0.5
     },
     {
@@ -2978,10 +3242,10 @@
       "source_file": "/home/jp/jay/telegram_bot/stock_bot/bot/router.py",
       "source_location": "L17",
       "weight": 0.8,
-      "_src": "router_silentupdate",
+      "_src": "router_rationale_128",
       "_tgt": "bot_config_features",
       "source": "bot_config_features",
-      "target": "router_silentupdate",
+      "target": "router_rationale_128",
       "confidence_score": 0.5
     },
     {
@@ -2990,10 +3254,10 @@
       "source_file": "/home/jp/jay/telegram_bot/stock_bot/bot/router.py",
       "source_location": "L17",
       "weight": 0.8,
-      "_src": "router_rationale_1",
+      "_src": "router_rationale_143",
       "_tgt": "bot_config_features",
       "source": "bot_config_features",
-      "target": "router_rationale_1",
+      "target": "router_rationale_143",
       "confidence_score": 0.5
     },
     {
@@ -3002,11 +3266,11 @@
       "source_file": "/home/jp/jay/telegram_bot/stock_bot/bot/router.py",
       "source_location": "L17",
       "weight": 0.8,
-      "_src": "router_rationale_64",
-      "_tgt": "bot_config_features",
+      "_src": "bot_config_features",
+      "_tgt": "router_rationale_111",
+      "confidence_score": 0.5,
       "source": "bot_config_features",
-      "target": "router_rationale_64",
-      "confidence_score": 0.5
+      "target": "router_rationale_111"
     },
     {
       "relation": "uses",
@@ -3014,11 +3278,11 @@
       "source_file": "/home/jp/jay/telegram_bot/stock_bot/bot/router.py",
       "source_location": "L17",
       "weight": 0.8,
-      "_src": "router_rationale_111",
-      "_tgt": "bot_config_features",
+      "_src": "bot_config_features",
+      "_tgt": "router_rationale_127",
+      "confidence_score": 0.5,
       "source": "bot_config_features",
-      "target": "router_rationale_111",
-      "confidence_score": 0.5
+      "target": "router_rationale_127"
     },
     {
       "relation": "uses",
@@ -3026,23 +3290,11 @@
       "source_file": "/home/jp/jay/telegram_bot/stock_bot/bot/router.py",
       "source_location": "L17",
       "weight": 0.8,
-      "_src": "router_rationale_127",
-      "_tgt": "bot_config_features",
+      "_src": "bot_config_features",
+      "_tgt": "router_rationale_142",
+      "confidence_score": 0.5,
       "source": "bot_config_features",
-      "target": "router_rationale_127",
-      "confidence_score": 0.5
-    },
-    {
-      "relation": "uses",
-      "confidence": "INFERRED",
-      "source_file": "/home/jp/jay/telegram_bot/stock_bot/bot/router.py",
-      "source_location": "L17",
-      "weight": 0.8,
-      "_src": "router_rationale_142",
-      "_tgt": "bot_config_features",
-      "source": "bot_config_features",
-      "target": "router_rationale_142",
-      "confidence_score": 0.5
+      "target": "router_rationale_142"
     },
     {
       "relation": "calls",
@@ -3055,6 +3307,18 @@
       "source": "bot_config_settings",
       "target": "bot_config_load",
       "confidence_score": 1.0
+    },
+    {
+      "relation": "uses",
+      "confidence": "INFERRED",
+      "source_file": "/home/jp/jay/telegram_bot/stock_bot/main.py",
+      "source_location": "L21",
+      "weight": 0.8,
+      "_src": "main_rationale_77",
+      "_tgt": "bot_config_botconfig",
+      "confidence_score": 0.5,
+      "source": "bot_config_botconfig",
+      "target": "main_rationale_77"
     },
     {
       "relation": "contains",
@@ -3124,9 +3388,9 @@
       "weight": 0.8,
       "_src": "logger_colouredformatter",
       "_tgt": "log_manager_smartrotatingfilehandler",
+      "confidence_score": 0.5,
       "source": "logger_colouredformatter",
-      "target": "log_manager_smartrotatingfilehandler",
-      "confidence_score": 0.5
+      "target": "log_manager_smartrotatingfilehandler"
     },
     {
       "relation": "calls",
@@ -3160,9 +3424,9 @@
       "weight": 0.8,
       "_src": "logger_rationale_1",
       "_tgt": "log_manager_smartrotatingfilehandler",
+      "confidence_score": 0.5,
       "source": "logger_rationale_1",
-      "target": "log_manager_smartrotatingfilehandler",
-      "confidence_score": 0.5
+      "target": "log_manager_smartrotatingfilehandler"
     },
     {
       "relation": "rationale_for",
@@ -3795,8 +4059,8 @@
       "source_file": "/home/jp/jay/telegram_bot/stock_bot/bot/handlers/search_handlers.py",
       "source_location": "L281",
       "weight": 1.0,
-      "_src": "search_handlers_do_watch",
-      "_tgt": "watchlist_service_add_stock",
+      "_src": "watchlist_service_add_stock",
+      "_tgt": "search_handlers_do_watch",
       "source": "watchlist_service_add_stock",
       "target": "search_handlers_do_watch"
     },
@@ -4623,8 +4887,8 @@
       "source_file": "/home/jp/jay/telegram_bot/stock_bot/bot/handlers/report_handlers.py",
       "source_location": "L190",
       "weight": 1.0,
-      "_src": "report_handlers_cmd_stock_details",
-      "_tgt": "holdings_service_get_stock_returns",
+      "_src": "holdings_service_get_stock_returns",
+      "_tgt": "report_handlers_cmd_stock_details",
       "source": "holdings_service_get_stock_returns",
       "target": "report_handlers_cmd_stock_details"
     },
@@ -4743,8 +5007,8 @@
       "source_file": "/home/jp/jay/telegram_bot/stock_bot/bot/handlers/report_handlers.py",
       "source_location": "L195",
       "weight": 1.0,
-      "_src": "report_handlers_cmd_stock_details",
-      "_tgt": "holdings_service_get_transaction_history",
+      "_src": "holdings_service_get_transaction_history",
+      "_tgt": "report_handlers_cmd_stock_details",
       "source": "holdings_service_get_transaction_history",
       "target": "report_handlers_cmd_stock_details"
     },
@@ -4894,6 +5158,18 @@
     },
     {
       "relation": "calls",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "/home/jp/jay/telegram_bot/stock_bot/services/alert_service.py",
+      "source_location": "L137",
+      "weight": 1.0,
+      "_src": "alert_service_build_morning_scan_message",
+      "_tgt": "price_fetcher_clear_cache",
+      "source": "price_fetcher_clear_cache",
+      "target": "alert_service_build_morning_scan_message"
+    },
+    {
+      "relation": "calls",
       "confidence": "EXTRACTED",
       "source_file": "/home/jp/jay/telegram_bot/stock_bot/services/price_fetcher.py",
       "source_location": "L50",
@@ -4921,10 +5197,22 @@
       "confidence": "INFERRED",
       "confidence_score": 0.8,
       "source_file": "/home/jp/jay/telegram_bot/stock_bot/services/alert_service.py",
+      "source_location": "L154",
+      "weight": 1.0,
+      "_src": "alert_service_build_morning_scan_message",
+      "_tgt": "price_fetcher_get_current_price",
+      "source": "price_fetcher_get_current_price",
+      "target": "alert_service_build_morning_scan_message"
+    },
+    {
+      "relation": "calls",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "/home/jp/jay/telegram_bot/stock_bot/services/alert_service.py",
       "source_location": "L126",
       "weight": 1.0,
-      "_src": "alert_service_check_one_price_alert",
-      "_tgt": "price_fetcher_get_current_price",
+      "_src": "price_fetcher_get_current_price",
+      "_tgt": "alert_service_check_one_price_alert",
       "source": "price_fetcher_get_current_price",
       "target": "alert_service_check_one_price_alert"
     },
@@ -4935,8 +5223,8 @@
       "source_file": "/home/jp/jay/telegram_bot/stock_bot/services/alert_service.py",
       "source_location": "L165",
       "weight": 1.0,
-      "_src": "alert_service_check_one_ema_alert",
-      "_tgt": "price_fetcher_get_current_price",
+      "_src": "price_fetcher_get_current_price",
+      "_tgt": "alert_service_check_one_ema_alert",
       "source": "price_fetcher_get_current_price",
       "target": "alert_service_check_one_ema_alert"
     },
@@ -4947,8 +5235,8 @@
       "source_file": "/home/jp/jay/telegram_bot/stock_bot/bot/handlers/price_alert_handlers.py",
       "source_location": "L58",
       "weight": 1.0,
-      "_src": "price_alert_handlers_cmd_set_price_alert",
-      "_tgt": "price_fetcher_get_current_price",
+      "_src": "price_fetcher_get_current_price",
+      "_tgt": "price_alert_handlers_cmd_set_price_alert",
       "source": "price_fetcher_get_current_price",
       "target": "price_alert_handlers_cmd_set_price_alert"
     },
@@ -5007,8 +5295,8 @@
       "source_file": "/home/jp/jay/telegram_bot/stock_bot/services/alert_service.py",
       "source_location": "L169",
       "weight": 1.0,
-      "_src": "alert_service_check_one_ema_alert",
-      "_tgt": "price_fetcher_get_ema",
+      "_src": "price_fetcher_get_ema",
+      "_tgt": "alert_service_check_one_ema_alert",
       "source": "price_fetcher_get_ema",
       "target": "alert_service_check_one_ema_alert"
     },
@@ -5040,11 +5328,23 @@
       "relation": "calls",
       "confidence": "INFERRED",
       "confidence_score": 0.8,
+      "source_file": "/home/jp/jay/telegram_bot/stock_bot/services/alert_service.py",
+      "source_location": "L155",
+      "weight": 1.0,
+      "_src": "alert_service_build_morning_scan_message",
+      "_tgt": "price_fetcher_get_all_emas",
+      "source": "price_fetcher_get_all_emas",
+      "target": "alert_service_build_morning_scan_message"
+    },
+    {
+      "relation": "calls",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
       "source_file": "/home/jp/jay/telegram_bot/stock_bot/bot/handlers/report_handlers.py",
       "source_location": "L31",
       "weight": 1.0,
-      "_src": "report_handlers_section_technicals",
-      "_tgt": "price_fetcher_get_all_emas",
+      "_src": "price_fetcher_get_all_emas",
+      "_tgt": "report_handlers_section_technicals",
       "source": "price_fetcher_get_all_emas",
       "target": "report_handlers_section_technicals"
     },
@@ -5091,8 +5391,8 @@
       "source_file": "/home/jp/jay/telegram_bot/stock_bot/bot/handlers/report_handlers.py",
       "source_location": "L37",
       "weight": 1.0,
-      "_src": "report_handlers_section_technicals",
-      "_tgt": "price_fetcher_get_rsi",
+      "_src": "price_fetcher_get_rsi",
+      "_tgt": "report_handlers_section_technicals",
       "source": "price_fetcher_get_rsi",
       "target": "report_handlers_section_technicals"
     },
@@ -5199,8 +5499,8 @@
       "source_file": "/home/jp/jay/telegram_bot/stock_bot/bot/handlers/search_handlers.py",
       "source_location": "L238",
       "weight": 1.0,
-      "_src": "search_handlers_run_search",
-      "_tgt": "ticker_search_search_tickers",
+      "_src": "ticker_search_search_tickers",
+      "_tgt": "search_handlers_run_search",
       "source": "ticker_search_search_tickers",
       "target": "search_handlers_run_search"
     },
@@ -5208,7 +5508,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "/home/jp/jay/telegram_bot/stock_bot/services/alert_service.py",
-      "source_location": "L38",
+      "source_location": "L42",
       "weight": 1.0,
       "_src": "home_jp_jay_telegram_bot_stock_bot_services_alert_service_py",
       "_tgt": "alert_service_ensure_default_ema_alerts",
@@ -5220,7 +5520,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "/home/jp/jay/telegram_bot/stock_bot/services/alert_service.py",
-      "source_location": "L53",
+      "source_location": "L57",
       "weight": 1.0,
       "_src": "home_jp_jay_telegram_bot_stock_bot_services_alert_service_py",
       "_tgt": "alert_service_ensure_watchlist_defaults",
@@ -5232,7 +5532,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "/home/jp/jay/telegram_bot/stock_bot/services/alert_service.py",
-      "source_location": "L74",
+      "source_location": "L78",
       "weight": 1.0,
       "_src": "home_jp_jay_telegram_bot_stock_bot_services_alert_service_py",
       "_tgt": "alert_service_backfill_default_ema_alerts",
@@ -5244,7 +5544,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "/home/jp/jay/telegram_bot/stock_bot/services/alert_service.py",
-      "source_location": "L95",
+      "source_location": "L99",
       "weight": 1.0,
       "_src": "home_jp_jay_telegram_bot_stock_bot_services_alert_service_py",
       "_tgt": "alert_service_run_alert_check",
@@ -5256,7 +5556,31 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "/home/jp/jay/telegram_bot/stock_bot/services/alert_service.py",
-      "source_location": "L120",
+      "source_location": "L131",
+      "weight": 1.0,
+      "_src": "home_jp_jay_telegram_bot_stock_bot_services_alert_service_py",
+      "_tgt": "alert_service_build_morning_scan_message",
+      "source": "home_jp_jay_telegram_bot_stock_bot_services_alert_service_py",
+      "target": "alert_service_build_morning_scan_message",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "/home/jp/jay/telegram_bot/stock_bot/services/alert_service.py",
+      "source_location": "L182",
+      "weight": 1.0,
+      "_src": "home_jp_jay_telegram_bot_stock_bot_services_alert_service_py",
+      "_tgt": "alert_service_run_morning_scan",
+      "source": "home_jp_jay_telegram_bot_stock_bot_services_alert_service_py",
+      "target": "alert_service_run_morning_scan",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "/home/jp/jay/telegram_bot/stock_bot/services/alert_service.py",
+      "source_location": "L197",
       "weight": 1.0,
       "_src": "home_jp_jay_telegram_bot_stock_bot_services_alert_service_py",
       "_tgt": "alert_service_check_one_price_alert",
@@ -5268,12 +5592,24 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "/home/jp/jay/telegram_bot/stock_bot/services/alert_service.py",
-      "source_location": "L159",
+      "source_location": "L236",
       "weight": 1.0,
       "_src": "home_jp_jay_telegram_bot_stock_bot_services_alert_service_py",
       "_tgt": "alert_service_check_one_ema_alert",
       "source": "home_jp_jay_telegram_bot_stock_bot_services_alert_service_py",
       "target": "alert_service_check_one_ema_alert",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "/home/jp/jay/telegram_bot/stock_bot/services/alert_service.py",
+      "source_location": "L288",
+      "weight": 1.0,
+      "_src": "home_jp_jay_telegram_bot_stock_bot_services_alert_service_py",
+      "_tgt": "alert_service_send_cross_alert",
+      "source": "home_jp_jay_telegram_bot_stock_bot_services_alert_service_py",
+      "target": "alert_service_send_cross_alert",
       "confidence_score": 1.0
     },
     {
@@ -5292,7 +5628,7 @@
       "relation": "calls",
       "confidence": "EXTRACTED",
       "source_file": "/home/jp/jay/telegram_bot/stock_bot/services/alert_service.py",
-      "source_location": "L71",
+      "source_location": "L75",
       "weight": 1.0,
       "_src": "alert_service_ensure_watchlist_defaults",
       "_tgt": "alert_service_ensure_default_ema_alerts",
@@ -5304,7 +5640,7 @@
       "relation": "calls",
       "confidence": "EXTRACTED",
       "source_file": "/home/jp/jay/telegram_bot/stock_bot/services/alert_service.py",
-      "source_location": "L92",
+      "source_location": "L96",
       "weight": 1.0,
       "_src": "alert_service_backfill_default_ema_alerts",
       "_tgt": "alert_service_ensure_default_ema_alerts",
@@ -5316,12 +5652,12 @@
       "relation": "rationale_for",
       "confidence": "EXTRACTED",
       "source_file": "/home/jp/jay/telegram_bot/stock_bot/services/alert_service.py",
-      "source_location": "L39",
+      "source_location": "L43",
       "weight": 1.0,
-      "_src": "alert_service_rationale_39",
+      "_src": "alert_service_rationale_43",
       "_tgt": "alert_service_ensure_default_ema_alerts",
       "source": "alert_service_ensure_default_ema_alerts",
-      "target": "alert_service_rationale_39",
+      "target": "alert_service_rationale_43",
       "confidence_score": 1.0
     },
     {
@@ -5340,7 +5676,7 @@
       "relation": "calls",
       "confidence": "EXTRACTED",
       "source_file": "/home/jp/jay/telegram_bot/stock_bot/services/alert_service.py",
-      "source_location": "L87",
+      "source_location": "L91",
       "weight": 1.0,
       "_src": "alert_service_backfill_default_ema_alerts",
       "_tgt": "alert_service_ensure_watchlist_defaults",
@@ -5352,12 +5688,12 @@
       "relation": "rationale_for",
       "confidence": "EXTRACTED",
       "source_file": "/home/jp/jay/telegram_bot/stock_bot/services/alert_service.py",
-      "source_location": "L60",
+      "source_location": "L64",
       "weight": 1.0,
-      "_src": "alert_service_rationale_60",
+      "_src": "alert_service_rationale_64",
       "_tgt": "alert_service_ensure_watchlist_defaults",
       "source": "alert_service_ensure_watchlist_defaults",
-      "target": "alert_service_rationale_60",
+      "target": "alert_service_rationale_64",
       "confidence_score": 1.0
     },
     {
@@ -5388,12 +5724,12 @@
       "relation": "rationale_for",
       "confidence": "EXTRACTED",
       "source_file": "/home/jp/jay/telegram_bot/stock_bot/services/alert_service.py",
-      "source_location": "L75",
+      "source_location": "L79",
       "weight": 1.0,
-      "_src": "alert_service_rationale_75",
+      "_src": "alert_service_rationale_79",
       "_tgt": "alert_service_backfill_default_ema_alerts",
       "source": "alert_service_backfill_default_ema_alerts",
-      "target": "alert_service_rationale_75",
+      "target": "alert_service_rationale_79",
       "confidence_score": 1.0
     },
     {
@@ -5448,7 +5784,7 @@
       "relation": "calls",
       "confidence": "EXTRACTED",
       "source_file": "/home/jp/jay/telegram_bot/stock_bot/services/alert_service.py",
-      "source_location": "L109",
+      "source_location": "L113",
       "weight": 1.0,
       "_src": "alert_service_run_alert_check",
       "_tgt": "alert_service_check_one_ema_alert",
@@ -5460,7 +5796,7 @@
       "relation": "calls",
       "confidence": "EXTRACTED",
       "source_file": "/home/jp/jay/telegram_bot/stock_bot/services/alert_service.py",
-      "source_location": "L115",
+      "source_location": "L119",
       "weight": 1.0,
       "_src": "alert_service_run_alert_check",
       "_tgt": "alert_service_check_one_price_alert",
@@ -5472,12 +5808,12 @@
       "relation": "rationale_for",
       "confidence": "EXTRACTED",
       "source_file": "/home/jp/jay/telegram_bot/stock_bot/services/alert_service.py",
-      "source_location": "L96",
+      "source_location": "L100",
       "weight": 1.0,
-      "_src": "alert_service_rationale_96",
+      "_src": "alert_service_rationale_100",
       "_tgt": "alert_service_run_alert_check",
       "source": "alert_service_run_alert_check",
-      "target": "alert_service_rationale_96",
+      "target": "alert_service_rationale_100",
       "confidence_score": 1.0
     },
     {
@@ -5517,6 +5853,54 @@
       "target": "queries_get_all_active_price_alerts"
     },
     {
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "/home/jp/jay/telegram_bot/stock_bot/services/alert_service.py",
+      "source_location": "L132",
+      "weight": 1.0,
+      "_src": "alert_service_rationale_132",
+      "_tgt": "alert_service_build_morning_scan_message",
+      "source": "alert_service_build_morning_scan_message",
+      "target": "alert_service_rationale_132",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "/home/jp/jay/telegram_bot/stock_bot/services/alert_service.py",
+      "source_location": "L138",
+      "weight": 1.0,
+      "_src": "alert_service_build_morning_scan_message",
+      "_tgt": "db_get_connection",
+      "source": "alert_service_build_morning_scan_message",
+      "target": "db_get_connection"
+    },
+    {
+      "relation": "calls",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "/home/jp/jay/telegram_bot/stock_bot/services/alert_service.py",
+      "source_location": "L139",
+      "weight": 1.0,
+      "_src": "alert_service_build_morning_scan_message",
+      "_tgt": "queries_get_all_watchlist_items",
+      "source": "alert_service_build_morning_scan_message",
+      "target": "queries_get_all_watchlist_items"
+    },
+    {
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "/home/jp/jay/telegram_bot/stock_bot/services/alert_service.py",
+      "source_location": "L185",
+      "weight": 1.0,
+      "_src": "alert_service_rationale_185",
+      "_tgt": "alert_service_run_morning_scan",
+      "source": "alert_service_run_morning_scan",
+      "target": "alert_service_rationale_185",
+      "confidence_score": 1.0
+    },
+    {
       "relation": "calls",
       "confidence": "INFERRED",
       "confidence_score": 0.8,
@@ -5554,6 +5938,18 @@
     },
     {
       "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "/home/jp/jay/telegram_bot/stock_bot/services/alert_service.py",
+      "source_location": "L259",
+      "weight": 1.0,
+      "_src": "alert_service_check_one_ema_alert",
+      "_tgt": "alert_service_send_cross_alert",
+      "source": "alert_service_check_one_ema_alert",
+      "target": "alert_service_send_cross_alert",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
       "confidence": "INFERRED",
       "confidence_score": 0.8,
       "source_file": "/home/jp/jay/telegram_bot/stock_bot/services/alert_service.py",
@@ -5563,6 +5959,18 @@
       "_tgt": "db_get_connection",
       "source": "alert_service_check_one_ema_alert",
       "target": "db_get_connection"
+    },
+    {
+      "relation": "calls",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "/home/jp/jay/telegram_bot/stock_bot/services/alert_service.py",
+      "source_location": "L257",
+      "weight": 1.0,
+      "_src": "alert_service_check_one_ema_alert",
+      "_tgt": "queries_update_alert_last_side",
+      "source": "alert_service_check_one_ema_alert",
+      "target": "queries_update_alert_last_side"
     },
     {
       "relation": "calls",
@@ -5586,6 +5994,54 @@
       "_src": "alert_service_check_one_ema_alert",
       "_tgt": "queries_log_alert",
       "source": "alert_service_check_one_ema_alert",
+      "target": "queries_log_alert"
+    },
+    {
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "/home/jp/jay/telegram_bot/stock_bot/services/alert_service.py",
+      "source_location": "L297",
+      "weight": 1.0,
+      "_src": "alert_service_rationale_297",
+      "_tgt": "alert_service_send_cross_alert",
+      "source": "alert_service_send_cross_alert",
+      "target": "alert_service_rationale_297",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "/home/jp/jay/telegram_bot/stock_bot/services/alert_service.py",
+      "source_location": "L300",
+      "weight": 1.0,
+      "_src": "alert_service_send_cross_alert",
+      "_tgt": "db_get_connection",
+      "source": "alert_service_send_cross_alert",
+      "target": "db_get_connection"
+    },
+    {
+      "relation": "calls",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "/home/jp/jay/telegram_bot/stock_bot/services/alert_service.py",
+      "source_location": "L301",
+      "weight": 1.0,
+      "_src": "alert_service_send_cross_alert",
+      "_tgt": "queries_get_recent_alert_log",
+      "source": "alert_service_send_cross_alert",
+      "target": "queries_get_recent_alert_log"
+    },
+    {
+      "relation": "calls",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "/home/jp/jay/telegram_bot/stock_bot/services/alert_service.py",
+      "source_location": "L304",
+      "weight": 1.0,
+      "_src": "alert_service_send_cross_alert",
+      "_tgt": "queries_log_alert",
+      "source": "alert_service_send_cross_alert",
       "target": "queries_log_alert"
     },
     {
@@ -5628,7 +6084,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "/home/jp/jay/telegram_bot/stock_bot/bot/router.py",
-      "source_location": "L110",
+      "source_location": "L111",
       "weight": 1.0,
       "_src": "home_jp_jay_telegram_bot_stock_bot_bot_router_py",
       "_tgt": "router_silentmessage",
@@ -5640,7 +6096,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "/home/jp/jay/telegram_bot/stock_bot/bot/router.py",
-      "source_location": "L126",
+      "source_location": "L127",
       "weight": 1.0,
       "_src": "home_jp_jay_telegram_bot_stock_bot_bot_router_py",
       "_tgt": "router_silentupdate",
@@ -5652,7 +6108,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "/home/jp/jay/telegram_bot/stock_bot/bot/router.py",
-      "source_location": "L134",
+      "source_location": "L135",
       "weight": 1.0,
       "_src": "home_jp_jay_telegram_bot_stock_bot_bot_router_py",
       "_tgt": "router_message",
@@ -5664,7 +6120,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "/home/jp/jay/telegram_bot/stock_bot/bot/router.py",
-      "source_location": "L141",
+      "source_location": "L142",
       "weight": 1.0,
       "_src": "home_jp_jay_telegram_bot_stock_bot_bot_router_py",
       "_tgt": "router_register_handlers",
@@ -5688,7 +6144,7 @@
       "relation": "calls",
       "confidence": "EXTRACTED",
       "source_file": "/home/jp/jay/telegram_bot/stock_bot/bot/router.py",
-      "source_location": "L146",
+      "source_location": "L147",
       "weight": 1.0,
       "_src": "router_register_handlers",
       "_tgt": "router_build_command_map",
@@ -5712,7 +6168,7 @@
       "relation": "method",
       "confidence": "EXTRACTED",
       "source_file": "/home/jp/jay/telegram_bot/stock_bot/bot/router.py",
-      "source_location": "L113",
+      "source_location": "L114",
       "weight": 1.0,
       "_src": "router_silentmessage",
       "_tgt": "router_silentmessage_init",
@@ -5724,7 +6180,7 @@
       "relation": "method",
       "confidence": "EXTRACTED",
       "source_file": "/home/jp/jay/telegram_bot/stock_bot/bot/router.py",
-      "source_location": "L117",
+      "source_location": "L118",
       "weight": 1.0,
       "_src": "router_silentmessage",
       "_tgt": "router_silentmessage_reply_text",
@@ -5736,7 +6192,7 @@
       "relation": "method",
       "confidence": "EXTRACTED",
       "source_file": "/home/jp/jay/telegram_bot/stock_bot/bot/router.py",
-      "source_location": "L122",
+      "source_location": "L123",
       "weight": 1.0,
       "_src": "router_silentmessage",
       "_tgt": "router_silentmessage_getattr",
@@ -5748,7 +6204,7 @@
       "relation": "calls",
       "confidence": "EXTRACTED",
       "source_file": "/home/jp/jay/telegram_bot/stock_bot/bot/router.py",
-      "source_location": "L131",
+      "source_location": "L132",
       "weight": 1.0,
       "_src": "router_silentupdate_init",
       "_tgt": "router_silentmessage",
@@ -5760,12 +6216,12 @@
       "relation": "rationale_for",
       "confidence": "EXTRACTED",
       "source_file": "/home/jp/jay/telegram_bot/stock_bot/bot/router.py",
-      "source_location": "L111",
+      "source_location": "L112",
       "weight": 1.0,
-      "_src": "router_rationale_111",
+      "_src": "router_rationale_112",
       "_tgt": "router_silentmessage",
       "source": "router_silentmessage",
-      "target": "router_rationale_111",
+      "target": "router_rationale_112",
       "confidence_score": 1.0
     },
     {
@@ -5775,8 +6231,8 @@
       "source_file": "/home/jp/jay/telegram_bot/stock_bot/bot/handlers/general_handlers.py",
       "source_location": "L100",
       "weight": 1.0,
-      "_src": "general_handlers_cmd_start",
-      "_tgt": "router_silentmessage_reply_text",
+      "_src": "router_silentmessage_reply_text",
+      "_tgt": "general_handlers_cmd_start",
       "source": "router_silentmessage_reply_text",
       "target": "general_handlers_cmd_start"
     },
@@ -5787,8 +6243,8 @@
       "source_file": "/home/jp/jay/telegram_bot/stock_bot/bot/handlers/general_handlers.py",
       "source_location": "L107",
       "weight": 1.0,
-      "_src": "general_handlers_cmd_help",
-      "_tgt": "router_silentmessage_reply_text",
+      "_src": "router_silentmessage_reply_text",
+      "_tgt": "general_handlers_cmd_help",
       "source": "router_silentmessage_reply_text",
       "target": "general_handlers_cmd_help"
     },
@@ -5799,8 +6255,8 @@
       "source_file": "/home/jp/jay/telegram_bot/stock_bot/bot/handlers/alert_handlers.py",
       "source_location": "L21",
       "weight": 1.0,
-      "_src": "alert_handlers_cmd_set_alert",
-      "_tgt": "router_silentmessage_reply_text",
+      "_src": "router_silentmessage_reply_text",
+      "_tgt": "alert_handlers_cmd_set_alert",
       "source": "router_silentmessage_reply_text",
       "target": "alert_handlers_cmd_set_alert"
     },
@@ -5811,8 +6267,8 @@
       "source_file": "/home/jp/jay/telegram_bot/stock_bot/bot/handlers/alert_handlers.py",
       "source_location": "L65",
       "weight": 1.0,
-      "_src": "alert_handlers_cmd_remove_alert",
-      "_tgt": "router_silentmessage_reply_text",
+      "_src": "router_silentmessage_reply_text",
+      "_tgt": "alert_handlers_cmd_remove_alert",
       "source": "router_silentmessage_reply_text",
       "target": "alert_handlers_cmd_remove_alert"
     },
@@ -5821,10 +6277,22 @@
       "confidence": "INFERRED",
       "confidence_score": 0.8,
       "source_file": "/home/jp/jay/telegram_bot/stock_bot/bot/handlers/alert_handlers.py",
+      "source_location": "L94",
+      "weight": 1.0,
+      "_src": "alert_handlers_cmd_scan",
+      "_tgt": "router_silentmessage_reply_text",
+      "source": "router_silentmessage_reply_text",
+      "target": "alert_handlers_cmd_scan"
+    },
+    {
+      "relation": "calls",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "/home/jp/jay/telegram_bot/stock_bot/bot/handlers/alert_handlers.py",
       "source_location": "L93",
       "weight": 1.0,
-      "_src": "alert_handlers_cmd_view_alerts",
-      "_tgt": "router_silentmessage_reply_text",
+      "_src": "router_silentmessage_reply_text",
+      "_tgt": "alert_handlers_cmd_view_alerts",
       "source": "router_silentmessage_reply_text",
       "target": "alert_handlers_cmd_view_alerts"
     },
@@ -5835,8 +6303,8 @@
       "source_file": "/home/jp/jay/telegram_bot/stock_bot/bot/handlers/holdings_handlers.py",
       "source_location": "L41",
       "weight": 1.0,
-      "_src": "holdings_handlers_cmd_buy",
-      "_tgt": "router_silentmessage_reply_text",
+      "_src": "router_silentmessage_reply_text",
+      "_tgt": "holdings_handlers_cmd_buy",
       "source": "router_silentmessage_reply_text",
       "target": "holdings_handlers_cmd_buy"
     },
@@ -5847,8 +6315,8 @@
       "source_file": "/home/jp/jay/telegram_bot/stock_bot/bot/handlers/holdings_handlers.py",
       "source_location": "L86",
       "weight": 1.0,
-      "_src": "holdings_handlers_cmd_sell",
-      "_tgt": "router_silentmessage_reply_text",
+      "_src": "router_silentmessage_reply_text",
+      "_tgt": "holdings_handlers_cmd_sell",
       "source": "router_silentmessage_reply_text",
       "target": "holdings_handlers_cmd_sell"
     },
@@ -5859,8 +6327,8 @@
       "source_file": "/home/jp/jay/telegram_bot/stock_bot/bot/handlers/holdings_handlers.py",
       "source_location": "L131",
       "weight": 1.0,
-      "_src": "holdings_handlers_cmd_view_holdings",
-      "_tgt": "router_silentmessage_reply_text",
+      "_src": "router_silentmessage_reply_text",
+      "_tgt": "holdings_handlers_cmd_view_holdings",
       "source": "router_silentmessage_reply_text",
       "target": "holdings_handlers_cmd_view_holdings"
     },
@@ -5871,8 +6339,8 @@
       "source_file": "/home/jp/jay/telegram_bot/stock_bot/bot/handlers/holdings_handlers.py",
       "source_location": "L172",
       "weight": 1.0,
-      "_src": "holdings_handlers_cmd_transactions",
-      "_tgt": "router_silentmessage_reply_text",
+      "_src": "router_silentmessage_reply_text",
+      "_tgt": "holdings_handlers_cmd_transactions",
       "source": "router_silentmessage_reply_text",
       "target": "holdings_handlers_cmd_transactions"
     },
@@ -5883,8 +6351,8 @@
       "source_file": "/home/jp/jay/telegram_bot/stock_bot/bot/handlers/holdings_handlers.py",
       "source_location": "L198",
       "weight": 1.0,
-      "_src": "holdings_handlers_cmd_transaction_history",
-      "_tgt": "router_silentmessage_reply_text",
+      "_src": "router_silentmessage_reply_text",
+      "_tgt": "holdings_handlers_cmd_transaction_history",
       "source": "router_silentmessage_reply_text",
       "target": "holdings_handlers_cmd_transaction_history"
     },
@@ -5895,8 +6363,8 @@
       "source_file": "/home/jp/jay/telegram_bot/stock_bot/bot/handlers/price_alert_handlers.py",
       "source_location": "L26",
       "weight": 1.0,
-      "_src": "price_alert_handlers_cmd_set_price_alert",
-      "_tgt": "router_silentmessage_reply_text",
+      "_src": "router_silentmessage_reply_text",
+      "_tgt": "price_alert_handlers_cmd_set_price_alert",
       "source": "router_silentmessage_reply_text",
       "target": "price_alert_handlers_cmd_set_price_alert"
     },
@@ -5907,8 +6375,8 @@
       "source_file": "/home/jp/jay/telegram_bot/stock_bot/bot/handlers/price_alert_handlers.py",
       "source_location": "L82",
       "weight": 1.0,
-      "_src": "price_alert_handlers_cmd_remove_price_alert",
-      "_tgt": "router_silentmessage_reply_text",
+      "_src": "router_silentmessage_reply_text",
+      "_tgt": "price_alert_handlers_cmd_remove_price_alert",
       "source": "router_silentmessage_reply_text",
       "target": "price_alert_handlers_cmd_remove_price_alert"
     },
@@ -5919,8 +6387,8 @@
       "source_file": "/home/jp/jay/telegram_bot/stock_bot/bot/handlers/price_alert_handlers.py",
       "source_location": "L121",
       "weight": 1.0,
-      "_src": "price_alert_handlers_cmd_view_price_alerts",
-      "_tgt": "router_silentmessage_reply_text",
+      "_src": "router_silentmessage_reply_text",
+      "_tgt": "price_alert_handlers_cmd_view_price_alerts",
       "source": "router_silentmessage_reply_text",
       "target": "price_alert_handlers_cmd_view_price_alerts"
     },
@@ -5931,8 +6399,8 @@
       "source_file": "/home/jp/jay/telegram_bot/stock_bot/bot/handlers/price_alert_handlers.py",
       "source_location": "L148",
       "weight": 1.0,
-      "_src": "price_alert_handlers_cmd_view_all_price_alerts",
-      "_tgt": "router_silentmessage_reply_text",
+      "_src": "router_silentmessage_reply_text",
+      "_tgt": "price_alert_handlers_cmd_view_all_price_alerts",
       "source": "router_silentmessage_reply_text",
       "target": "price_alert_handlers_cmd_view_all_price_alerts"
     },
@@ -5943,8 +6411,8 @@
       "source_file": "/home/jp/jay/telegram_bot/stock_bot/bot/handlers/watchlist_handlers.py",
       "source_location": "L36",
       "weight": 1.0,
-      "_src": "watchlist_handlers_cmd_add_watchlist",
-      "_tgt": "router_silentmessage_reply_text",
+      "_src": "router_silentmessage_reply_text",
+      "_tgt": "watchlist_handlers_cmd_add_watchlist",
       "source": "router_silentmessage_reply_text",
       "target": "watchlist_handlers_cmd_add_watchlist"
     },
@@ -5955,8 +6423,8 @@
       "source_file": "/home/jp/jay/telegram_bot/stock_bot/bot/handlers/watchlist_handlers.py",
       "source_location": "L107",
       "weight": 1.0,
-      "_src": "watchlist_handlers_cmd_remove_watchlist",
-      "_tgt": "router_silentmessage_reply_text",
+      "_src": "router_silentmessage_reply_text",
+      "_tgt": "watchlist_handlers_cmd_remove_watchlist",
       "source": "router_silentmessage_reply_text",
       "target": "watchlist_handlers_cmd_remove_watchlist"
     },
@@ -5967,8 +6435,8 @@
       "source_file": "/home/jp/jay/telegram_bot/stock_bot/bot/handlers/watchlist_handlers.py",
       "source_location": "L126",
       "weight": 1.0,
-      "_src": "watchlist_handlers_cmd_view_watchlist",
-      "_tgt": "router_silentmessage_reply_text",
+      "_src": "router_silentmessage_reply_text",
+      "_tgt": "watchlist_handlers_cmd_view_watchlist",
       "source": "router_silentmessage_reply_text",
       "target": "watchlist_handlers_cmd_view_watchlist"
     },
@@ -5979,8 +6447,8 @@
       "source_file": "/home/jp/jay/telegram_bot/stock_bot/bot/handlers/watchlist_handlers.py",
       "source_location": "L153",
       "weight": 1.0,
-      "_src": "watchlist_handlers_cmd_set_checkpoint",
-      "_tgt": "router_silentmessage_reply_text",
+      "_src": "router_silentmessage_reply_text",
+      "_tgt": "watchlist_handlers_cmd_set_checkpoint",
       "source": "router_silentmessage_reply_text",
       "target": "watchlist_handlers_cmd_set_checkpoint"
     },
@@ -5991,8 +6459,8 @@
       "source_file": "/home/jp/jay/telegram_bot/stock_bot/bot/handlers/search_handlers.py",
       "source_location": "L73",
       "weight": 1.0,
-      "_src": "search_handlers_cmd_search",
-      "_tgt": "router_silentmessage_reply_text",
+      "_src": "router_silentmessage_reply_text",
+      "_tgt": "search_handlers_cmd_search",
       "source": "router_silentmessage_reply_text",
       "target": "search_handlers_cmd_search"
     },
@@ -6003,8 +6471,8 @@
       "source_file": "/home/jp/jay/telegram_bot/stock_bot/bot/handlers/search_handlers.py",
       "source_location": "L175",
       "weight": 1.0,
-      "_src": "search_handlers_cmd_set_date",
-      "_tgt": "router_silentmessage_reply_text",
+      "_src": "router_silentmessage_reply_text",
+      "_tgt": "search_handlers_cmd_set_date",
       "source": "router_silentmessage_reply_text",
       "target": "search_handlers_cmd_set_date"
     },
@@ -6015,8 +6483,8 @@
       "source_file": "/home/jp/jay/telegram_bot/stock_bot/bot/handlers/search_handlers.py",
       "source_location": "L220",
       "weight": 1.0,
-      "_src": "search_handlers_handle_date_reply",
-      "_tgt": "router_silentmessage_reply_text",
+      "_src": "router_silentmessage_reply_text",
+      "_tgt": "search_handlers_handle_date_reply",
       "source": "router_silentmessage_reply_text",
       "target": "search_handlers_handle_date_reply"
     },
@@ -6027,8 +6495,8 @@
       "source_file": "/home/jp/jay/telegram_bot/stock_bot/bot/handlers/report_handlers.py",
       "source_location": "L163",
       "weight": 1.0,
-      "_src": "report_handlers_cmd_weekly_report",
-      "_tgt": "router_silentmessage_reply_text",
+      "_src": "router_silentmessage_reply_text",
+      "_tgt": "report_handlers_cmd_weekly_report",
       "source": "router_silentmessage_reply_text",
       "target": "report_handlers_cmd_weekly_report"
     },
@@ -6039,8 +6507,8 @@
       "source_file": "/home/jp/jay/telegram_bot/stock_bot/bot/handlers/report_handlers.py",
       "source_location": "L169",
       "weight": 1.0,
-      "_src": "report_handlers_cmd_stock_details",
-      "_tgt": "router_silentmessage_reply_text",
+      "_src": "router_silentmessage_reply_text",
+      "_tgt": "report_handlers_cmd_stock_details",
       "source": "router_silentmessage_reply_text",
       "target": "report_handlers_cmd_stock_details"
     },
@@ -6048,7 +6516,7 @@
       "relation": "method",
       "confidence": "EXTRACTED",
       "source_file": "/home/jp/jay/telegram_bot/stock_bot/bot/router.py",
-      "source_location": "L129",
+      "source_location": "L130",
       "weight": 1.0,
       "_src": "router_silentupdate",
       "_tgt": "router_silentupdate_init",
@@ -6060,7 +6528,7 @@
       "relation": "method",
       "confidence": "EXTRACTED",
       "source_file": "/home/jp/jay/telegram_bot/stock_bot/bot/router.py",
-      "source_location": "L137",
+      "source_location": "L138",
       "weight": 1.0,
       "_src": "router_silentupdate",
       "_tgt": "router_silentupdate_getattr",
@@ -6072,24 +6540,24 @@
       "relation": "rationale_for",
       "confidence": "EXTRACTED",
       "source_file": "/home/jp/jay/telegram_bot/stock_bot/bot/router.py",
-      "source_location": "L127",
+      "source_location": "L128",
       "weight": 1.0,
-      "_src": "router_rationale_127",
+      "_src": "router_rationale_128",
       "_tgt": "router_silentupdate",
       "source": "router_silentupdate",
-      "target": "router_rationale_127",
+      "target": "router_rationale_128",
       "confidence_score": 1.0
     },
     {
       "relation": "rationale_for",
       "confidence": "EXTRACTED",
       "source_file": "/home/jp/jay/telegram_bot/stock_bot/bot/router.py",
-      "source_location": "L142",
+      "source_location": "L143",
       "weight": 1.0,
-      "_src": "router_rationale_142",
+      "_src": "router_rationale_143",
       "_tgt": "router_register_handlers",
       "source": "router_register_handlers",
-      "target": "router_rationale_142",
+      "target": "router_rationale_143",
       "confidence_score": 1.0
     },
     {
@@ -6147,8 +6615,8 @@
       "source_file": "/home/jp/jay/telegram_bot/stock_bot/bot/handlers/general_handlers.py",
       "source_location": "L95",
       "weight": 1.0,
-      "_src": "general_handlers_cmd_start",
-      "_tgt": "helpers_get_account_id",
+      "_src": "helpers_get_account_id",
+      "_tgt": "general_handlers_cmd_start",
       "source": "helpers_get_account_id",
       "target": "general_handlers_cmd_start"
     },
@@ -6159,8 +6627,8 @@
       "source_file": "/home/jp/jay/telegram_bot/stock_bot/bot/handlers/alert_handlers.py",
       "source_location": "L40",
       "weight": 1.0,
-      "_src": "alert_handlers_cmd_set_alert",
-      "_tgt": "helpers_get_account_id",
+      "_src": "helpers_get_account_id",
+      "_tgt": "alert_handlers_cmd_set_alert",
       "source": "helpers_get_account_id",
       "target": "alert_handlers_cmd_set_alert"
     },
@@ -6171,8 +6639,8 @@
       "source_file": "/home/jp/jay/telegram_bot/stock_bot/bot/handlers/alert_handlers.py",
       "source_location": "L70",
       "weight": 1.0,
-      "_src": "alert_handlers_cmd_remove_alert",
-      "_tgt": "helpers_get_account_id",
+      "_src": "helpers_get_account_id",
+      "_tgt": "alert_handlers_cmd_remove_alert",
       "source": "helpers_get_account_id",
       "target": "alert_handlers_cmd_remove_alert"
     },
@@ -6183,8 +6651,8 @@
       "source_file": "/home/jp/jay/telegram_bot/stock_bot/bot/handlers/alert_handlers.py",
       "source_location": "L97",
       "weight": 1.0,
-      "_src": "alert_handlers_cmd_view_alerts",
-      "_tgt": "helpers_get_account_id",
+      "_src": "helpers_get_account_id",
+      "_tgt": "alert_handlers_cmd_view_alerts",
       "source": "helpers_get_account_id",
       "target": "alert_handlers_cmd_view_alerts"
     },
@@ -6195,8 +6663,8 @@
       "source_file": "/home/jp/jay/telegram_bot/stock_bot/bot/handlers/holdings_handlers.py",
       "source_location": "L62",
       "weight": 1.0,
-      "_src": "holdings_handlers_cmd_buy",
-      "_tgt": "helpers_get_account_id",
+      "_src": "helpers_get_account_id",
+      "_tgt": "holdings_handlers_cmd_buy",
       "source": "helpers_get_account_id",
       "target": "holdings_handlers_cmd_buy"
     },
@@ -6207,8 +6675,8 @@
       "source_file": "/home/jp/jay/telegram_bot/stock_bot/bot/handlers/holdings_handlers.py",
       "source_location": "L107",
       "weight": 1.0,
-      "_src": "holdings_handlers_cmd_sell",
-      "_tgt": "helpers_get_account_id",
+      "_src": "helpers_get_account_id",
+      "_tgt": "holdings_handlers_cmd_sell",
       "source": "helpers_get_account_id",
       "target": "holdings_handlers_cmd_sell"
     },
@@ -6219,8 +6687,8 @@
       "source_file": "/home/jp/jay/telegram_bot/stock_bot/bot/handlers/holdings_handlers.py",
       "source_location": "L127",
       "weight": 1.0,
-      "_src": "holdings_handlers_cmd_view_holdings",
-      "_tgt": "helpers_get_account_id",
+      "_src": "helpers_get_account_id",
+      "_tgt": "holdings_handlers_cmd_view_holdings",
       "source": "helpers_get_account_id",
       "target": "holdings_handlers_cmd_view_holdings"
     },
@@ -6231,8 +6699,8 @@
       "source_file": "/home/jp/jay/telegram_bot/stock_bot/bot/handlers/holdings_handlers.py",
       "source_location": "L175",
       "weight": 1.0,
-      "_src": "holdings_handlers_cmd_transactions",
-      "_tgt": "helpers_get_account_id",
+      "_src": "helpers_get_account_id",
+      "_tgt": "holdings_handlers_cmd_transactions",
       "source": "helpers_get_account_id",
       "target": "holdings_handlers_cmd_transactions"
     },
@@ -6243,8 +6711,8 @@
       "source_file": "/home/jp/jay/telegram_bot/stock_bot/bot/handlers/holdings_handlers.py",
       "source_location": "L202",
       "weight": 1.0,
-      "_src": "holdings_handlers_cmd_transaction_history",
-      "_tgt": "helpers_get_account_id",
+      "_src": "helpers_get_account_id",
+      "_tgt": "holdings_handlers_cmd_transaction_history",
       "source": "helpers_get_account_id",
       "target": "holdings_handlers_cmd_transaction_history"
     },
@@ -6255,8 +6723,8 @@
       "source_file": "/home/jp/jay/telegram_bot/stock_bot/bot/handlers/price_alert_handlers.py",
       "source_location": "L40",
       "weight": 1.0,
-      "_src": "price_alert_handlers_cmd_set_price_alert",
-      "_tgt": "helpers_get_account_id",
+      "_src": "helpers_get_account_id",
+      "_tgt": "price_alert_handlers_cmd_set_price_alert",
       "source": "helpers_get_account_id",
       "target": "price_alert_handlers_cmd_set_price_alert"
     },
@@ -6267,8 +6735,8 @@
       "source_file": "/home/jp/jay/telegram_bot/stock_bot/bot/handlers/price_alert_handlers.py",
       "source_location": "L92",
       "weight": 1.0,
-      "_src": "price_alert_handlers_cmd_remove_price_alert",
-      "_tgt": "helpers_get_account_id",
+      "_src": "helpers_get_account_id",
+      "_tgt": "price_alert_handlers_cmd_remove_price_alert",
       "source": "helpers_get_account_id",
       "target": "price_alert_handlers_cmd_remove_price_alert"
     },
@@ -6279,8 +6747,8 @@
       "source_file": "/home/jp/jay/telegram_bot/stock_bot/bot/handlers/watchlist_handlers.py",
       "source_location": "L78",
       "weight": 1.0,
-      "_src": "watchlist_handlers_cmd_add_watchlist",
-      "_tgt": "helpers_get_account_id",
+      "_src": "helpers_get_account_id",
+      "_tgt": "watchlist_handlers_cmd_add_watchlist",
       "source": "helpers_get_account_id",
       "target": "watchlist_handlers_cmd_add_watchlist"
     },
@@ -6291,8 +6759,8 @@
       "source_file": "/home/jp/jay/telegram_bot/stock_bot/bot/handlers/watchlist_handlers.py",
       "source_location": "L111",
       "weight": 1.0,
-      "_src": "watchlist_handlers_cmd_remove_watchlist",
-      "_tgt": "helpers_get_account_id",
+      "_src": "helpers_get_account_id",
+      "_tgt": "watchlist_handlers_cmd_remove_watchlist",
       "source": "helpers_get_account_id",
       "target": "watchlist_handlers_cmd_remove_watchlist"
     },
@@ -6303,8 +6771,8 @@
       "source_file": "/home/jp/jay/telegram_bot/stock_bot/bot/handlers/watchlist_handlers.py",
       "source_location": "L122",
       "weight": 1.0,
-      "_src": "watchlist_handlers_cmd_view_watchlist",
-      "_tgt": "helpers_get_account_id",
+      "_src": "helpers_get_account_id",
+      "_tgt": "watchlist_handlers_cmd_view_watchlist",
       "source": "helpers_get_account_id",
       "target": "watchlist_handlers_cmd_view_watchlist"
     },
@@ -6315,8 +6783,8 @@
       "source_file": "/home/jp/jay/telegram_bot/stock_bot/bot/handlers/watchlist_handlers.py",
       "source_location": "L180",
       "weight": 1.0,
-      "_src": "watchlist_handlers_cmd_set_checkpoint",
-      "_tgt": "helpers_get_account_id",
+      "_src": "helpers_get_account_id",
+      "_tgt": "watchlist_handlers_cmd_set_checkpoint",
       "source": "helpers_get_account_id",
       "target": "watchlist_handlers_cmd_set_checkpoint"
     },
@@ -6327,8 +6795,8 @@
       "source_file": "/home/jp/jay/telegram_bot/stock_bot/bot/handlers/search_handlers.py",
       "source_location": "L155",
       "weight": 1.0,
-      "_src": "search_handlers_handle_search_callback",
-      "_tgt": "helpers_get_account_id",
+      "_src": "helpers_get_account_id",
+      "_tgt": "search_handlers_handle_search_callback",
       "source": "helpers_get_account_id",
       "target": "search_handlers_handle_search_callback"
     },
@@ -6339,8 +6807,8 @@
       "source_file": "/home/jp/jay/telegram_bot/stock_bot/bot/handlers/search_handlers.py",
       "source_location": "L194",
       "weight": 1.0,
-      "_src": "search_handlers_cmd_set_date",
-      "_tgt": "helpers_get_account_id",
+      "_src": "helpers_get_account_id",
+      "_tgt": "search_handlers_cmd_set_date",
       "source": "helpers_get_account_id",
       "target": "search_handlers_cmd_set_date"
     },
@@ -6351,8 +6819,8 @@
       "source_file": "/home/jp/jay/telegram_bot/stock_bot/bot/handlers/search_handlers.py",
       "source_location": "L230",
       "weight": 1.0,
-      "_src": "search_handlers_handle_date_reply",
-      "_tgt": "helpers_get_account_id",
+      "_src": "helpers_get_account_id",
+      "_tgt": "search_handlers_handle_date_reply",
       "source": "helpers_get_account_id",
       "target": "search_handlers_handle_date_reply"
     },
@@ -6363,8 +6831,8 @@
       "source_file": "/home/jp/jay/telegram_bot/stock_bot/bot/handlers/report_handlers.py",
       "source_location": "L125",
       "weight": 1.0,
-      "_src": "report_handlers_cmd_weekly_report",
-      "_tgt": "helpers_get_account_id",
+      "_src": "helpers_get_account_id",
+      "_tgt": "report_handlers_cmd_weekly_report",
       "source": "helpers_get_account_id",
       "target": "report_handlers_cmd_weekly_report"
     },
@@ -6375,8 +6843,8 @@
       "source_file": "/home/jp/jay/telegram_bot/stock_bot/bot/handlers/report_handlers.py",
       "source_location": "L173",
       "weight": 1.0,
-      "_src": "report_handlers_cmd_stock_details",
-      "_tgt": "helpers_get_account_id",
+      "_src": "helpers_get_account_id",
+      "_tgt": "report_handlers_cmd_stock_details",
       "source": "helpers_get_account_id",
       "target": "report_handlers_cmd_stock_details"
     },
@@ -6423,8 +6891,8 @@
       "source_file": "/home/jp/jay/telegram_bot/stock_bot/bot/handlers/report_handlers.py",
       "source_location": "L34",
       "weight": 1.0,
-      "_src": "report_handlers_section_technicals",
-      "_tgt": "helpers_fmt_pct",
+      "_src": "helpers_fmt_pct",
+      "_tgt": "report_handlers_section_technicals",
       "source": "helpers_fmt_pct",
       "target": "report_handlers_section_technicals"
     },
@@ -6435,8 +6903,8 @@
       "source_file": "/home/jp/jay/telegram_bot/stock_bot/bot/handlers/report_handlers.py",
       "source_location": "L48",
       "weight": 1.0,
-      "_src": "report_handlers_section_watchlist",
-      "_tgt": "helpers_fmt_pct",
+      "_src": "helpers_fmt_pct",
+      "_tgt": "report_handlers_section_watchlist",
       "source": "helpers_fmt_pct",
       "target": "report_handlers_section_watchlist"
     },
@@ -6447,8 +6915,8 @@
       "source_file": "/home/jp/jay/telegram_bot/stock_bot/bot/handlers/report_handlers.py",
       "source_location": "L88",
       "weight": 1.0,
-      "_src": "report_handlers_section_returns",
-      "_tgt": "helpers_fmt_pct",
+      "_src": "helpers_fmt_pct",
+      "_tgt": "report_handlers_section_returns",
       "source": "helpers_fmt_pct",
       "target": "report_handlers_section_returns"
     },
@@ -6492,7 +6960,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "/home/jp/jay/telegram_bot/stock_bot/bot/handlers/general_handlers.py",
-      "source_location": "L92",
+      "source_location": "L97",
       "weight": 1.0,
       "_src": "home_jp_jay_telegram_bot_stock_bot_bot_handlers_general_handlers_py",
       "_tgt": "general_handlers_cmd_start",
@@ -6504,7 +6972,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "/home/jp/jay/telegram_bot/stock_bot/bot/handlers/general_handlers.py",
-      "source_location": "L106",
+      "source_location": "L112",
       "weight": 1.0,
       "_src": "home_jp_jay_telegram_bot_stock_bot_bot_handlers_general_handlers_py",
       "_tgt": "general_handlers_cmd_help",
@@ -6528,12 +6996,12 @@
       "relation": "rationale_for",
       "confidence": "EXTRACTED",
       "source_file": "/home/jp/jay/telegram_bot/stock_bot/bot/handlers/general_handlers.py",
-      "source_location": "L93",
+      "source_location": "L98",
       "weight": 1.0,
-      "_src": "general_handlers_rationale_93",
+      "_src": "general_handlers_rationale_98",
       "_tgt": "general_handlers_cmd_start",
       "source": "general_handlers_cmd_start",
-      "target": "general_handlers_rationale_93",
+      "target": "general_handlers_rationale_98",
       "confidence_score": 1.0
     },
     {
@@ -6564,7 +7032,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "/home/jp/jay/telegram_bot/stock_bot/bot/handlers/alert_handlers.py",
-      "source_location": "L14",
+      "source_location": "L17",
       "weight": 1.0,
       "_src": "home_jp_jay_telegram_bot_stock_bot_bot_handlers_alert_handlers_py",
       "_tgt": "alert_handlers_cmd_set_alert",
@@ -6576,7 +7044,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "/home/jp/jay/telegram_bot/stock_bot/bot/handlers/alert_handlers.py",
-      "source_location": "L61",
+      "source_location": "L64",
       "weight": 1.0,
       "_src": "home_jp_jay_telegram_bot_stock_bot_bot_handlers_alert_handlers_py",
       "_tgt": "alert_handlers_cmd_remove_alert",
@@ -6588,7 +7056,19 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "/home/jp/jay/telegram_bot/stock_bot/bot/handlers/alert_handlers.py",
-      "source_location": "L89",
+      "source_location": "L92",
+      "weight": 1.0,
+      "_src": "home_jp_jay_telegram_bot_stock_bot_bot_handlers_alert_handlers_py",
+      "_tgt": "alert_handlers_cmd_scan",
+      "source": "home_jp_jay_telegram_bot_stock_bot_bot_handlers_alert_handlers_py",
+      "target": "alert_handlers_cmd_scan",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "/home/jp/jay/telegram_bot/stock_bot/bot/handlers/alert_handlers.py",
+      "source_location": "L102",
       "weight": 1.0,
       "_src": "home_jp_jay_telegram_bot_stock_bot_bot_handlers_alert_handlers_py",
       "_tgt": "alert_handlers_cmd_view_alerts",
@@ -6612,12 +7092,12 @@
       "relation": "rationale_for",
       "confidence": "EXTRACTED",
       "source_file": "/home/jp/jay/telegram_bot/stock_bot/bot/handlers/alert_handlers.py",
-      "source_location": "L15",
+      "source_location": "L18",
       "weight": 1.0,
-      "_src": "alert_handlers_rationale_15",
+      "_src": "alert_handlers_rationale_18",
       "_tgt": "alert_handlers_cmd_set_alert",
       "source": "alert_handlers_cmd_set_alert",
-      "target": "alert_handlers_rationale_15",
+      "target": "alert_handlers_rationale_18",
       "confidence_score": 1.0
     },
     {
@@ -6672,12 +7152,12 @@
       "relation": "rationale_for",
       "confidence": "EXTRACTED",
       "source_file": "/home/jp/jay/telegram_bot/stock_bot/bot/handlers/alert_handlers.py",
-      "source_location": "L62",
+      "source_location": "L65",
       "weight": 1.0,
-      "_src": "alert_handlers_rationale_62",
+      "_src": "alert_handlers_rationale_65",
       "_tgt": "alert_handlers_cmd_remove_alert",
       "source": "alert_handlers_cmd_remove_alert",
-      "target": "alert_handlers_rationale_62",
+      "target": "alert_handlers_rationale_65",
       "confidence_score": 1.0
     },
     {
@@ -6732,12 +7212,24 @@
       "relation": "rationale_for",
       "confidence": "EXTRACTED",
       "source_file": "/home/jp/jay/telegram_bot/stock_bot/bot/handlers/alert_handlers.py",
-      "source_location": "L90",
+      "source_location": "L93",
       "weight": 1.0,
-      "_src": "alert_handlers_rationale_90",
+      "_src": "alert_handlers_rationale_93",
+      "_tgt": "alert_handlers_cmd_scan",
+      "source": "alert_handlers_cmd_scan",
+      "target": "alert_handlers_rationale_93",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "/home/jp/jay/telegram_bot/stock_bot/bot/handlers/alert_handlers.py",
+      "source_location": "L103",
+      "weight": 1.0,
+      "_src": "alert_handlers_rationale_103",
       "_tgt": "alert_handlers_cmd_view_alerts",
       "source": "alert_handlers_cmd_view_alerts",
-      "target": "alert_handlers_rationale_90",
+      "target": "alert_handlers_rationale_103",
       "confidence_score": 1.0
     },
     {
@@ -8028,7 +8520,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "/home/jp/jay/telegram_bot/stock_bot/database/db.py",
-      "source_location": "L131",
+      "source_location": "L134",
       "weight": 1.0,
       "_src": "home_jp_jay_telegram_bot_stock_bot_database_db_py",
       "_tgt": "db_get_connection",
@@ -8040,7 +8532,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "/home/jp/jay/telegram_bot/stock_bot/database/db.py",
-      "source_location": "L144",
+      "source_location": "L147",
       "weight": 1.0,
       "_src": "home_jp_jay_telegram_bot_stock_bot_database_db_py",
       "_tgt": "db_connect",
@@ -8112,7 +8604,7 @@
       "relation": "calls",
       "confidence": "EXTRACTED",
       "source_file": "/home/jp/jay/telegram_bot/stock_bot/database/db.py",
-      "source_location": "L133",
+      "source_location": "L136",
       "weight": 1.0,
       "_src": "db_get_connection",
       "_tgt": "db_connect",
@@ -8124,12 +8616,12 @@
       "relation": "rationale_for",
       "confidence": "EXTRACTED",
       "source_file": "/home/jp/jay/telegram_bot/stock_bot/database/db.py",
-      "source_location": "L132",
+      "source_location": "L135",
       "weight": 1.0,
-      "_src": "db_rationale_132",
+      "_src": "db_rationale_135",
       "_tgt": "db_get_connection",
       "source": "db_get_connection",
-      "target": "db_rationale_132",
+      "target": "db_rationale_135",
       "confidence_score": 1.0
     },
     {
@@ -8271,6 +8763,18 @@
       "source_location": "L155",
       "weight": 1.0,
       "_src": "home_jp_jay_telegram_bot_stock_bot_database_queries_py",
+      "_tgt": "queries_update_alert_last_side",
+      "source": "home_jp_jay_telegram_bot_stock_bot_database_queries_py",
+      "target": "queries_update_alert_last_side",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "/home/jp/jay/telegram_bot/stock_bot/database/queries.py",
+      "source_location": "L164",
+      "weight": 1.0,
+      "_src": "home_jp_jay_telegram_bot_stock_bot_database_queries_py",
       "_tgt": "queries_deactivate_alert",
       "source": "home_jp_jay_telegram_bot_stock_bot_database_queries_py",
       "target": "queries_deactivate_alert",
@@ -8280,7 +8784,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "/home/jp/jay/telegram_bot/stock_bot/database/queries.py",
-      "source_location": "L166",
+      "source_location": "L175",
       "weight": 1.0,
       "_src": "home_jp_jay_telegram_bot_stock_bot_database_queries_py",
       "_tgt": "queries_get_alert_configs",
@@ -8292,7 +8796,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "/home/jp/jay/telegram_bot/stock_bot/database/queries.py",
-      "source_location": "L175",
+      "source_location": "L184",
       "weight": 1.0,
       "_src": "home_jp_jay_telegram_bot_stock_bot_database_queries_py",
       "_tgt": "queries_get_all_active_alert_configs",
@@ -8304,7 +8808,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "/home/jp/jay/telegram_bot/stock_bot/database/queries.py",
-      "source_location": "L188",
+      "source_location": "L197",
       "weight": 1.0,
       "_src": "home_jp_jay_telegram_bot_stock_bot_database_queries_py",
       "_tgt": "queries_log_alert",
@@ -8316,7 +8820,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "/home/jp/jay/telegram_bot/stock_bot/database/queries.py",
-      "source_location": "L201",
+      "source_location": "L210",
       "weight": 1.0,
       "_src": "home_jp_jay_telegram_bot_stock_bot_database_queries_py",
       "_tgt": "queries_get_recent_alert_log",
@@ -8328,7 +8832,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "/home/jp/jay/telegram_bot/stock_bot/database/queries.py",
-      "source_location": "L218",
+      "source_location": "L227",
       "weight": 1.0,
       "_src": "home_jp_jay_telegram_bot_stock_bot_database_queries_py",
       "_tgt": "queries_get_or_create_holding",
@@ -8340,7 +8844,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "/home/jp/jay/telegram_bot/stock_bot/database/queries.py",
-      "source_location": "L233",
+      "source_location": "L242",
       "weight": 1.0,
       "_src": "home_jp_jay_telegram_bot_stock_bot_database_queries_py",
       "_tgt": "queries_get_holdings",
@@ -8352,7 +8856,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "/home/jp/jay/telegram_bot/stock_bot/database/queries.py",
-      "source_location": "L240",
+      "source_location": "L249",
       "weight": 1.0,
       "_src": "home_jp_jay_telegram_bot_stock_bot_database_queries_py",
       "_tgt": "queries_get_all_holdings",
@@ -8364,7 +8868,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "/home/jp/jay/telegram_bot/stock_bot/database/queries.py",
-      "source_location": "L245",
+      "source_location": "L254",
       "weight": 1.0,
       "_src": "home_jp_jay_telegram_bot_stock_bot_database_queries_py",
       "_tgt": "queries_get_holding",
@@ -8376,7 +8880,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "/home/jp/jay/telegram_bot/stock_bot/database/queries.py",
-      "source_location": "L258",
+      "source_location": "L267",
       "weight": 1.0,
       "_src": "home_jp_jay_telegram_bot_stock_bot_database_queries_py",
       "_tgt": "queries_add_lot",
@@ -8388,7 +8892,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "/home/jp/jay/telegram_bot/stock_bot/database/queries.py",
-      "source_location": "L279",
+      "source_location": "L288",
       "weight": 1.0,
       "_src": "home_jp_jay_telegram_bot_stock_bot_database_queries_py",
       "_tgt": "queries_get_open_buy_lots",
@@ -8400,7 +8904,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "/home/jp/jay/telegram_bot/stock_bot/database/queries.py",
-      "source_location": "L290",
+      "source_location": "L299",
       "weight": 1.0,
       "_src": "home_jp_jay_telegram_bot_stock_bot_database_queries_py",
       "_tgt": "queries_get_recent_transactions",
@@ -8412,7 +8916,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "/home/jp/jay/telegram_bot/stock_bot/database/queries.py",
-      "source_location": "L305",
+      "source_location": "L314",
       "weight": 1.0,
       "_src": "home_jp_jay_telegram_bot_stock_bot_database_queries_py",
       "_tgt": "queries_mark_lot_consumed",
@@ -8424,7 +8928,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "/home/jp/jay/telegram_bot/stock_bot/database/queries.py",
-      "source_location": "L309",
+      "source_location": "L318",
       "weight": 1.0,
       "_src": "home_jp_jay_telegram_bot_stock_bot_database_queries_py",
       "_tgt": "queries_get_lots",
@@ -8436,7 +8940,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "/home/jp/jay/telegram_bot/stock_bot/database/queries.py",
-      "source_location": "L316",
+      "source_location": "L325",
       "weight": 1.0,
       "_src": "home_jp_jay_telegram_bot_stock_bot_database_queries_py",
       "_tgt": "queries_update_lot_quantity",
@@ -8448,7 +8952,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "/home/jp/jay/telegram_bot/stock_bot/database/queries.py",
-      "source_location": "L322",
+      "source_location": "L331",
       "weight": 1.0,
       "_src": "home_jp_jay_telegram_bot_stock_bot_database_queries_py",
       "_tgt": "queries_delete_lot",
@@ -8460,7 +8964,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "/home/jp/jay/telegram_bot/stock_bot/database/queries.py",
-      "source_location": "L330",
+      "source_location": "L339",
       "weight": 1.0,
       "_src": "home_jp_jay_telegram_bot_stock_bot_database_queries_py",
       "_tgt": "queries_add_price_alert",
@@ -8472,7 +8976,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "/home/jp/jay/telegram_bot/stock_bot/database/queries.py",
-      "source_location": "L343",
+      "source_location": "L352",
       "weight": 1.0,
       "_src": "home_jp_jay_telegram_bot_stock_bot_database_queries_py",
       "_tgt": "queries_get_price_alerts",
@@ -8484,7 +8988,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "/home/jp/jay/telegram_bot/stock_bot/database/queries.py",
-      "source_location": "L352",
+      "source_location": "L361",
       "weight": 1.0,
       "_src": "home_jp_jay_telegram_bot_stock_bot_database_queries_py",
       "_tgt": "queries_get_price_alerts_by_ticker",
@@ -8496,7 +9000,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "/home/jp/jay/telegram_bot/stock_bot/database/queries.py",
-      "source_location": "L363",
+      "source_location": "L372",
       "weight": 1.0,
       "_src": "home_jp_jay_telegram_bot_stock_bot_database_queries_py",
       "_tgt": "queries_get_all_active_price_alerts",
@@ -8508,7 +9012,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "/home/jp/jay/telegram_bot/stock_bot/database/queries.py",
-      "source_location": "L372",
+      "source_location": "L381",
       "weight": 1.0,
       "_src": "home_jp_jay_telegram_bot_stock_bot_database_queries_py",
       "_tgt": "queries_deactivate_price_alert",
@@ -8520,7 +9024,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "/home/jp/jay/telegram_bot/stock_bot/database/queries.py",
-      "source_location": "L379",
+      "source_location": "L388",
       "weight": 1.0,
       "_src": "home_jp_jay_telegram_bot_stock_bot_database_queries_py",
       "_tgt": "queries_log_price_alert",
@@ -8532,7 +9036,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "/home/jp/jay/telegram_bot/stock_bot/database/queries.py",
-      "source_location": "L388",
+      "source_location": "L397",
       "weight": 1.0,
       "_src": "home_jp_jay_telegram_bot_stock_bot_database_queries_py",
       "_tgt": "queries_get_recent_price_alert_log",
@@ -8616,24 +9120,24 @@
       "relation": "rationale_for",
       "confidence": "EXTRACTED",
       "source_file": "/home/jp/jay/telegram_bot/stock_bot/database/queries.py",
-      "source_location": "L241",
+      "source_location": "L250",
       "weight": 1.0,
-      "_src": "queries_rationale_241",
+      "_src": "queries_rationale_250",
       "_tgt": "queries_get_all_holdings",
       "source": "queries_get_all_holdings",
-      "target": "queries_rationale_241",
+      "target": "queries_rationale_250",
       "confidence_score": 1.0
     },
     {
       "relation": "rationale_for",
       "confidence": "EXTRACTED",
       "source_file": "/home/jp/jay/telegram_bot/stock_bot/database/queries.py",
-      "source_location": "L282",
+      "source_location": "L291",
       "weight": 1.0,
-      "_src": "queries_rationale_282",
+      "_src": "queries_rationale_291",
       "_tgt": "queries_get_open_buy_lots",
       "source": "queries_get_open_buy_lots",
-      "target": "queries_rationale_282",
+      "target": "queries_rationale_291",
       "confidence_score": 1.0
     }
   ],

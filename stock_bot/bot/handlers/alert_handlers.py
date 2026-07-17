@@ -2,12 +2,15 @@
 Telegram command handlers for alert configuration.
 """
 
+import asyncio
+
 from telegram import Update
 from telegram.ext import ContextTypes
 
 from stock_bot.config import EMA_SPANS, CURRENCY_SYMBOL
 from stock_bot.database.db import get_connection
 from stock_bot.database import queries as q
+from stock_bot.services.alert_service import build_morning_scan_message
 from stock_bot.bot.handlers._helpers import get_account_id
 
 
@@ -84,6 +87,16 @@ async def cmd_remove_alert(update: Update, ctx: ContextTypes.DEFAULT_TYPE) -> No
         await update.message.reply_text(f"✅ Alert removed for *{ticker}* / {indicator}.", parse_mode="Markdown")
     else:
         await update.message.reply_text(f"No active alert found for {ticker} / {indicator}.")
+
+
+async def cmd_scan(update: Update, ctx: ContextTypes.DEFAULT_TYPE) -> None:
+    """Usage: /scan — run the EMA scan now (same report as the morning scan)"""
+    await update.message.reply_text("🔍 Scanning all stocks against their weekly EMAs…")
+    message = await asyncio.to_thread(build_morning_scan_message, None)
+    if message is None:
+        await update.message.reply_text("Nothing to scan — the watchlist is empty.")
+        return
+    await update.message.reply_text(message, parse_mode="Markdown")
 
 
 async def cmd_view_alerts(update: Update, ctx: ContextTypes.DEFAULT_TYPE) -> None:

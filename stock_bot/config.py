@@ -38,6 +38,10 @@ EMA_HISTORY_MULTIPLIER: int = 3   # fetch 3× the longest span for reliable seed
 DEFAULT_ALERT_INDICATORS: tuple[str, ...] = ("EMA_10W", "EMA_20W", "EMA_30W", "EMA_40W")
 DEFAULT_ALERT_THRESHOLD_PCT: float = 2.0
 
+# Pre-market morning scan: local (hour, minute) per market region, weekdays.
+# NSE/BSE open 9:15 IST; NASDAQ/NYSE open 9:30 ET.
+MORNING_SCAN_LOCAL_TIME: tuple[int, int] = (8, 30)
+
 # ---------------------------------------------------------------------------
 # Currency symbols by exchange
 # ---------------------------------------------------------------------------

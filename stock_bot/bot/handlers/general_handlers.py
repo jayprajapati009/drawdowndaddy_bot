@@ -39,8 +39,13 @@ HELP_TEXT = """📈 *Stock Alert & Portfolio Bot*
 ━━━━━━━━━━━━━━━━━━━━
 🔔 *Alerts*
 ━━━━━━━━━━━━━━━━━━━━
-Every stock you watch or buy automatically gets alerts on the *10/20/30/40\\-week EMAs* \\(within 2%\\)\\.
+Every stock you watch or buy automatically gets alerts on the *10/20/30/40\\-week EMAs*:
+  • when price comes within 2% of an EMA
+  • when price *crosses* an EMA \\(any distance\\)
 
+A *morning scan* posts before each market opens \\(8:30 IST for NSE/BSE, 8:30 ET for US\\) showing which stocks are below each weekly EMA\\.
+
+/scan — run the morning scan right now
 /alert TICKER INDICATOR THRESHOLD
   → change the threshold for an EMA alert
   → `/alert RELIANCE\\.NS EMA\\_10W 5`
