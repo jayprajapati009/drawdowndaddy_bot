@@ -39,15 +39,17 @@ HELP_TEXT = """📈 *Stock Alert & Portfolio Bot*
 ━━━━━━━━━━━━━━━━━━━━
 🔔 *Alerts*
 ━━━━━━━━━━━━━━━━━━━━
+Every stock you watch or buy automatically gets alerts on the *10/20/30/40\\-week EMAs* \\(within 2%\\)\\.
+
 /alert TICKER INDICATOR THRESHOLD
-  → fire when price is within X% of an EMA
+  → change the threshold for an EMA alert
   → `/alert RELIANCE\\.NS EMA\\_10W 5`
   → `/alert AAPL EMA\\_40W 3`
 
 /unalert TICKER INDICATOR — disable an alert
 /alerts TICKER — list active alerts for a stock
 
-Indicators: *EMA\\_10W* \\(10\\-week\\) · *EMA\\_40W* \\(40\\-week\\)
+Indicators: *EMA\\_10W* · *EMA\\_20W* · *EMA\\_30W* · *EMA\\_40W* \\(weekly\\)
 
 ━━━━━━━━━━━━━━━━━━━━
 🎯 *Price Alerts*
@@ -90,10 +92,11 @@ NSE · BSE \\(India\\) · NASDAQ · NYSE \\(US\\)
 async def cmd_start(update: Update, ctx: ContextTypes.DEFAULT_TYPE) -> None:
     """Register the user and show a welcome message."""
     user = update.effective_user
+    username = user.username
     telegram_id = get_account_id(update)
 
     with get_connection() as conn:
-        q.upsert_user(conn, telegram_id, user.username)
+        q.upsert_user(conn, telegram_id, username)
 
     await update.message.reply_text(
         f"👋 Welcome{', @' + username if username else ''}!\n\n"
