@@ -10,6 +10,7 @@ from typing import Optional
 
 from stock_bot.database.db import get_connection
 from stock_bot.database import queries as q
+from stock_bot.services.alert_service import ensure_watchlist_defaults
 from stock_bot.services.price_fetcher import get_current_price, get_prices_batch
 
 logger = logging.getLogger(__name__)
@@ -38,9 +39,16 @@ def buy(
             raise HoldingsError("User not registered. Send /start first.")
         holding_id = q.get_or_create_holding(conn, user_id, ticker, exchange)
         q.add_lot(conn, holding_id, "BUY", quantity, price, notes, transacted_at=trade_date)
+        default_alerts = ensure_watchlist_defaults(conn, user_id, ticker, exchange, price)
 
     logger.info("BUY %s × %s @ %s on %s", quantity, ticker, price, trade_date or "today")
-    return {"ticker": ticker.upper(), "action": "BUY", "quantity": quantity, "price": price}
+    return {
+        "ticker": ticker.upper(),
+        "action": "BUY",
+        "quantity": quantity,
+        "price": price,
+        "default_alerts": default_alerts,
+    }
 
 
 def sell(
@@ -102,6 +110,9 @@ def sell(
         avg_cost = total_cost / quantity if quantity else 0.0
         q.add_lot(conn, holding["id"], "SELL", quantity, price, notes,
                   cost_basis=avg_cost, transacted_at=trade_date)
+        default_alerts = ensure_watchlist_defaults(
+            conn, user_id, ticker, holding["exchange"], price
+        )
 
     logger.info("SELL %s × %s @ %s, realised P&L = %.2f for user %s",
                 quantity, ticker, price, realised_pnl, telegram_id)
@@ -112,6 +123,7 @@ def sell(
         "price": price,
         "realised_pnl": realised_pnl,
         "lots_consumed": lot_consumed,
+        "default_alerts": default_alerts,
     }
 
 

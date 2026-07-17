@@ -8,6 +8,7 @@ from typing import Optional
 
 from stock_bot.database.db import get_connection
 from stock_bot.database import queries as q
+from stock_bot.services.alert_service import ensure_default_ema_alerts
 from stock_bot.services.price_fetcher import get_current_price, get_price_on_date, get_prices_batch
 
 logger = logging.getLogger(__name__)
@@ -56,7 +57,8 @@ def add_stock(
         if existing:
             raise WatchlistError(f"{ticker.upper()} is already on your watchlist.")
 
-        q.add_to_watchlist(conn, user_id, ticker, exchange, price)
+        watchlist_id = q.add_to_watchlist(conn, user_id, ticker, exchange, price)
+        default_alerts = ensure_default_ema_alerts(conn, watchlist_id)
 
     logger.info("Added %s to watchlist for user %s at %s (%.2f)", ticker, telegram_id, price_label, price)
     return {
@@ -64,6 +66,7 @@ def add_stock(
         "exchange": exchange.upper(),
         "added_price": price,
         "price_label": price_label,
+        "default_alerts": default_alerts,
     }
 
 

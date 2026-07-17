@@ -132,6 +132,26 @@ def upsert_alert_config(
     return row["id"]
 
 
+def insert_alert_config_if_absent(
+    conn: sqlite3.Connection,
+    watchlist_id: int,
+    indicator: str,
+    threshold_pct: float,
+) -> bool:
+    """
+    Insert an alert config only if none exists for (watchlist_id, indicator).
+    Never touches an existing row, so user-customised thresholds and
+    deliberately deactivated alerts are preserved.
+    Returns True if a new row was created.
+    """
+    cur = conn.execute(
+        "INSERT INTO alert_configs(watchlist_id, indicator, threshold_pct) VALUES(?,?,?) "
+        "ON CONFLICT(watchlist_id, indicator) DO NOTHING",
+        (watchlist_id, indicator.upper(), threshold_pct),
+    )
+    return cur.rowcount > 0
+
+
 def deactivate_alert(
     conn: sqlite3.Connection, watchlist_id: int, indicator: str
 ) -> bool:
@@ -215,6 +235,11 @@ def get_holdings(conn: sqlite3.Connection, user_id: int) -> list[sqlite3.Row]:
         "SELECT * FROM holdings WHERE user_id=? ORDER BY ticker",
         (user_id,),
     ).fetchall()
+
+
+def get_all_holdings(conn: sqlite3.Connection) -> list[sqlite3.Row]:
+    """Return every holding across all users (used by the default-alert backfill)."""
+    return conn.execute("SELECT * FROM holdings").fetchall()
 
 
 def get_holding(

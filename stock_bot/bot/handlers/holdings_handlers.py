@@ -65,13 +65,16 @@ async def cmd_buy(update: Update, ctx: ContextTypes.DEFAULT_TYPE) -> None:
         result   = hs.buy(telegram_id, ticker, exchange, quantity, price, notes, trade_date)
         currency = CURRENCY_SYMBOL.get(exchange, "")
         date_str = f" on {trade_date}" if trade_date else ""
-        await update.message.reply_text(
+        msg = (
             f"✅ *BUY logged*\n"
             f"{result['ticker']} ({exchange})\n"
             f"Qty: {result['quantity']} @ {currency}{result['price']:,.2f}{date_str}\n"
-            f"Total: {currency}{result['quantity'] * result['price']:,.2f}",
-            parse_mode="Markdown",
+            f"Total: {currency}{result['quantity'] * result['price']:,.2f}"
         )
+        if result.get("default_alerts"):
+            spans = "/".join(a.replace("EMA_", "") for a in result["default_alerts"])
+            msg += f"\n🔔 Default EMA alerts on: {spans}"
+        await update.message.reply_text(msg, parse_mode="Markdown")
     except hs.HoldingsError as e:
         await update.message.reply_text(f"❌ {e}")
 

@@ -4,6 +4,15 @@ Most recent changes appear first.
 
 ---
 
+## 2026-07-16 — Automatic weekly EMA alerts
+
+- **Default EMA triggers everywhere** — every stock you /watch, /buy, or /sell now automatically gets alerts on the 10, 20, 30, and 40-week EMAs (fires when price comes within 2% of the EMA)
+- **Existing stocks covered too** — on startup the bot backfills the default alerts for everything already on your watchlist and in your portfolio
+- **New indicators** — EMA_20W and EMA_30W join EMA_10W and EMA_40W; /stock and /alert support all four
+- **Your customisations are safe** — thresholds you changed with /alert and alerts you removed with /unalert are never overwritten by the defaults
+
+---
+
 ## 2026-05-29 — Transactions command
 
 - **/transactions** — see your last 10 trades across all stocks in one place; use `/transactions 20` for more or `/transactions all` for everything

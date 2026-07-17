@@ -10,16 +10,86 @@ config the service:
 """
 
 import logging
+import sqlite3
 from datetime import datetime, timedelta, timezone
 
 from telegram import Bot, InlineKeyboardButton, InlineKeyboardMarkup
 
-from stock_bot.config import CURRENCY_SYMBOL
+from stock_bot.config import (
+    CURRENCY_SYMBOL,
+    DEFAULT_ALERT_INDICATORS,
+    DEFAULT_ALERT_THRESHOLD_PCT,
+)
 from stock_bot.database.db import get_connection
 from stock_bot.database import queries as q
 from stock_bot.services.price_fetcher import clear_cache, get_current_price, get_ema
 
 logger = logging.getLogger(__name__)
+
+
+# ---------------------------------------------------------------------------
+# Default EMA alerts
+#
+# Every stock on the watchlist or in the portfolio gets the default weekly
+# EMA alerts (10/20/30/40W). Seeding never overwrites an existing config,
+# so custom thresholds and removed alerts stay as the user left them.
+# ---------------------------------------------------------------------------
+
+def ensure_default_ema_alerts(conn: sqlite3.Connection, watchlist_id: int) -> list[str]:
+    """Seed the default EMA alert configs for one watchlist row.
+    Returns the indicators that were newly created."""
+    created = [
+        indicator
+        for indicator in DEFAULT_ALERT_INDICATORS
+        if q.insert_alert_config_if_absent(
+            conn, watchlist_id, indicator, DEFAULT_ALERT_THRESHOLD_PCT
+        )
+    ]
+    if created:
+        logger.info("Seeded default EMA alerts for watchlist %s: %s", watchlist_id, created)
+    return created
+
+
+def ensure_watchlist_defaults(
+    conn: sqlite3.Connection,
+    user_id: int,
+    ticker: str,
+    exchange: str,
+    fallback_price: float,
+) -> list[str]:
+    """
+    Make sure *ticker* has a watchlist row (alerts are anchored to it) and
+    the default EMA alerts. *fallback_price* is used as added_price only when
+    the watchlist row has to be created. Returns newly created indicators.
+    """
+    item = q.get_watchlist_item(conn, user_id, ticker)
+    if item is not None:
+        watchlist_id = item["id"]
+    else:
+        watchlist_id = q.add_to_watchlist(conn, user_id, ticker, exchange, fallback_price)
+        logger.info("Auto-added %s to watchlist (portfolio stock) for user %s", ticker, user_id)
+    return ensure_default_ema_alerts(conn, watchlist_id)
+
+
+def backfill_default_ema_alerts() -> None:
+    """
+    One-shot seeding at startup: give every existing watchlist stock and every
+    portfolio stock the default EMA alerts. Idempotent — reruns are no-ops.
+    """
+    with get_connection() as conn:
+        # Portfolio stocks with open positions may not be on the watchlist yet
+        for holding in q.get_all_holdings(conn):
+            open_lots = q.get_open_buy_lots(conn, holding["id"])
+            total_qty = sum(lot["quantity"] for lot in open_lots)
+            if total_qty <= 0:
+                continue
+            avg_cost = sum(lot["quantity"] * lot["price"] for lot in open_lots) / total_qty
+            ensure_watchlist_defaults(
+                conn, holding["user_id"], holding["ticker"], holding["exchange"], avg_cost
+            )
+
+        for row in q.get_all_watchlist_items(conn):
+            ensure_default_ema_alerts(conn, row["id"])
 
 
 async def run_alert_check(bot: Bot, chat_id: str, cooldown_hours: int = 2) -> None:

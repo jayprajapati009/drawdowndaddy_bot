@@ -41,7 +41,7 @@ from pathlib import Path
 from stock_bot.config import MARKET_HOURS
 from stock_bot.database.db import init_db
 from stock_bot.bot.router import register_handlers
-from stock_bot.services.alert_service import run_alert_check
+from stock_bot.services.alert_service import backfill_default_ema_alerts, run_alert_check
 
 logger = logging.getLogger(__name__)
 
@@ -56,8 +56,8 @@ _COMMAND_DESCRIPTIONS = {
     "unwatch":    "Stop tracking a stock — TICKER",
     "watchlist":  "All tracked stocks with live prices & returns",
     "mark":       "Save today's price as a reference — TICKER LABEL",
-    "alert":      "Add EMA alert — TICKER EMA_10W|EMA_40W THRESHOLD%",
-    "unalert":    "Remove an EMA alert — TICKER EMA_10W|EMA_40W",
+    "alert":      "Add EMA alert — TICKER EMA_10W/20W/30W/40W THRESHOLD%",
+    "unalert":    "Remove an EMA alert — TICKER EMA_10W/20W/30W/40W",
     "alerts":     "List active EMA alerts for a stock — TICKER",
     "palert":     "Set price alert — TICKER PRICE",
     "unpalert":   "Remove price alert — TICKER PRICE",
@@ -131,6 +131,7 @@ def main() -> None:
     logger.info("=" * 60)
 
     init_db()
+    backfill_default_ema_alerts()
 
     app = Application.builder().token(cfg.telegram_token).build()
     command_map = register_handlers(app, cfg.features)

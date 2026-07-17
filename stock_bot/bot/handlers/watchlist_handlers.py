@@ -84,11 +84,14 @@ async def cmd_add_watchlist(update: Update, ctx: ContextTypes.DEFAULT_TYPE) -> N
             "  added %s %s entry_date=%s price=%.4f (%s)",
             ticker, exchange, entry_date, result["added_price"], result["price_label"],
         )
-        await update.message.reply_text(
+        msg = (
             f"✅ Added *{result['ticker']}* ({result['exchange']}) to your watchlist\n"
-            f"Entry price: {currency}{result['added_price']:,.2f} _{result['price_label']}_",
-            parse_mode="Markdown",
+            f"Entry price: {currency}{result['added_price']:,.2f} _{result['price_label']}_"
         )
+        if result.get("default_alerts"):
+            spans = "/".join(a.replace("EMA_", "") for a in result["default_alerts"])
+            msg += f"\n🔔 Default EMA alerts on: {spans}"
+        await update.message.reply_text(msg, parse_mode="Markdown")
     except ws.WatchlistError as e:
         logger.warning("  WatchlistError: %s", e)
         msg = f"❌ {e}"
